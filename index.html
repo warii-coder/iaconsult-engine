@@ -1,1 +1,2206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IAConsult Decision Engine</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+/* ─── Variables ─────────────────────────────────────────────── */
+:root{
+  --b9:#0A1628;--b8:#0D2040;--b7:#0F3460;--b6:#1A4F9A;
+  --b5:#1E6FD9;--b4:#3B82F6;--b3:#93C5FD;--b1:#DBEAFE;
+  --o6:#EA580C;--o5:#F97316;--o4:#FB923C;--o1:#FFEDD5;
+  --g5:#22C55E;--g1:#DCFCE7;--r5:#EF4444;--r1:#FEE2E2;
+  --y5:#EAB308;--y1:#FEF9C3;
+  --white:#FFF;--s50:#F8FAFC;--s100:#F1F5F9;--s200:#E2E8F0;
+  --s300:#CBD5E1;--s400:#94A3B8;--s500:#64748B;--s600:#475569;
+  --s700:#334155;--s800:#1E293B;--s900:#0F172A;
+  --sidebar-w:240px;--sidebar-w-col:64px;
+  --header-h:60px;
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:24px;--r-2xl:32px;
+  --sh-sm:0 1px 3px rgba(0,0,0,.08);
+  --sh-md:0 4px 16px rgba(0,0,0,.10);
+  --sh-lg:0 12px 40px rgba(0,0,0,.14);
+  --t:.2s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--s50);color:var(--s800);line-height:1.6;overflow-x:hidden}
+.hidden{display:none!important}
+
+/* ─── Pre-analysis pages ───────────────────────────────────── */
+.page{display:none;min-height:100vh}
+.page.active{display:block}
+
+/* Landing */
+#pg-landing{background:linear-gradient(135deg,var(--b9) 0%,var(--b8) 45%,#0E2A52 100%);overflow:hidden;position:relative}
+#pg-landing::before{content:'';position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(30,111,217,.18) 0%,transparent 70%);top:-200px;right:-200px;pointer-events:none;animation:blob 9s ease-in-out infinite alternate}
+#pg-landing::after{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(249,115,22,.12) 0%,transparent 70%);bottom:-100px;left:-100px;pointer-events:none;animation:blob 11s ease-in-out infinite alternate-reverse}
+@keyframes blob{from{transform:translate(0,0) scale(1)}to{transform:translate(25px,-25px) scale(1.06)}}
+.land-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:56px 56px;pointer-events:none}
+.land-nav{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:22px 60px;max-width:1280px;margin:0 auto}
+.logo-wrap{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-weight:700;font-size:19px;color:#fff;text-decoration:none;cursor:pointer}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--o5),var(--o4));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.logo-wrap span{color:var(--o4)}
+.nav-pill{background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);color:var(--o4);font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.04em}
+.land-hero{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;text-align:center;padding:90px 24px 60px;max-width:860px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(30,111,217,.2);border:1px solid rgba(59,130,246,.3);color:var(--b3);font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px;margin-bottom:28px;letter-spacing:.05em;text-transform:uppercase}
+.hero-eyebrow::before{content:'';width:6px;height:6px;background:var(--b4);border-radius:50%;animation:pdot 2s ease-in-out infinite}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+.hero-title{font-family:'Sora',sans-serif;font-size:clamp(34px,5.5vw,64px);font-weight:800;line-height:1.1;color:#fff;margin-bottom:22px;letter-spacing:-.02em}
+.hero-title .hi{background:linear-gradient(135deg,var(--o4),var(--o5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(15px,2.2vw,18px);color:rgba(255,255,255,.6);max-width:560px;margin-bottom:44px;line-height:1.75}
+.hero-cta-group{display:flex;flex-direction:column;align-items:center;gap:14px}
+.btn-hero{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--o5),var(--o6));color:#fff;font-size:17px;font-weight:700;padding:17px 44px;border-radius:var(--r-xl);border:none;cursor:pointer;box-shadow:0 8px 32px rgba(249,115,22,.4);transition:var(--t);position:relative;overflow:hidden}
+.btn-hero:hover{transform:translateY(-2px);box-shadow:0 14px 48px rgba(249,115,22,.5)}
+.btn-hero .arr{transition:transform var(--t)}
+.btn-hero:hover .arr{transform:translateX(4px)}
+.hero-trust{font-size:12px;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:8px}
+.hero-trust::before,.hero-trust::after{content:'';height:1px;width:36px;background:rgba(255,255,255,.15)}
+.land-stats{position:relative;z-index:5;display:flex;max-width:680px;margin:0 auto 70px;background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-xl);overflow:hidden}
+.stat-it{flex:1;padding:24px 28px;text-align:center;border-right:1px solid rgba(255,255,255,.08)}
+.stat-it:last-child{border-right:none}
+.stat-n{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:#fff;line-height:1;margin-bottom:4px}
+.stat-n span{color:var(--o4)}
+.stat-l{font-size:12px;color:rgba(255,255,255,.4);font-weight:500}
+.land-feats{position:relative;z-index:5;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1060px;margin:0 auto 80px;padding:0 24px}
+.feat-card{background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-lg);padding:28px;transition:var(--t)}
+.feat-card:hover{background:rgba(255,255,255,.09);border-color:rgba(59,130,246,.3);transform:translateY(-3px)}
+.feat-icon{width:44px;height:44px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px}
+.feat-icon.blue{background:rgba(30,111,217,.2)}.feat-icon.orange{background:rgba(249,115,22,.2)}.feat-icon.green{background:rgba(34,197,94,.2)}
+.feat-title{font-weight:700;color:#fff;font-size:16px;margin-bottom:6px}
+.feat-desc{font-size:13px;color:rgba(255,255,255,.45);line-height:1.65}
+
+/* Wizard shared */
+.wiz-layout{min-height:100vh;background:var(--s50);display:flex;flex-direction:column}
+.wiz-topbar{background:#fff;border-bottom:1px solid var(--s200);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:var(--header-h);position:sticky;top:0;z-index:100}
+.wiz-prog{display:flex;align-items:center;gap:0}
+.wstep{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--s400)}
+.wstep.act{color:var(--b5)}.wstep.done{color:var(--g5)}
+.wstep-c{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:var(--s200);color:var(--s400);flex-shrink:0;transition:var(--t)}
+.wstep.act .wstep-c{background:var(--b5);color:#fff;box-shadow:0 0 0 4px rgba(30,111,217,.15)}
+.wstep.done .wstep-c{background:var(--g5);color:#fff}
+.wconn{width:36px;height:2px;background:var(--s200);margin:0 4px;transition:var(--t)}
+.wconn.done{background:var(--g5)}
+.wiz-body{flex:1;display:flex;align-items:center;justify-content:center;padding:44px 24px}
+.wiz-card{background:#fff;border-radius:var(--r-2xl);box-shadow:var(--sh-md);width:100%;max-width:660px;padding:44px;border:1px solid var(--s200)}
+.step-header{margin-bottom:36px}
+.step-tag{display:inline-block;background:var(--b1);color:var(--b6);font-size:11px;font-weight:700;padding:3px 11px;border-radius:20px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:14px}
+.step-title{font-family:'Sora',sans-serif;font-size:26px;font-weight:800;color:var(--s900);line-height:1.2;margin-bottom:7px}
+.step-desc{font-size:14px;color:var(--s500)}
+.fg{margin-bottom:22px}
+.flabel{display:block;font-size:13px;font-weight:600;color:var(--s700);margin-bottom:7px}
+.flabel .req{color:var(--o5);margin-left:2px}
+.opt-grid{display:grid;gap:10px}
+.opt-grid.c2{grid-template-columns:1fr 1fr}.opt-grid.c3{grid-template-columns:repeat(3,1fr)}
+.opt-btn{display:flex;align-items:center;gap:11px;padding:13px 16px;border:2px solid var(--s200);border-radius:var(--r-md);background:#fff;cursor:pointer;font-size:13px;font-weight:500;color:var(--s700);transition:var(--t);text-align:left}
+.opt-btn:hover{border-color:var(--b4);background:var(--b1);color:var(--b7)}
+.opt-btn.sel{border-color:var(--b5);background:linear-gradient(135deg,#EFF6FF,#DBEAFE);color:var(--b7);box-shadow:0 0 0 4px rgba(30,111,217,.08)}
+.opt-btn .oi{width:34px;height:34px;border-radius:8px;background:var(--s100);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.opt-btn.sel .oi{background:rgba(30,111,217,.15)}
+.opt-btn .ol{font-weight:600;line-height:1.3}.opt-btn .os{font-size:11px;color:var(--s400);margin-top:2px;font-weight:400}
+.yn-grid{display:flex;gap:10px}
+.yn-btn{flex:1;padding:14px;border:2px solid var(--s200);border-radius:var(--r-md);background:#fff;cursor:pointer;font-size:14px;font-weight:600;color:var(--s600);transition:var(--t);text-align:center}
+.yn-btn:hover{border-color:var(--b4);background:var(--b1)}
+.yn-btn.sy{border-color:var(--g5);background:var(--g1);color:#166534}
+.yn-btn.sn{border-color:var(--r5);background:var(--r1);color:#991B1B}
+.finput{width:100%;padding:11px 15px;border:2px solid var(--s200);border-radius:var(--r-md);font-size:14px;font-family:inherit;color:var(--s800);background:#fff;transition:var(--t);outline:none}
+.finput:focus{border-color:var(--b5);box-shadow:0 0 0 4px rgba(30,111,217,.1)}
+.finput::placeholder{color:var(--s400)}
+.igroup{display:flex;align-items:center;border:2px solid var(--s200);border-radius:var(--r-md);overflow:hidden;transition:var(--t)}
+.igroup:focus-within{border-color:var(--b5);box-shadow:0 0 0 4px rgba(30,111,217,.1)}
+.ipfx{padding:11px 13px;background:var(--s50);border-right:2px solid var(--s200);font-size:13px;font-weight:600;color:var(--s500);white-space:nowrap}
+.igroup .finput{border:none;border-radius:0;box-shadow:none}
+.range-wrap{padding:6px 0}
+.range-lbl{display:flex;justify-content:space-between;font-size:11px;color:var(--s400);margin-top:5px}
+input[type=range]{width:100%;height:5px;-webkit-appearance:none;background:linear-gradient(to right,var(--b5) var(--val,50%),var(--s200) var(--val,50%));border-radius:3px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--b5);box-shadow:var(--sh-sm);transition:var(--t)}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+.wiz-nav{display:flex;align-items:center;justify-content:space-between;margin-top:36px;padding-top:28px;border-top:1px solid var(--s200)}
+.btn-back{display:flex;align-items:center;gap:7px;padding:11px 22px;border:2px solid var(--s200);border-radius:var(--r-md);background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:var(--s600);transition:var(--t)}
+.btn-back:hover{border-color:var(--s400);color:var(--s800)}
+.btn-next{display:flex;align-items:center;gap:7px;padding:13px 30px;background:linear-gradient(135deg,var(--b5),var(--b6));color:#fff;border:none;border-radius:var(--r-md);cursor:pointer;font-size:14px;font-weight:700;box-shadow:0 4px 16px rgba(30,111,217,.3);transition:var(--t)}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(30,111,217,.4)}
+.btn-next.orange{background:linear-gradient(135deg,var(--o5),var(--o6));box-shadow:0 4px 16px rgba(249,115,22,.35)}
+.btn-next.orange:hover{box-shadow:0 8px 24px rgba(249,115,22,.45)}
+
+/* Analyzing */
+#pg-analyzing{background:linear-gradient(135deg,var(--b9),var(--b8));display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;min-height:100vh;padding:40px 24px}
+.anlz-icon{width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:44px;margin-bottom:28px;position:relative}
+.anlz-ring{position:absolute;inset:-8px;border-radius:50%;border:3px solid transparent;border-top-color:var(--o5);border-right-color:rgba(249,115,22,.3);animation:spin 1.2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.anlz-title{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:#fff;margin-bottom:10px}
+.anlz-sub{font-size:15px;color:rgba(255,255,255,.45);margin-bottom:40px}
+.anlz-steps{display:flex;flex-direction:column;gap:10px;width:100%;max-width:400px}
+.anlz-step{display:flex;align-items:center;gap:14px;padding:14px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-md);font-size:13px;color:rgba(255,255,255,.45);font-weight:500;transition:all .4s ease}
+.anlz-step.done{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.25);color:rgba(255,255,255,.8)}
+.anlz-step.act{background:rgba(30,111,217,.15);border-color:rgba(59,130,246,.3);color:#fff}
+.anlz-dot{width:8px;height:8px;border-radius:50%;background:var(--s600);flex-shrink:0;transition:var(--t)}
+.anlz-step.done .anlz-dot{background:var(--g5)}
+.anlz-step.act .anlz-dot{background:var(--b4);animation:pdot 1s ease-in-out infinite}
+
+/* ─── APP SHELL ─────────────────────────────────────────────── */
+#app-shell{display:none;min-height:100vh;background:var(--s50)}
+#app-shell.active{display:flex}
+
+/* Sidebar */
+.app-sidebar{width:var(--sidebar-w);min-height:100vh;background:var(--b9);display:flex;flex-direction:column;flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto;transition:width var(--t);z-index:200}
+.app-sidebar.collapsed{width:var(--sidebar-w-col)}
+.sb-logo{display:flex;align-items:center;gap:10px;padding:20px 18px;border-bottom:1px solid rgba(255,255,255,.07);cursor:pointer;text-decoration:none}
+.sb-logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--o5),var(--o4));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.sb-logo-text{font-family:'Sora',sans-serif;font-weight:700;font-size:16px;color:#fff;white-space:nowrap;overflow:hidden;transition:opacity var(--t)}
+.sb-logo-text span{color:var(--o4)}
+.app-sidebar.collapsed .sb-logo-text{opacity:0;width:0}
+.sb-section{padding:12px 10px;border-bottom:1px solid rgba(255,255,255,.06)}
+.sb-section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.25);padding:4px 8px;margin-bottom:4px;white-space:nowrap;overflow:hidden;transition:opacity var(--t)}
+.app-sidebar.collapsed .sb-section-label{opacity:0}
+.sb-item{display:flex;align-items:center;gap:11px;padding:10px 8px;border-radius:var(--r-sm);cursor:pointer;transition:var(--t);text-decoration:none;position:relative}
+.sb-item:hover{background:rgba(255,255,255,.07)}
+.sb-item.active{background:linear-gradient(135deg,rgba(30,111,217,.3),rgba(30,111,217,.15));border:1px solid rgba(59,130,246,.25)}
+.sb-item-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:rgba(255,255,255,.06)}
+.sb-item.active .sb-item-icon{background:rgba(30,111,217,.35)}
+.sb-item-text{font-size:13px;font-weight:600;color:rgba(255,255,255,.65);white-space:nowrap;overflow:hidden;transition:opacity var(--t)}
+.sb-item.active .sb-item-text{color:#fff}
+.app-sidebar.collapsed .sb-item-text{opacity:0;width:0}
+.sb-badge{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:var(--r5);color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;transition:opacity var(--t)}
+.app-sidebar.collapsed .sb-badge{opacity:0}
+.sb-footer{margin-top:auto;padding:16px 10px;border-top:1px solid rgba(255,255,255,.07)}
+.sb-org-info{display:flex;align-items:center;gap:10px;padding:8px;border-radius:var(--r-sm)}
+.sb-org-avatar{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--b6),var(--b5));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.sb-org-name{font-size:12px;font-weight:600;color:rgba(255,255,255,.8);white-space:nowrap;overflow:hidden}
+.sb-org-role{font-size:10px;color:rgba(255,255,255,.35)}
+.app-sidebar.collapsed .sb-org-name,.app-sidebar.collapsed .sb-org-role{opacity:0;width:0}
+.sb-collapse-btn{display:flex;align-items:center;justify-content:center;width:100%;padding:8px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,.3);font-size:16px;transition:var(--t);border-radius:var(--r-sm)}
+.sb-collapse-btn:hover{color:rgba(255,255,255,.7);background:rgba(255,255,255,.07)}
+
+/* App main area */
+.app-main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.app-topbar{background:#fff;border-bottom:1px solid var(--s200);height:var(--header-h);display:flex;align-items:center;justify-content:space-between;padding:0 28px;flex-shrink:0;position:sticky;top:0;z-index:100}
+.app-topbar-left{display:flex;align-items:center;gap:14px}
+.page-breadcrumb{font-size:14px;color:var(--s400)}
+.page-breadcrumb strong{color:var(--s800)}
+.app-topbar-right{display:flex;align-items:center;gap:10px}
+.topbar-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border:1.5px solid var(--s200);border-radius:var(--r-md);background:#fff;cursor:pointer;font-size:12px;font-weight:600;color:var(--s600);transition:var(--t)}
+.topbar-btn:hover{border-color:var(--b4);color:var(--b5)}
+.topbar-btn.primary{background:linear-gradient(135deg,var(--b5),var(--b6));border-color:transparent;color:#fff}
+.topbar-btn.primary:hover{box-shadow:0 4px 16px rgba(30,111,217,.3)}
+.alert-bell{position:relative;cursor:pointer;padding:7px;border-radius:var(--r-sm);transition:var(--t)}
+.alert-bell:hover{background:var(--s100)}
+.alert-dot{position:absolute;top:5px;right:5px;width:8px;height:8px;background:var(--r5);border-radius:50%;border:2px solid #fff;display:none}
+.alert-dot.show{display:block}
+
+/* App content */
+.app-content{flex:1;overflow-y:auto;padding:28px}
+.app-section{display:none}
+.app-section.active{display:block}
+
+/* ─── SHARED COMPONENTS ─────────────────────────────────────── */
+.sec-title{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--s900);margin-bottom:4px}
+.sec-sub{font-size:13px;color:var(--s400);margin-bottom:24px}
+.card{background:#fff;border-radius:var(--r-lg);border:1px solid var(--s200);box-shadow:var(--sh-sm)}
+.card-p{padding:24px}
+.card-head{padding:20px 24px 0}
+.card-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--s900);margin-bottom:3px}
+.card-subtitle{font-size:12px;color:var(--s400)}
+.card-body{padding:20px 24px 24px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.btn-sm{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--r-sm);font-size:12px;font-weight:600;cursor:pointer;transition:var(--t);border:1.5px solid transparent}
+.btn-sm.outline{border-color:var(--s200);background:#fff;color:var(--s600)}
+.btn-sm.outline:hover{border-color:var(--b4);color:var(--b5)}
+.btn-sm.solid{background:var(--b5);color:#fff;border-color:var(--b5)}
+.btn-sm.solid:hover{background:var(--b6)}
+.btn-sm.orange{background:var(--o5);color:#fff;border-color:var(--o5)}
+.btn-sm.orange:hover{background:var(--o6)}
+.btn-sm.ghost{background:none;border:none;color:var(--s500);padding:7px}
+.btn-sm.ghost:hover{color:var(--s800);background:var(--s100)}
+
+/* Dashboard */
+.dash-kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.kpi-card{background:#fff;border-radius:var(--r-lg);border:1px solid var(--s200);padding:20px;transition:var(--t)}
+.kpi-card:hover{transform:translateY(-2px);box-shadow:var(--sh-md)}
+.kpi-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.kpi-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.kpi-trend{font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px}
+.kpi-trend.up{background:var(--g1);color:#166534}
+.kpi-trend.down{background:var(--r1);color:#991B1B}
+.kpi-trend.flat{background:var(--y1);color:#713F12}
+.kpi-val{font-family:'Sora',sans-serif;font-size:34px;font-weight:900;line-height:1;color:var(--s900)}
+.kpi-val span{font-size:14px;font-weight:500;color:var(--s400)}
+.kpi-label{font-size:12px;color:var(--s400);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
+.kpi-bar{height:4px;background:var(--s100);border-radius:2px;margin-top:10px;overflow:hidden}
+.kpi-bar-fill{height:100%;border-radius:2px;transition:width 1s ease;width:0}
+.dash-main-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.dash-wide-grid{display:grid;grid-template-columns:3fr 2fr;gap:20px;margin-bottom:20px}
+
+/* Score circle */
+.score-circle-wrap{position:relative;width:160px;height:160px;margin:0 auto 16px}
+.score-svg{transform:rotate(-90deg)}
+.sc-bg{fill:none;stroke:var(--s100);stroke-width:10}
+.sc-fill{fill:none;stroke-width:10;stroke-linecap:round;stroke-dasharray:452;stroke-dashoffset:452;transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1)}
+.sc-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.sc-num{font-family:'Sora',sans-serif;font-size:44px;font-weight:900;line-height:1}
+.sc-lbl{font-size:12px;color:var(--s400);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.level-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:8px}
+
+/* Alerts */
+.alert-list{display:flex;flex-direction:column;gap:10px}
+.alert-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border-radius:var(--r-md);border:1px solid transparent}
+.alert-item.crit{background:var(--r1);border-color:#FECACA}
+.alert-item.warn{background:var(--y1);border-color:#FDE68A}
+.alert-item.info{background:var(--b1);border-color:#BFDBFE}
+.alert-item.ok{background:var(--g1);border-color:#BBF7D0}
+.alert-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.alert-title{font-size:13px;font-weight:700}
+.alert-item.crit .alert-title{color:#991B1B}
+.alert-item.warn .alert-title{color:#92400E}
+.alert-item.info .alert-title{color:var(--b7)}
+.alert-item.ok .alert-title{color:#166534}
+.alert-text{font-size:12px;color:var(--s600);margin-top:2px;line-height:1.5}
+
+/* Indices */
+.index-row{display:flex;flex-direction:column;gap:12px}
+.idx-item{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--r-md);border:1px solid var(--s200);background:#fff;transition:var(--t)}
+.idx-item:hover{border-color:var(--b3)}
+.idx-icon{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.idx-label{font-size:13px;font-weight:700;color:var(--s700)}
+.idx-sub{font-size:11px;color:var(--s400)}
+.idx-val{margin-left:auto;font-family:'Sora',sans-serif;font-size:26px;font-weight:900;text-align:right}
+.idx-max{font-size:12px;font-weight:400;color:var(--s400)}
+
+/* Impact */
+.impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.impact-card{border-radius:var(--r-md);padding:18px;text-align:center;border:1px solid transparent}
+.impact-card.loss{background:var(--r1);border-color:#FECACA}
+.impact-card.gain{background:var(--g1);border-color:#BBF7D0}
+.impact-card.opp{background:var(--b1);border-color:#BFDBFE}
+.impact-card .ic-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.impact-card.loss .ic-lbl{color:#991B1B}
+.impact-card.gain .ic-lbl{color:#166534}
+.impact-card.opp .ic-lbl{color:var(--b7)}
+.impact-card .ic-val{font-family:'Sora',sans-serif;font-size:22px;font-weight:900;line-height:1}
+.impact-card.loss .ic-val{color:#DC2626}
+.impact-card.gain .ic-val{color:#16A34A}
+.impact-card.opp .ic-val{color:var(--b5)}
+.impact-card .ic-sub{font-size:11px;color:var(--s500);margin-top:4px}
+
+/* Action Plan */
+.ap-tabs{display:flex;gap:0;background:var(--s100);border-radius:var(--r-md);padding:4px}
+.ap-tab{padding:8px 16px;border-radius:var(--r-sm);font-size:13px;font-weight:600;cursor:pointer;transition:var(--t);color:var(--s500);background:none;border:none;display:flex;align-items:center;gap:6px}
+.ap-tab.act{background:#fff;color:var(--s800);box-shadow:var(--sh-sm)}
+.ap-tab-count{font-size:10px;background:var(--s200);color:var(--s600);padding:1px 6px;border-radius:10px;font-weight:700}
+.ap-tab.act .ap-tab-count{background:var(--b1);color:var(--b6)}
+.task-list{display:flex;flex-direction:column;gap:10px}
+.task-card{background:#fff;border-radius:var(--r-md);border:1px solid var(--s200);padding:16px 18px;display:flex;align-items:flex-start;gap:14px;transition:var(--t);cursor:pointer}
+.task-card:hover{border-color:var(--b3);box-shadow:var(--sh-sm)}
+.task-card.done-card{opacity:.65}
+.task-check{width:20px;height:20px;border-radius:5px;border:2px solid var(--s300);flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--t);background:#fff}
+.task-check.checked{background:var(--g5);border-color:var(--g5);color:#fff;font-size:11px}
+.task-main{flex:1;min-width:0}
+.task-title{font-size:14px;font-weight:600;color:var(--s800);line-height:1.4;margin-bottom:6px}
+.task-card.done-card .task-title{text-decoration:line-through;color:var(--s400)}
+.task-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.task-prio{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.04em}
+.prio-urgent{background:var(--r1);color:#991B1B}
+.prio-important{background:var(--o1);color:var(--o6)}
+.prio-planned{background:var(--b1);color:var(--b6)}
+.task-deadline{font-size:11px;color:var(--s400);display:flex;align-items:center;gap:3px}
+.task-assignee{font-size:11px;color:var(--s500);display:flex;align-items:center;gap:4px}
+.task-assignee-dot{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex-shrink:0}
+.task-actions{display:flex;gap:4px;flex-shrink:0}
+.ap-empty{text-align:center;padding:48px 24px;color:var(--s400)}
+.ap-empty-icon{font-size:40px;margin-bottom:12px}
+.ap-empty-title{font-size:16px;font-weight:600;color:var(--s600);margin-bottom:4px}
+
+/* Tracking */
+.history-table{width:100%;border-collapse:collapse}
+.history-table th{text-align:left;padding:10px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--s400);border-bottom:2px solid var(--s200)}
+.history-table td{padding:13px 14px;border-bottom:1px solid var(--s100);font-size:13px;vertical-align:middle}
+.history-table tr:last-child td{border-bottom:none}
+.history-table tr:hover td{background:var(--s50)}
+.hist-score{font-family:'Sora',sans-serif;font-size:20px;font-weight:900}
+.hist-level{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600}
+.hist-compare{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600}
+.hist-compare.up{color:#166534}.hist-compare.down{color:#991B1B}.hist-compare.same{color:#713F12}
+
+/* Organisation */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:20px}
+.member-card{background:#fff;border-radius:var(--r-lg);border:1px solid var(--s200);padding:20px;text-align:center;transition:var(--t)}
+.member-card:hover{border-color:var(--b3);transform:translateY(-2px)}
+.member-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#fff;margin:0 auto 12px}
+.member-name{font-size:14px;font-weight:700;color:var(--s800);margin-bottom:3px}
+.member-role{font-size:11px;color:var(--s400)}
+.member-tasks{font-size:12px;font-weight:600;color:var(--b5);margin-top:8px}
+.role-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.04em;margin-top:6px}
+.role-admin{background:var(--o1);color:var(--o6)}
+.role-manager{background:var(--b1);color:var(--b6)}
+.role-user{background:var(--s100);color:var(--s600)}
+
+/* Assistant IA */
+.chat-layout{display:flex;flex-direction:column;height:calc(100vh - 180px);max-height:700px}
+.chat-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px;background:var(--s50);border-radius:var(--r-lg) var(--r-lg) 0 0;border:1px solid var(--s200);border-bottom:none}
+.chat-msg{display:flex;gap:12px;max-width:80%}
+.chat-msg.user{flex-direction:row-reverse;align-self:flex-end}
+.chat-bubble{padding:12px 16px;border-radius:var(--r-lg);font-size:14px;line-height:1.6;max-width:100%}
+.chat-msg.bot .chat-bubble{background:#fff;border:1px solid var(--s200);color:var(--s800);border-radius:4px var(--r-lg) var(--r-lg) var(--r-lg)}
+.chat-msg.user .chat-bubble{background:linear-gradient(135deg,var(--b5),var(--b6));color:#fff;border-radius:var(--r-lg) 4px var(--r-lg) var(--r-lg)}
+.chat-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:2px}
+.chat-msg.bot .chat-avatar{background:linear-gradient(135deg,var(--b6),var(--b5));color:#fff}
+.chat-msg.user .chat-avatar{background:linear-gradient(135deg,var(--o5),var(--o4));color:#fff}
+.chat-typing{display:flex;gap:4px;padding:12px 16px;background:#fff;border:1px solid var(--s200);border-radius:4px var(--r-lg) var(--r-lg) var(--r-lg);align-items:center}
+.typing-dot{width:7px;height:7px;border-radius:50%;background:var(--s400);animation:typing .9s ease-in-out infinite}
+.typing-dot:nth-child(2){animation-delay:.2s}.typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes typing{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.chat-input-area{background:#fff;border:1px solid var(--s200);border-radius:0 0 var(--r-lg) var(--r-lg);padding:16px}
+.chat-suggestions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.chat-suggestion{padding:6px 14px;background:var(--b1);color:var(--b6);border:1px solid var(--b3);border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;transition:var(--t)}
+.chat-suggestion:hover{background:var(--b5);color:#fff;border-color:var(--b5)}
+.chat-input-row{display:flex;gap:10px;align-items:flex-end}
+.chat-input{flex:1;padding:12px 16px;border:2px solid var(--s200);border-radius:var(--r-md);font-size:14px;font-family:inherit;resize:none;outline:none;transition:var(--t);min-height:44px;max-height:120px}
+.chat-input:focus{border-color:var(--b5);box-shadow:0 0 0 4px rgba(30,111,217,.1)}
+.chat-send{width:44px;height:44px;background:var(--b5);color:#fff;border:none;border-radius:var(--r-md);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:var(--t);flex-shrink:0}
+.chat-send:hover{background:var(--b6);transform:scale(1.05)}
+
+/* Recommandations */
+.tl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:24px}
+.tl-card{background:#fff;border-radius:var(--r-xl);border:1px solid var(--s200);overflow:hidden}
+.tl-head{padding:20px 22px 16px;border-bottom:1px solid var(--s100)}
+.tl-badge{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 10px;border-radius:20px;margin-bottom:7px}
+.tl-badge.d7{background:var(--o1);color:var(--o6)}
+.tl-badge.d30{background:var(--b1);color:var(--b6)}
+.tl-badge.d90{background:var(--g1);color:#166534}
+.tl-period{font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:var(--s900)}
+.tl-body{padding:18px 22px}
+.tl-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px dashed var(--s100);font-size:13px}
+.tl-item:last-child{border-bottom:none}
+.tl-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;margin-top:1px}
+.tl-num.n7{background:var(--o1);color:var(--o6)}.tl-num.n30{background:var(--b1);color:var(--b6)}.tl-num.n90{background:var(--g1);color:#166534}
+.tl-text{color:var(--s700);font-weight:500;flex:1;line-height:1.5}
+.tl-prio{margin-left:auto;flex-shrink:0;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;text-transform:uppercase}
+.tl-prio.high{background:var(--r1);color:#991B1B}
+.tl-prio.med{background:var(--y1);color:#713F12}
+.tl-prio.low{background:var(--g1);color:#166534}
+
+/* Modals */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);backdrop-filter:blur(4px);z-index:1000;display:none;align-items:center;justify-content:center;padding:24px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:var(--r-xl);box-shadow:var(--sh-lg);width:100%;max-width:520px;max-height:90vh;overflow-y:auto}
+.modal-head{padding:24px 28px 0;display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:var(--s900)}
+.modal-close{width:32px;height:32px;border:none;background:var(--s100);border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:var(--t);color:var(--s500)}
+.modal-close:hover{background:var(--s200);color:var(--s800)}
+.modal-body{padding:20px 28px 28px}
+.modal-footer{padding:0 28px 24px;display:flex;gap:10px;justify-content:flex-end}
+
+/* Alert drawer */
+.alert-drawer{position:fixed;top:0;right:0;width:360px;height:100vh;background:#fff;border-left:1px solid var(--s200);box-shadow:var(--sh-lg);z-index:500;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);overflow-y:auto}
+.alert-drawer.open{transform:translateX(0)}
+.alert-drawer-head{padding:20px 24px;border-bottom:1px solid var(--s200);display:flex;align-items:center;justify-content:space-between}
+.alert-drawer-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:800;color:var(--s900)}
+.alert-drawer-body{padding:16px}
+
+/* Toast */
+.toast{position:fixed;bottom:20px;right:20px;padding:12px 18px;border-radius:var(--r-md);font-size:13px;font-weight:500;box-shadow:var(--sh-lg);z-index:9999;display:flex;align-items:center;gap:8px;transform:translateY(60px);opacity:0;transition:all .28s cubic-bezier(.4,0,.2,1)}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{background:#166534;color:#fff}.toast.error{background:#991B1B;color:#fff}.toast.info{background:var(--b9);color:#fff}.toast.warn{background:#92400E;color:#fff}
+
+/* Print */
+@media print{
+  .app-sidebar,.app-topbar,.topbar-btn,.btn-sm,.btn-hero,.chat-layout,.ap-tabs,.task-actions,.modal-overlay,.alert-drawer,.toast{display:none!important}
+  #app-shell{display:block!important}
+  .app-content{padding:0}
+  .card{box-shadow:none;break-inside:avoid}
+  .grid-2,.grid-3,.grid-4,.dash-kpi-row,.tl-grid,.impact-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+}
+
+/* Fix: analyzing page must be flex when active */
+#pg-analyzing.active{display:flex!important}
+
+/* Animations */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fiu{animation:fadeInUp .4s ease forwards}
+.d1{animation-delay:.08s;opacity:0}.d2{animation-delay:.16s;opacity:0}.d3{animation-delay:.24s;opacity:0}.d4{animation-delay:.32s;opacity:0}
+
+/* Disabled button state */
+button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
+
+/* Responsive */
+@media(max-width:1024px){
+  .dash-kpi-row{grid-template-columns:repeat(2,1fr)}
+  .dash-main-grid,.dash-wide-grid{grid-template-columns:1fr}
+  .tl-grid{grid-template-columns:1fr}
+  .impact-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .land-feats{grid-template-columns:1fr}
+  .land-stats{flex-direction:column}
+  .stat-it{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+  .stat-it:last-child{border-bottom:none}
+  .wiz-card{padding:28px 20px}
+  .wiz-topbar{padding:0 16px}
+  .opt-grid.c3{grid-template-columns:1fr 1fr}
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .app-sidebar{position:fixed;left:0;top:0;z-index:300;transform:translateX(-100%);transition:transform .3s ease}
+  .app-sidebar.mobile-open{transform:translateX(0)}
+  .chat-layout{height:calc(100vh - 140px)}
+  .land-nav{padding:18px 20px}
+}
+@media(max-width:480px){
+  .dash-kpi-row{grid-template-columns:1fr}
+  .wstep .step-label{display:none}
+  .hero-title{font-size:28px}
+}
+  </style>
+</head>
+<body>
+
+<!-- ═══ LANDING ═══════════════════════════════════════════════ -->
+<div id="pg-landing" class="page active">
+  <div class="land-grid"></div>
+  <nav class="land-nav fiu">
+    <div class="logo-wrap" onclick="goTo('landing')">
+      <div class="logo-icon">⚡</div>
+      <div>IA<span>Consult</span></div>
+    </div>
+    <div class="nav-pill">Decision Engine v2.0</div>
+  </nav>
+  <div class="land-hero">
+    <div class="hero-eyebrow fiu d1">Système de pilotage intelligent</div>
+    <h1 class="hero-title fiu d2">Prenez de meilleures décisions<br>en <span class="hi">10 minutes</span> grâce à l'IA</h1>
+    <p class="hero-sub fiu d3">Analysez, guidez, suivez et améliorez les performances de votre organisation avec un copilote IA dédié.</p>
+    <div class="hero-cta-group fiu d4">
+      <button class="btn-hero" onclick="goTo('step1')">Lancer l'analyse <span class="arr">→</span></button>
+      <span class="hero-trust">Gratuit · Sans inscription · 10 minutes</span>
+    </div>
+  </div>
+  <div class="land-stats fiu d4">
+    <div class="stat-it"><div class="stat-n">4<span>axes</span></div><div class="stat-l">d'analyse stratégique</div></div>
+    <div class="stat-it"><div class="stat-n"><span>+</span>25</div><div class="stat-l">indicateurs évalués</div></div>
+    <div class="stat-it"><div class="stat-n">90<span>j</span></div><div class="stat-l">de roadmap IA générée</div></div>
+  </div>
+  <div class="land-feats">
+    <div class="feat-card fiu d1"><div class="feat-icon blue">📊</div><div class="feat-title">Diagnostic instantané</div><div class="feat-desc">Score de maturité sur 4 axes avec radar chart, indices personnalisés et impact business chiffré.</div></div>
+    <div class="feat-card fiu d2"><div class="feat-icon orange">🤖</div><div class="feat-title">Copilote IA</div><div class="feat-desc">Assistant intelligent qui répond à vos questions stratégiques en temps réel basé sur vos données.</div></div>
+    <div class="feat-card fiu d3"><div class="feat-icon green">🎯</div><div class="feat-title">Plan d'action opérationnel</div><div class="feat-desc">Tâches priorisées, assignées par responsable avec suivi de progression et alertes automatiques.</div></div>
+  </div>
+</div>
+
+<!-- ═══ WIZARD STEP 1 — Profil organisation ════════════════════ -->
+<div id="pg-step1" class="page wiz-layout">
+  <header class="wiz-topbar">
+    <div class="logo-wrap" onclick="goTo('landing')" style="color:var(--s900)">
+      <div class="logo-icon">⚡</div><div>IA<span>Consult</span></div>
+    </div>
+    <div class="wiz-prog">
+      <div class="wstep act"><div class="wstep-c">1</div><span class="step-label">Profil</span></div>
+      <div class="wconn"></div>
+      <div class="wstep"><div class="wstep-c">2</div><span class="step-label">Diagnostic</span></div>
+      <div class="wconn"></div>
+      <div class="wstep"><div class="wstep-c">3</div><span class="step-label">Données</span></div>
+    </div>
+    <div style="width:120px"></div>
+  </header>
+  <div class="wiz-body">
+    <div class="wiz-card fiu">
+      <div class="step-header">
+        <div class="step-tag">Étape 1 sur 3</div>
+        <h2 class="step-title">Profil de votre organisation</h2>
+        <p class="step-desc">Ces informations adaptent votre diagnostic et vos recommandations.</p>
+      </div>
+
+      <!-- Secteur -->
+      <div class="fg">
+        <label class="flabel">Secteur d'activité <span class="req">*</span></label>
+        <div class="opt-grid c2">
+          <button class="opt-btn" data-g="secteur" data-v="ong" onclick="selOpt(this)">
+            <div class="oi">🌍</div><div><div class="ol">ONG / Associatif</div><div class="os">Impact social &amp; humanitaire</div></div>
+          </button>
+          <button class="opt-btn" data-g="secteur" data-v="entreprise" onclick="selOpt(this)">
+            <div class="oi">🏢</div><div><div class="ol">Entreprise privée</div><div class="os">PME, startup, corporate</div></div>
+          </button>
+          <button class="opt-btn" data-g="secteur" data-v="ecole" onclick="selOpt(this)">
+            <div class="oi">🎓</div><div><div class="ol">École / Formation</div><div class="os">Éducation &amp; enseignement</div></div>
+          </button>
+          <button class="opt-btn" data-g="secteur" data-v="institution" onclick="selOpt(this)">
+            <div class="oi">🏛️</div><div><div class="ol">Institution publique</div><div class="os">Administration &amp; gouvernance</div></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Taille -->
+      <div class="fg">
+        <label class="flabel">Taille de l'organisation <span class="req">*</span></label>
+        <div class="opt-grid c3">
+          <button class="opt-btn" data-g="taille" data-v="petite" onclick="selOpt(this)">
+            <div class="oi">🌱</div><div><div class="ol">Petite</div><div class="os">&lt; 50 pers.</div></div>
+          </button>
+          <button class="opt-btn" data-g="taille" data-v="moyenne" onclick="selOpt(this)">
+            <div class="oi">🏗️</div><div><div class="ol">Moyenne</div><div class="os">50–500 pers.</div></div>
+          </button>
+          <button class="opt-btn" data-g="taille" data-v="grande" onclick="selOpt(this)">
+            <div class="oi">🏙️</div><div><div class="ol">Grande</div><div class="os">500+ pers.</div></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Infos libres -->
+      <div class="fg">
+        <label class="flabel">Localisation</label>
+        <input type="text" class="finput" id="localisation" placeholder="Ex: Dakar, Sénégal">
+      </div>
+      <div class="fg">
+        <label class="flabel">Nom de l'organisation (optionnel)</label>
+        <input type="text" class="finput" id="org-name" placeholder="Ex: Fondation Avenir">
+      </div>
+
+      <div class="wiz-nav">
+        <button class="btn-back" onclick="goTo('landing')">← Retour</button>
+        <button class="btn-next" onclick="goStep2()">Continuer →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ WIZARD STEP 2 — Diagnostic ════════════════════════════ -->
+<div id="pg-step2" class="page wiz-layout">
+  <header class="wiz-topbar">
+    <div class="logo-wrap" onclick="goTo('landing')" style="color:var(--s900)">
+      <div class="logo-icon">⚡</div><div>IA<span>Consult</span></div>
+    </div>
+    <div class="wiz-prog">
+      <div class="wstep done"><div class="wstep-c">✓</div><span class="step-label">Profil</span></div>
+      <div class="wconn done"></div>
+      <div class="wstep act"><div class="wstep-c">2</div><span class="step-label">Diagnostic</span></div>
+      <div class="wconn"></div>
+      <div class="wstep"><div class="wstep-c">3</div><span class="step-label">Données</span></div>
+    </div>
+    <div style="width:120px"></div>
+  </header>
+  <div class="wiz-body">
+    <div class="wiz-card fiu">
+      <div class="step-header">
+        <div class="step-tag">Étape 2 sur 3</div>
+        <h2 class="step-title">Diagnostic rapide</h2>
+        <p class="step-desc">5 questions clés pour évaluer votre maturité organisationnelle.</p>
+      </div>
+
+      <div class="fg">
+        <label class="flabel">Avez-vous des données fiables et accessibles ?</label>
+        <div class="yn-grid">
+          <button class="yn-btn" data-g="q_donnees" data-v="oui" onclick="selYN(this)">✓ Oui</button>
+          <button class="yn-btn" data-g="q_donnees" data-v="non" onclick="selYN(this)">✗ Non</button>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flabel">Disposez-vous d'un tableau de bord de pilotage ?</label>
+        <div class="yn-grid">
+          <button class="yn-btn" data-g="q_tdb" data-v="oui" onclick="selYN(this)">✓ Oui</button>
+          <button class="yn-btn" data-g="q_tdb" data-v="non" onclick="selYN(this)">✗ Non</button>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flabel">Comment prenez-vous vos décisions stratégiques ?</label>
+        <div class="opt-grid">
+          <button class="opt-btn" data-g="q_decision" data-v="intuition" onclick="selOpt(this)">
+            <div class="oi">💭</div><div><div class="ol">Par intuition / expérience</div><div class="os">Sans base de données formelle</div></div>
+          </button>
+          <button class="opt-btn" data-g="q_decision" data-v="discussion" onclick="selOpt(this)">
+            <div class="oi">🗣️</div><div><div class="ol">Par réunions / consensus</div><div class="os">Décisions collectives</div></div>
+          </button>
+          <button class="opt-btn" data-g="q_decision" data-v="data" onclick="selOpt(this)">
+            <div class="oi">📈</div><div><div class="ol">Sur la base de données</div><div class="os">Approche data-driven</div></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flabel">Suivez-vous des KPI régulièrement ?</label>
+        <div class="yn-grid">
+          <button class="yn-btn" data-g="q_kpi" data-v="oui" onclick="selYN(this)">✓ Oui</button>
+          <button class="yn-btn" data-g="q_kpi" data-v="non" onclick="selYN(this)">✗ Non</button>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flabel">Avez-vous une vision stratégique documentée ?</label>
+        <div class="yn-grid">
+          <button class="yn-btn" data-g="q_vision" data-v="oui" onclick="selYN(this)">✓ Oui</button>
+          <button class="yn-btn" data-g="q_vision" data-v="non" onclick="selYN(this)">✗ Non</button>
+        </div>
+      </div>
+
+      <div class="wiz-nav">
+        <button class="btn-back" onclick="goTo('step1')">← Retour</button>
+        <button class="btn-next" onclick="goStep3()">Continuer →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ WIZARD STEP 3 — Données chiffrées ════════════════════ -->
+<div id="pg-step3" class="page wiz-layout">
+  <header class="wiz-topbar">
+    <div class="logo-wrap" onclick="goTo('landing')" style="color:var(--s900)">
+      <div class="logo-icon">⚡</div><div>IA<span>Consult</span></div>
+    </div>
+    <div class="wiz-prog">
+      <div class="wstep done"><div class="wstep-c">✓</div><span class="step-label">Profil</span></div>
+      <div class="wconn done"></div>
+      <div class="wstep done"><div class="wstep-c">✓</div><span class="step-label">Diagnostic</span></div>
+      <div class="wconn done"></div>
+      <div class="wstep act"><div class="wstep-c">3</div><span class="step-label">Données</span></div>
+    </div>
+    <div style="width:120px"></div>
+  </header>
+  <div class="wiz-body">
+    <div class="wiz-card fiu">
+      <div class="step-header">
+        <div class="step-tag">Étape 3 sur 3</div>
+        <h2 class="step-title">Données clés</h2>
+        <p class="step-desc">Quelques chiffres pour affiner l'analyse. Seul le nombre d'employés est requis.</p>
+      </div>
+
+      <div class="fg">
+        <label class="flabel">Chiffre d'affaires annuel (optionnel)</label>
+        <div class="igroup">
+          <span class="ipfx">XOF / €</span>
+          <input type="number" class="finput" id="ca" placeholder="Ex: 500 000 000" min="0">
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flabel">Nombre d'employés <span class="req">*</span></label>
+        <input type="number" class="finput" id="employes" placeholder="Ex: 85" min="1">
+      </div>
+
+      <div class="fg">
+        <label class="flabel">Projets actifs en cours</label>
+        <input type="number" class="finput" id="projets" placeholder="Ex: 12" min="0">
+      </div>
+
+      <div class="fg">
+        <label class="flabel">Taux de performance estimé : <strong id="pval">50</strong>%</label>
+        <div class="range-wrap">
+          <input type="range" id="perf-range" min="0" max="100" value="50"
+                 oninput="upRange(this)" style="--val:50%">
+          <div class="range-lbl">
+            <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="flabel">Importer vos données (CSV optionnel)</label>
+        <div style="display:flex;gap:10px;align-items:center">
+          <input type="file" id="csv-import" accept=".csv,.xlsx" style="display:none" onchange="importCSV(this)">
+          <button class="btn-sm outline" onclick="document.getElementById('csv-import').click()">
+            📂 Importer CSV / Excel
+          </button>
+          <span id="csv-status" style="font-size:12px;color:var(--s400)">Aucun fichier</span>
+        </div>
+      </div>
+
+      <div class="wiz-nav">
+        <button class="btn-back" onclick="goTo('step2')">← Retour</button>
+        <button class="btn-next orange" onclick="runAnalysis()">🚀 Lancer l'analyse IA</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ANALYZING — Écran de chargement ═══════════════════════ -->
+<div id="pg-analyzing" class="page">
+  <div class="anlz-icon">
+    <div class="anlz-ring"></div>⚡
+  </div>
+  <h2 class="anlz-title">Analyse en cours…</h2>
+  <p class="anlz-sub">Le moteur IA évalue votre organisation sur 4 dimensions</p>
+  <div class="anlz-steps">
+    <div class="anlz-step" id="as1"><div class="anlz-dot"></div>Analyse du profil organisationnel</div>
+    <div class="anlz-step" id="as2"><div class="anlz-dot"></div>Calcul du score de maturité (4 axes)</div>
+    <div class="anlz-step" id="as3"><div class="anlz-dot"></div>Calcul de l'impact business</div>
+    <div class="anlz-step" id="as4"><div class="anlz-dot"></div>Génération du plan d'action IA</div>
+    <div class="anlz-step" id="as5"><div class="anlz-dot"></div>Création du dashboard &amp; alertes</div>
+  </div>
+</div>
+
+<!-- ═══ APP SHELL ══════════════════════════════════════════════ -->
+<div id="app-shell">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="app-sidebar" id="sidebar">
+    <a class="sb-logo" onclick="appNav('dashboard')">
+      <div class="sb-logo-icon">⚡</div>
+      <div class="sb-logo-text">IA<span>Consult</span></div>
+    </a>
+
+    <div class="sb-section">
+      <div class="sb-section-label">Pilotage</div>
+      <div class="sb-item active" data-sec="dashboard" onclick="appNav('dashboard')">
+        <div class="sb-item-icon">📊</div>
+        <span class="sb-item-text">Dashboard</span>
+      </div>
+      <div class="sb-item" data-sec="results" onclick="appNav('results')">
+        <div class="sb-item-icon">📋</div>
+        <span class="sb-item-text">Résultats</span>
+      </div>
+      <div class="sb-item" data-sec="action-plan" onclick="appNav('action-plan')">
+        <div class="sb-item-icon">✅</div>
+        <span class="sb-item-text">Plan d'action</span>
+        <span class="sb-badge" id="badge-tasks" style="display:none">0</span>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-section-label">Analyse</div>
+      <div class="sb-item" data-sec="recommendations" onclick="appNav('recommendations')">
+        <div class="sb-item-icon">🎯</div>
+        <span class="sb-item-text">Recommandations</span>
+      </div>
+      <div class="sb-item" data-sec="tracking" onclick="appNav('tracking')">
+        <div class="sb-item-icon">📈</div>
+        <span class="sb-item-text">Suivi de performance</span>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-section-label">Organisation</div>
+      <div class="sb-item" data-sec="organization" onclick="appNav('organization')">
+        <div class="sb-item-icon">🏢</div>
+        <span class="sb-item-text">Mon organisation</span>
+      </div>
+      <div class="sb-item" data-sec="assistant" onclick="appNav('assistant')">
+        <div class="sb-item-icon">🤖</div>
+        <span class="sb-item-text">Assistant IA</span>
+      </div>
+    </div>
+
+    <div class="sb-footer">
+      <div class="sb-org-info">
+        <div class="sb-org-avatar">🏢</div>
+        <div>
+          <div class="sb-org-name" id="sb-org-name">Organisation</div>
+          <div class="sb-org-role" id="sb-org-role">Admin</div>
+        </div>
+      </div>
+      <button class="sb-collapse-btn" onclick="toggleSidebar()" title="Réduire le menu">◀</button>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <div class="app-main">
+
+    <!-- Topbar -->
+    <header class="app-topbar">
+      <div class="app-topbar-left">
+        <button class="btn-sm outline" onclick="toggleSidebar()" style="padding:7px 10px;font-size:16px">☰</button>
+        <div class="page-breadcrumb">IAConsult / <strong id="topbar-page">Dashboard</strong></div>
+      </div>
+      <div class="app-topbar-right">
+        <button class="topbar-btn" onclick="document.getElementById('csv-import-shell').click()">📂 Importer</button>
+        <input type="file" id="csv-import-shell" accept=".csv" style="display:none" onchange="importCSV(this)">
+        <button class="topbar-btn" onclick="exportPDF()">⬇ Export PDF</button>
+        <button class="topbar-btn primary" onclick="restartWizard()">+ Nouvelle analyse</button>
+        <div class="alert-bell" onclick="toggleAlertDrawer()" title="Alertes">
+          🔔<div class="alert-dot" id="alert-dot"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="app-content">
+
+      <!-- ══ SECTION: DASHBOARD ══ -->
+      <section class="app-section active" id="sec-dashboard">
+        <div class="sec-title" id="dash-title">Dashboard de pilotage</div>
+        <div class="sec-sub" id="dash-sub">Vue synthétique de votre maturité organisationnelle</div>
+
+        <!-- KPI Row: 4 axes -->
+        <div class="dash-kpi-row" id="dash-kpis"></div>
+
+        <!-- Score global + Radar | Alertes -->
+        <div class="dash-wide-grid" style="margin-bottom:20px">
+
+          <!-- Score circle + Radar -->
+          <div class="card card-p" style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">
+            <div style="text-align:center;flex-shrink:0">
+              <div class="score-circle-wrap">
+                <svg class="score-svg" viewBox="0 0 160 160" width="160" height="160">
+                  <circle class="sc-bg" cx="80" cy="80" r="72"></circle>
+                  <circle class="sc-fill" id="sc-fill" cx="80" cy="80" r="72"></circle>
+                </svg>
+                <div class="sc-inner">
+                  <div class="sc-num" id="sc-num">—</div>
+                  <div class="sc-lbl">/ 100</div>
+                </div>
+              </div>
+              <div class="level-badge" id="dash-level-badge">—</div>
+              <div style="font-size:12px;color:var(--s400);max-width:160px;margin:0 auto" id="dash-level-desc">—</div>
+            </div>
+            <div style="flex:1;min-width:220px;position:relative">
+              <div class="card-title" style="margin-bottom:12px">Radar de maturité</div>
+              <canvas id="radarChart" height="240"></canvas>
+            </div>
+          </div>
+
+          <!-- Alertes actives -->
+          <div class="card card-p">
+            <div class="card-title">Alertes actives</div>
+            <div class="card-subtitle" style="margin-bottom:16px">Situations nécessitant votre attention</div>
+            <div class="alert-list" id="dash-alerts"></div>
+          </div>
+        </div>
+
+        <!-- Indices IAConsult + Impact Business -->
+        <div class="dash-main-grid" style="margin-bottom:20px">
+          <div class="card card-p">
+            <div class="card-title">Indices IAConsult</div>
+            <div class="card-subtitle" style="margin-bottom:16px">Mesures exclusives de maturité organisationnelle</div>
+            <div class="index-row" id="dash-indices"></div>
+          </div>
+          <div class="card card-p">
+            <div class="card-title">Impact business estimé</div>
+            <div class="card-subtitle" style="margin-bottom:16px">Coûts et gains liés à votre niveau actuel</div>
+            <div class="impact-grid" id="dash-impact"></div>
+          </div>
+        </div>
+
+        <!-- Top 3 priorités -->
+        <div class="card card-p">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+            <div>
+              <div class="card-title">Top priorités — Actions immédiates</div>
+              <div class="card-subtitle">Identifiées par l'IA selon votre score</div>
+            </div>
+            <button class="btn-sm solid" onclick="appNav('action-plan')">Voir le plan complet →</button>
+          </div>
+          <div class="task-list" id="dash-top-tasks"></div>
+        </div>
+      </section>
+
+      <!-- ══ SECTION: RÉSULTATS ══ -->
+      <section class="app-section" id="sec-results">
+        <div class="sec-title">Résultats de l'analyse</div>
+        <div class="sec-sub" id="res-sub">Diagnostic détaillé par axe</div>
+        <div class="grid-4" id="axes-cards" style="margin-bottom:20px"></div>
+        <div class="grid-2" style="margin-bottom:20px">
+          <div class="card card-p">
+            <div class="card-title" style="margin-bottom:14px">⚠️ Problèmes identifiés</div>
+            <div id="res-problems"></div>
+          </div>
+          <div class="card card-p">
+            <div class="card-title" style="margin-bottom:14px">🚀 Opportunités détectées</div>
+            <div id="res-opportunities"></div>
+          </div>
+        </div>
+        <div class="card card-p" style="margin-bottom:20px">
+          <div class="card-title" style="margin-bottom:14px">💰 Impact financier estimé</div>
+          <div class="impact-grid" id="res-impact"></div>
+        </div>
+        <div style="text-align:center">
+          <button class="btn-next" onclick="appNav('recommendations')" style="display:inline-flex">
+            Voir les recommandations →
+          </button>
+        </div>
+      </section>
+
+      <!-- ══ SECTION: PLAN D'ACTION ══ -->
+      <section class="app-section" id="sec-action-plan">
+        <div class="sec-title">Plan d'action opérationnel</div>
+        <div class="sec-sub">Tâches générées par l'IA, priorisées et assignées à votre équipe</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+          <div class="ap-tabs" id="ap-tabs">
+            <button class="ap-tab act" data-filter="all" onclick="filterTasks(this)">
+              Toutes <span class="ap-tab-count" id="cnt-all">0</span>
+            </button>
+            <button class="ap-tab" data-filter="urgent" onclick="filterTasks(this)">
+              Urgent <span class="ap-tab-count" id="cnt-urgent">0</span>
+            </button>
+            <button class="ap-tab" data-filter="important" onclick="filterTasks(this)">
+              Important <span class="ap-tab-count" id="cnt-important">0</span>
+            </button>
+            <button class="ap-tab" data-filter="done" onclick="filterTasks(this)">
+              Terminé <span class="ap-tab-count" id="cnt-done">0</span>
+            </button>
+          </div>
+          <button class="btn-sm orange" onclick="openAddTaskModal()">+ Ajouter une tâche</button>
+        </div>
+        <div class="task-list" id="task-list"></div>
+      </section>
+
+      <!-- ══ SECTION: RECOMMANDATIONS ══ -->
+      <section class="app-section" id="sec-recommendations">
+        <div class="sec-title">Recommandations IA — Roadmap 90 jours</div>
+        <div class="sec-sub">Plan personnalisé basé sur votre diagnostic</div>
+        <div class="tl-grid" id="tl-grid"></div>
+        <div class="card card-p" style="text-align:center">
+          <div class="card-title" style="margin-bottom:6px">Prêt à démarrer ?</div>
+          <div class="card-subtitle" style="margin-bottom:16px">
+            Transformez ce plan en tâches avec suivi et assignation d'équipe
+          </div>
+          <button class="btn-next" onclick="appNav('action-plan')" style="display:inline-flex">
+            Accéder au plan d'action →
+          </button>
+        </div>
+      </section>
+
+      <!-- ══ SECTION: SUIVI DE PERFORMANCE ══ -->
+      <section class="app-section" id="sec-tracking">
+        <div class="sec-title">Suivi de performance</div>
+        <div class="sec-sub">Évolution de votre score dans le temps</div>
+        <div class="grid-2" style="margin-bottom:20px">
+          <div class="card card-p">
+            <div class="card-title" style="margin-bottom:4px">Évolution du score global</div>
+            <div class="card-subtitle" style="margin-bottom:16px">Après chaque analyse</div>
+            <canvas id="evolChart" height="200"></canvas>
+          </div>
+          <div class="card card-p">
+            <div class="card-title" style="margin-bottom:4px">Projection 90 jours</div>
+            <div class="card-subtitle" style="margin-bottom:16px">Impact estimé après implémentation</div>
+            <canvas id="projChart" height="200"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" style="padding-bottom:16px">
+            <div class="card-title">Historique des analyses</div>
+            <div class="card-subtitle">Toutes vos sessions IAConsult</div>
+          </div>
+          <div class="card-body" style="padding-top:0;overflow-x:auto">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Date</th><th>Organisation</th><th>Score</th><th>Niveau</th>
+                  <th>Structure</th><th>Données</th><th>Décision</th><th>Performance</th><th>Évolution</th>
+                </tr>
+              </thead>
+              <tbody id="hist-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ SECTION: ORGANISATION ══ -->
+      <section class="app-section" id="sec-organization">
+        <div class="sec-title">Mon organisation</div>
+        <div class="sec-sub" id="org-sub">Gérez votre équipe et les assignations de tâches</div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;gap:16px;flex-wrap:wrap">
+          <div class="grid-3" style="flex:1;min-width:280px" id="org-stats"></div>
+          <button class="btn-sm orange" onclick="openAddMemberModal()">+ Ajouter un membre</button>
+        </div>
+        <div class="team-grid" id="team-grid"></div>
+        <div class="card card-p">
+          <div class="card-title" style="margin-bottom:16px">Répartition des tâches par responsable</div>
+          <canvas id="teamChart" height="120"></canvas>
+        </div>
+      </section>
+
+      <!-- ══ SECTION: ASSISTANT IA ══ -->
+      <section class="app-section" id="sec-assistant">
+        <div class="sec-title">Assistant IA — Copilote stratégique</div>
+        <div class="sec-sub">Posez vos questions. L'IA répond en tenant compte de vos données réelles.</div>
+        <div class="chat-layout card">
+          <div class="chat-messages" id="chat-messages"></div>
+          <div class="chat-input-area">
+            <div class="chat-suggestions" id="chat-suggestions"></div>
+            <div class="chat-input-row">
+              <textarea class="chat-input" id="chat-input" rows="1"
+                placeholder="Ex: Que dois-je faire aujourd'hui ?"
+                onkeydown="chatKeydown(event)"></textarea>
+              <button class="chat-send" onclick="sendChat()" title="Envoyer">➤</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /app-content -->
+  </div><!-- /app-main -->
+</div><!-- /app-shell -->
+
+<!-- ═══ ALERT DRAWER ══════════════════════════════════════════ -->
+<div class="alert-drawer" id="alert-drawer">
+  <div class="alert-drawer-head">
+    <div class="alert-drawer-title">🔔 Alertes système</div>
+    <button class="modal-close" onclick="toggleAlertDrawer()">✕</button>
+  </div>
+  <div class="alert-drawer-body">
+    <div class="alert-list" id="drawer-alerts"></div>
+  </div>
+</div>
+
+<!-- ═══ MODAL: Nouvelle tâche ════════════════════════════════ -->
+<div class="modal-overlay" id="modal-task">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">Nouvelle tâche</div>
+      <button class="modal-close" onclick="closeModal('modal-task')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="fg">
+        <label class="flabel">Titre <span class="req">*</span></label>
+        <input type="text" class="finput" id="task-title-input" placeholder="Ex: Déployer un tableau de bord KPI">
+      </div>
+      <div class="fg">
+        <label class="flabel">Priorité</label>
+        <div class="opt-grid c3">
+          <button class="opt-btn sel" data-g="task-prio" data-v="urgent" onclick="selOpt(this)">
+            <div><div class="ol">🔴 Urgent</div></div>
+          </button>
+          <button class="opt-btn" data-g="task-prio" data-v="important" onclick="selOpt(this)">
+            <div><div class="ol">🟡 Important</div></div>
+          </button>
+          <button class="opt-btn" data-g="task-prio" data-v="planned" onclick="selOpt(this)">
+            <div><div class="ol">🟢 Planifié</div></div>
+          </button>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="flabel">Responsable</label>
+        <select class="finput" id="task-assignee-input">
+          <option value="">Non assigné</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="flabel">Échéance</label>
+        <input type="date" class="finput" id="task-deadline-input">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm outline" onclick="closeModal('modal-task')">Annuler</button>
+      <button class="btn-sm solid" onclick="addTask()">Créer la tâche</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL: Ajouter un membre ════════════════════════════ -->
+<div class="modal-overlay" id="modal-member">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">Ajouter un membre</div>
+      <button class="modal-close" onclick="closeModal('modal-member')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="fg">
+        <label class="flabel">Nom complet <span class="req">*</span></label>
+        <input type="text" class="finput" id="member-name-input" placeholder="Ex: Amadou Diallo">
+      </div>
+      <div class="fg">
+        <label class="flabel">Poste</label>
+        <input type="text" class="finput" id="member-post-input" placeholder="Ex: Directeur des opérations">
+      </div>
+      <div class="fg">
+        <label class="flabel">Rôle</label>
+        <div class="opt-grid c3">
+          <button class="opt-btn" data-g="member-role" data-v="admin" onclick="selOpt(this)">
+            <div><div class="ol">Admin</div></div>
+          </button>
+          <button class="opt-btn sel" data-g="member-role" data-v="manager" onclick="selOpt(this)">
+            <div><div class="ol">Manager</div></div>
+          </button>
+          <button class="opt-btn" data-g="member-role" data-v="user" onclick="selOpt(this)">
+            <div><div class="ol">Utilisateur</div></div>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm outline" onclick="closeModal('modal-member')">Annuler</button>
+      <button class="btn-sm solid" onclick="addMember()">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TOAST ══════════════════════════════════════════════════ -->
+<div class="toast" id="toast"><span id="toast-msg">Notification</span></div>
+
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// STATE — Single source of truth
+// ═══════════════════════════════════════════════════════════════
+const S = {
+  // Wizard inputs
+  secteur: null, taille: null, localisation: '', orgName: '',
+  q_donnees: null, q_tdb: null, q_decision: null, q_kpi: null, q_vision: null,
+  ca: null, employes: 0, projets: 0, performance: 50,
+  // Computed results
+  scores: { structure: 0, donnees: 0, decision: 0, performance: 0 },
+  global: 0, level: 1,
+  // App data
+  tasks: [], team: [], analyses: [], chatHistory: [],
+  taskPrio: 'urgent', memberRole: 'manager',
+  charts: { radar: null, evol: null, proj: null, team: null },
+  alertDrawerOpen: false, sidebarCollapsed: false,
+};
+
+// ─── LocalStorage helpers ─────────────────────────────────────
+const LS = {
+  save(key, val) { try { localStorage.setItem('iac_' + key, JSON.stringify(val)); } catch(e) {} },
+  load(key, def) { try { const v = localStorage.getItem('iac_' + key); return v ? JSON.parse(v) : def; } catch(e) { return def; } },
+};
+
+// ═══════════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════════
+function goTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('app-shell').style.display = 'none';
+  const pg = document.getElementById('pg-' + page);
+  if (pg) { pg.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+}
+
+function appNav(sec) {
+  document.querySelectorAll('.app-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+  const el = document.getElementById('sec-' + sec);
+  if (el) el.classList.add('active');
+  const si = document.querySelector(`.sb-item[data-sec="${sec}"]`);
+  if (si) si.classList.add('active');
+  const labels = {
+    dashboard: 'Dashboard', results: 'Résultats',
+    'action-plan': "Plan d'action", recommendations: 'Recommandations',
+    tracking: 'Suivi de performance', organization: 'Organisation', assistant: 'Assistant IA',
+  };
+  document.getElementById('topbar-page').textContent = labels[sec] || sec;
+  if (sec === 'assistant' && S.chatHistory.length === 0) initChat();
+  if (sec === 'tracking') buildTrackingCharts();
+  if (sec === 'organization') { buildOrganization(); setTimeout(() => buildTeamChart(), 50); }
+  window.scrollTo({ top: 0 });
+}
+
+function showApp() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const shell = document.getElementById('app-shell');
+  shell.style.display = 'flex';
+  // Small delay so DOM is ready before chart renders
+  setTimeout(() => appNav('dashboard'), 50);
+}
+
+function restartWizard() {
+  // Reset wizard inputs + derived state; preserve team/tasks
+  Object.assign(S, {
+    secteur: null, taille: null, localisation: '', orgName: '',
+    q_donnees: null, q_tdb: null, q_decision: null, q_kpi: null, q_vision: null,
+    ca: null, employes: 0, projets: 0, performance: 50,
+    scores: { structure:0, donnees:0, decision:0, performance:0 },
+    global: 0, level: 1, chatHistory: [],
+  });
+  document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('sel'));
+  document.querySelectorAll('.yn-btn').forEach(b => b.classList.remove('sy', 'sn'));
+  const r = document.getElementById('perf-range');
+  if (r) { r.value = 50; r.style.setProperty('--val', '50%'); }
+  const pv = document.getElementById('pval'); if (pv) pv.textContent = '50';
+  const csvStatus = document.getElementById('csv-status'); if (csvStatus) csvStatus.textContent = 'Aucun fichier';
+  // Clear text inputs
+  ['localisation','org-name','ca','employes','projets'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = '';
+  });
+  goTo('step1');
+}
+
+function toggleSidebar() {
+  const sb = document.getElementById('sidebar');
+  S.sidebarCollapsed = !S.sidebarCollapsed;
+  sb.classList.toggle('collapsed', S.sidebarCollapsed);
+  if (window.innerWidth <= 768) sb.classList.toggle('mobile-open');
+}
+
+function toggleAlertDrawer() {
+  const d = document.getElementById('alert-drawer');
+  S.alertDrawerOpen = !S.alertDrawerOpen;
+  d.classList.toggle('open', S.alertDrawerOpen);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// WIZARD INTERACTIONS
+// ═══════════════════════════════════════════════════════════════
+function selOpt(btn) {
+  const g = btn.dataset.g;
+  document.querySelectorAll(`[data-g="${g}"]`).forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+  // Map hyphenated data-g keys to camelCase state keys
+  const keyMap = { 'task-prio': 'taskPrio', 'member-role': 'memberRole' };
+  const stateKey = keyMap[g] || g;
+  S[stateKey] = btn.dataset.v;
+}
+
+function selYN(btn) {
+  const g = btn.dataset.g;
+  document.querySelectorAll(`[data-g="${g}"]`).forEach(b => b.classList.remove('sy', 'sn'));
+  btn.classList.add(btn.dataset.v === 'oui' ? 'sy' : 'sn');
+  S[g] = btn.dataset.v;
+}
+
+function upRange(inp) {
+  const v = inp.value;
+  inp.style.setProperty('--val', v + '%');
+  document.getElementById('pval').textContent = v;
+  S.performance = parseInt(v);
+}
+
+function goStep2() {
+  if (!S.secteur || !S.taille) { toast('Veuillez sélectionner secteur et taille', 'warn'); return; }
+  S.localisation = document.getElementById('localisation').value;
+  S.orgName = document.getElementById('org-name').value || 'Mon organisation';
+  goTo('step2');
+}
+
+function goStep3() {
+  if (!S.q_donnees || !S.q_tdb || !S.q_decision || !S.q_kpi || !S.q_vision) {
+    toast('Veuillez répondre à toutes les questions', 'warn'); return;
+  }
+  goTo('step3');
+}
+
+function importCSV(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const rows = e.target.result.split('\n').filter(r => r.trim());
+    if (rows.length < 2) { toast('Format CSV invalide', 'warn'); return; }
+    const headers = rows[0].split(',').map(h => h.trim().toLowerCase());
+    const data = rows[1].split(',');
+    const get = k => { const i = headers.indexOf(k); return i >= 0 ? data[i].trim() : null; };
+    const emp = get('employes') || get('employees') || get('effectif');
+    const ca  = get('ca') || get('chiffre') || get('revenue');
+    const proj = get('projets') || get('projects');
+    const perf = get('performance') || get('taux');
+    if (emp) { const el = document.getElementById('employes'); if(el) el.value = parseInt(emp) || ''; }
+    if (ca)  { const el = document.getElementById('ca');  if(el) el.value = parseInt(ca.replace(/\s/g,'')) || ''; }
+    if (proj){ const el = document.getElementById('projets'); if(el) el.value = parseInt(proj) || ''; }
+    if (perf){ const v = Math.min(100, Math.max(0, parseInt(perf) || 50));
+               const r = document.getElementById('perf-range'); if(r) { r.value = v; upRange(r); } }
+    const st = document.getElementById('csv-status'); if(st) st.textContent = '✓ ' + file.name;
+    toast('Données importées depuis ' + file.name, 'success');
+  };
+  reader.readAsText(file);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SCORING ENGINE — Core business logic
+// ═══════════════════════════════════════════════════════════════
+function computeScores() {
+  /* ── STRUCTURE (/100)
+     Base: organisational formalism, size, vision, headcount */
+  let str = 38;
+  if (S.taille === 'grande')  str += 22;
+  else if (S.taille === 'moyenne') str += 13;
+  else str += 5;                          // petite
+  if (S.q_vision === 'oui')   str += 24; // documented strategic vision
+  if (S.employes > 100)        str += 12; // organisation complexity bonus
+  if (S.secteur === 'institution') str += 8; // public sector structural bonus
+  S.scores.structure = Math.min(100, Math.round(str));
+
+  /* ── DONNÉES (/100)
+     Measures data availability, dashboards, KPI tracking */
+  let dat = 18;
+  if (S.q_donnees === 'oui') dat += 42;  // reliable data exists
+  if (S.q_tdb === 'oui')    dat += 26;  // has a dashboard
+  if (S.q_kpi === 'oui')    dat += 14;  // tracks KPIs regularly
+  S.scores.donnees = Math.min(100, Math.round(dat));
+
+  /* ── DÉCISION (/100)
+     Measures decision quality and process maturity */
+  let dec = 22;
+  if (S.q_decision === 'data')        dec += 52; // data-driven decisions
+  else if (S.q_decision === 'discussion') dec += 26; // collective decisions
+  else                                 dec += 6;  // intuition only
+  if (S.q_kpi === 'oui')    dec += 14; // KPIs support decisions
+  if (S.q_vision === 'oui') dec += 10; // vision guides decisions
+  S.scores.decision = Math.min(100, Math.round(dec));
+
+  /* ── PERFORMANCE (/100)
+     Measures operational effectiveness */
+  let perf = S.performance * 0.52;     // self-reported base
+  if (S.q_kpi === 'oui')  perf += 20; // measurable results
+  if (S.projets > 5)       perf += 14; // active project density
+  if (S.q_tdb === 'oui')  perf += 14; // dashboard-driven management
+  S.scores.performance = Math.min(100, Math.round(perf));
+
+  /* ── GLOBAL: weighted composite
+     Données weighted highest — data is the foundation of everything */
+  S.global = Math.round(
+    S.scores.structure   * 0.25 +
+    S.scores.donnees     * 0.30 +
+    S.scores.decision    * 0.25 +
+    S.scores.performance * 0.20
+  );
+
+  /* ── MATURITY LEVEL */
+  S.level = S.global >= 75 ? 4 : S.global >= 55 ? 3 : S.global >= 35 ? 2 : 1;
+}
+
+// ─── Level metadata ──────────────────────────────────────────
+function levelInfo(l) {
+  return {
+    1: { label: 'Niveau 1 — Émergent',       desc: 'Organisation peu structurée, décisions informelles.',         bg: '#FEE2E2', text: '#991B1B' },
+    2: { label: 'Niveau 2 — En développement', desc: 'Premiers systèmes en place, mais insuffisants.',            bg: '#FEF9C3', text: '#713F12' },
+    3: { label: 'Niveau 3 — Structuré',        desc: 'Bonne base organisationnelle, optimisations à réaliser.',  bg: '#DBEAFE', text: '#1A4F9A' },
+    4: { label: 'Niveau 4 — Optimisé',         desc: 'Organisation mature et data-driven. Maintenez la dynamique.', bg: '#DCFCE7', text: '#166534' },
+  }[l];
+}
+
+// ─── Score color coding ───────────────────────────────────────
+function scoreColor(v) {
+  if (v >= 70) return { stroke: '#22C55E', bg: '#DCFCE7', text: '#166534', label: 'Solide' };
+  if (v >= 45) return { stroke: '#EAB308', bg: '#FEF9C3', text: '#713F12', label: 'À améliorer' };
+  return         { stroke: '#EF4444', bg: '#FEE2E2', text: '#991B1B', label: 'Critique' };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// IMPACT CALCULATION — Financial interpretation
+// ═══════════════════════════════════════════════════════════════
+function calcImpact() {
+  const emp = S.employes || 10;
+  const monthSalary = 450_000; // XOF avg salary
+  // Productivity loss ratio scales with score
+  const lossRatio = S.global < 35 ? 0.30 : S.global < 55 ? 0.20 : S.global < 75 ? 0.10 : 0.05;
+  const annualSalaryLoss = Math.round(emp * monthSalary * 12 * lossRatio);
+  // CA-based opportunity loss (if CA provided)
+  const caLoss = S.ca ? Math.round(S.ca * (1 - S.global / 100) * 0.07) : null;
+  const totalLoss = caLoss ? Math.round((annualSalaryLoss + caLoss) / 2) : annualSalaryLoss;
+  const gain = Math.round(totalLoss * 0.65);   // conservative recovery estimate
+  const opp  = Math.round(totalLoss * 1.20);   // full opportunity value
+  return { totalLoss, gain, opp };
+}
+
+function fmtXOF(v) {
+  if (v >= 1_000_000) return (v / 1_000_000).toFixed(1) + 'M';
+  if (v >= 1_000)     return (v / 1_000).toFixed(0) + 'K';
+  return String(v);
+}
+
+function buildImpact(containerId) {
+  const { totalLoss, gain, opp } = calcImpact();
+  document.getElementById(containerId).innerHTML = `
+    <div class="impact-card loss">
+      <div class="ic-lbl">Perte estimée / an</div>
+      <div class="ic-val">${fmtXOF(totalLoss)} XOF</div>
+      <div class="ic-sub">Coût de l'inefficacité actuelle</div>
+    </div>
+    <div class="impact-card gain">
+      <div class="ic-lbl">Gain potentiel</div>
+      <div class="ic-val">${fmtXOF(gain)} XOF</div>
+      <div class="ic-sub">Après implémentation du plan IA</div>
+    </div>
+    <div class="impact-card opp">
+      <div class="ic-lbl">Opportunité totale</div>
+      <div class="ic-val">${fmtXOF(opp)} XOF</div>
+      <div class="ic-sub">Valeur totale à débloquer</div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ANALYSIS — Save + init team
+// ═══════════════════════════════════════════════════════════════
+function runAnalysis() {
+  S.employes = parseInt(document.getElementById('employes').value) || 0;
+  if (!S.employes) { toast("Nombre d'employés requis", 'warn'); return; }
+  S.ca      = parseFloat(document.getElementById('ca').value) || null;
+  S.projets = parseInt(document.getElementById('projets').value) || 0;
+
+  // Disable launch button to prevent double-submit
+  const launchBtn = document.querySelector('#pg-step3 .btn-next.orange');
+  if (launchBtn) launchBtn.disabled = true;
+
+  goTo('analyzing');
+  animateSteps(['as1','as2','as3','as4','as5'], () => {
+    computeScores();
+    saveAnalysis();
+    buildAllPages();
+    showApp();
+    if (launchBtn) launchBtn.disabled = false; // re-enable for future runs
+  });
+}
+
+function animateSteps(ids, cb) {
+  ids.forEach(id => { const el = document.getElementById(id); if (el) el.className = 'anlz-step'; });
+  let i = 0;
+  function next() {
+    if (i > 0) document.getElementById(ids[i-1]).className = 'anlz-step done';
+    if (i < ids.length) {
+      document.getElementById(ids[i]).className = 'anlz-step act';
+      i++; setTimeout(next, 700);
+    } else { setTimeout(cb, 400); }
+  }
+  next();
+}
+
+function saveAnalysis() {
+  S.analyses = LS.load('analyses', []);
+  S.analyses.push({
+    date: new Date().toISOString(),
+    orgName: S.orgName, secteur: S.secteur, taille: S.taille,
+    global: S.global, level: S.level,
+    scores: { ...S.scores }, employes: S.employes,
+  });
+  LS.save('analyses', S.analyses);
+  S.tasks = LS.load('tasks', []);
+  S.team  = LS.load('team', []);
+  if (!S.team.length) initDefaultTeam();
+}
+
+function initDefaultTeam() {
+  S.team = [
+    { id: 1, name: 'Vous (Admin)',  post: 'Directeur général',       role: 'admin',   color: '#1E6FD9' },
+    { id: 2, name: 'Manager Ops',   post: 'Responsable opérations',  role: 'manager', color: '#F97316' },
+    { id: 3, name: 'Data Analyst',  post: 'Analyste de données',     role: 'user',    color: '#22C55E' },
+  ];
+  LS.save('team', S.team);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// BUILD ALL SECTIONS
+// ═══════════════════════════════════════════════════════════════
+function buildAllPages() {
+  buildSidebar();
+  buildDashboard();
+  buildResults();
+  buildActionPlan();
+  buildRecommendations();
+  buildOrganization();
+  buildAlerts();
+}
+
+// ─── Sidebar ─────────────────────────────────────────────────
+function buildSidebar() {
+  const lvl = levelInfo(S.level);
+  document.getElementById('sb-org-name').textContent = S.orgName || 'Mon organisation';
+  document.getElementById('sb-org-role').textContent = 'Admin · ' + lvl.label.split('—')[0].trim();
+}
+
+// ─── Dashboard ───────────────────────────────────────────────
+function buildDashboard() {
+  document.getElementById('dash-title').textContent = 'Dashboard — ' + (S.orgName || 'Mon organisation');
+  document.getElementById('dash-sub').textContent =
+    `${S.employes} employés · ${S.secteur || ''} · Analysé le ${new Date().toLocaleDateString('fr-FR')}`;
+
+  // ── 4 KPI cards
+  const axes = [
+    { key: 'structure',   label: 'Structure',   icon: '🏗️', bg: '#EFF6FF' },
+    { key: 'donnees',     label: 'Données',      icon: '📊', bg: '#F0FDF4' },
+    { key: 'decision',    label: 'Décision',     icon: '🧠', bg: '#FFFBEB' },
+    { key: 'performance', label: 'Performance',  icon: '🚀', bg: '#FFF7ED' },
+  ];
+  document.getElementById('dash-kpis').innerHTML = axes.map(ax => {
+    const v = S.scores[ax.key], c = scoreColor(v);
+    const trend = v >= 70 ? 'up' : v >= 45 ? 'flat' : 'down';
+    const trendLabel = v >= 70 ? '▲ Solide' : v >= 45 ? '▶ Moyen' : '▼ Critique';
+    return `<div class="kpi-card">
+      <div class="kpi-top">
+        <div class="kpi-icon" style="background:${ax.bg}">${ax.icon}</div>
+        <div class="kpi-trend ${trend}">${trendLabel}</div>
+      </div>
+      <div class="kpi-val">${v}<span>/100</span></div>
+      <div class="kpi-label">${ax.label}</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" id="kbar-${ax.key}" style="background:${c.stroke}"></div></div>
+    </div>`;
+  }).join('');
+  setTimeout(() => axes.forEach(ax => {
+    const b = document.getElementById('kbar-' + ax.key);
+    if (b) b.style.width = S.scores[ax.key] + '%';
+  }), 200);
+
+  // ── Score circle
+  const lvl = levelInfo(S.level), c = scoreColor(S.global);
+  const fill = 452 - (S.global / 100) * 452;
+  document.getElementById('sc-num').textContent = S.global;
+  document.getElementById('sc-num').style.color = c.stroke;
+  const sc = document.getElementById('sc-fill');
+  sc.style.stroke = c.stroke;
+  setTimeout(() => { sc.style.strokeDashoffset = fill; }, 200);
+  const lb = document.getElementById('dash-level-badge');
+  lb.textContent = lvl.label; lb.style.background = lvl.bg; lb.style.color = lvl.text;
+  document.getElementById('dash-level-desc').textContent = lvl.desc;
+
+  buildRadar();
+  buildIndices();
+  buildImpact('dash-impact');
+  buildDashTopTasks();
+}
+
+// ─── Radar Chart ─────────────────────────────────────────────
+function buildRadar() {
+  const canvas = document.getElementById('radarChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (S.charts.radar) S.charts.radar.destroy();
+  S.charts.radar = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['Structure', 'Données', 'Décision', 'Performance'],
+      datasets: [
+        {
+          label: 'Score actuel',
+          data: [S.scores.structure, S.scores.donnees, S.scores.decision, S.scores.performance],
+          backgroundColor: 'rgba(30,111,217,.1)', borderColor: 'rgba(30,111,217,.8)',
+          borderWidth: 2.5, pointBackgroundColor: '#1E6FD9', pointBorderColor: '#fff', pointRadius: 5,
+        },
+        {
+          label: 'Objectif 90j',
+          data: [
+            Math.min(100, S.scores.structure   + 18),
+            Math.min(100, S.scores.donnees      + 22),
+            Math.min(100, S.scores.decision     + 20),
+            Math.min(100, S.scores.performance  + 16),
+          ],
+          backgroundColor: 'rgba(249,115,22,.07)', borderColor: 'rgba(249,115,22,.55)',
+          borderWidth: 2, borderDash: [5,3], pointBackgroundColor: '#F97316',
+          pointBorderColor: '#fff', pointRadius: 4,
+        },
+      ],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 10 } } },
+      scales: {
+        r: {
+          beginAtZero: true, max: 100,
+          ticks: { stepSize: 25, font: { size: 10 }, color: '#94A3B8' },
+          grid: { color: 'rgba(0,0,0,.05)' },
+          angleLines: { color: 'rgba(0,0,0,.05)' },
+          pointLabels: { font: { size: 12, weight: '600' }, color: '#475569' },
+        },
+      },
+      animation: { duration: 1000, easing: 'easeInOutQuart' },
+    },
+  });
+}
+
+// ─── 5 Exclusive Indices ─────────────────────────────────────
+function buildIndices() {
+  const { structure, donnees, decision, performance } = S.scores;
+  const g = S.global;
+  const indices = [
+    { icon:'🏆', label:'Score de maturité organisationnelle', sub:'Indice global IAConsult',          val: Math.round((structure+donnees+decision+performance)/4), color:'#1E6FD9', bg:'#EFF6FF' },
+    { icon:'🧠', label:'Indice de décision intelligente',     sub:'Qualité du processus décisionnel', val: decision,                                               color:'#F97316', bg:'#FFF7ED' },
+    { icon:'🔍', label:'Indice de performance cachée',        sub:'Potentiel non encore exploité',    val: Math.round((100-g)*0.6),                                color:'#EAB308', bg:'#FFFBEB' },
+    { icon:'📊', label:'Indice de pilotage data-driven',      sub:'Capacité analytique interne',      val: Math.round((donnees+decision)/2),                       color:'#22C55E', bg:'#F0FDF4' },
+    { icon:'📉', label:'Indice de perte organisationnelle',   sub:'Pertes liées à l\'inefficacité',   val: Math.round((100-g)*0.7),                                color:'#EF4444', bg:'#FEF2F2' },
+  ];
+  document.getElementById('dash-indices').innerHTML = indices.map(idx => `
+    <div class="idx-item">
+      <div class="idx-icon" style="background:${idx.bg}">${idx.icon}</div>
+      <div><div class="idx-label">${idx.label}</div><div class="idx-sub">${idx.sub}</div></div>
+      <div class="idx-val" style="color:${idx.color}">${idx.val}<span class="idx-max">/100</span></div>
+    </div>`).join('');
+}
+
+// ─── Top 3 urgent tasks on dashboard ─────────────────────────
+function buildDashTopTasks() {
+  const list = (S.tasks.filter(t => !t.done && t.prio === 'urgent').slice(0,3).length
+    ? S.tasks.filter(t => !t.done && t.prio === 'urgent').slice(0,3)
+    : genTasks().filter(t => t.prio === 'urgent').slice(0,3));
+  document.getElementById('dash-top-tasks').innerHTML = list.map(t => `
+    <div class="task-card" onclick="appNav('action-plan')">
+      <div class="task-check"></div>
+      <div class="task-main">
+        <div class="task-title">${t.title}</div>
+        <div class="task-meta">
+          <span class="task-prio prio-${t.prio}">${priLabel(t.prio)}</span>
+          <span class="task-deadline">📅 ${t.deadline}</span>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ─── Results section ─────────────────────────────────────────
+function buildResults() {
+  const lvl = levelInfo(S.level);
+  document.getElementById('res-sub').textContent = `Score global ${S.global}/100 · ${lvl.label}`;
+  const axes = [
+    { key:'structure', label:'Structure', icon:'🏗️', bg:'#EFF6FF' },
+    { key:'donnees',   label:'Données',   icon:'📊', bg:'#F0FDF4' },
+    { key:'decision',  label:'Décision',  icon:'🧠', bg:'#FFFBEB' },
+    { key:'performance',label:'Performance',icon:'🚀',bg:'#FFF7ED' },
+  ];
+  document.getElementById('axes-cards').innerHTML = axes.map(ax => {
+    const v = S.scores[ax.key], c = scoreColor(v);
+    return `<div class="kpi-card" style="text-align:center">
+      <div class="kpi-icon" style="background:${ax.bg};margin:0 auto 10px">${ax.icon}</div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--s400);margin-bottom:4px">${ax.label}</div>
+      <div style="font-family:'Sora',sans-serif;font-size:42px;font-weight:900;color:${c.stroke};line-height:1">${v}</div>
+      <div class="kpi-bar" style="margin-top:10px"><div class="kpi-bar-fill" id="abar-${ax.key}" style="background:${c.stroke}"></div></div>
+      <span style="display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:2px 9px;border-radius:10px;margin-top:8px;background:${c.bg};color:${c.text}">${c.label}</span>
+    </div>`;
+  }).join('');
+  setTimeout(() => axes.forEach(ax => {
+    const b = document.getElementById('abar-' + ax.key); if (b) b.style.width = S.scores[ax.key] + '%';
+  }), 200);
+  document.getElementById('res-problems').innerHTML = genProblems().map(p =>
+    `<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--s100);font-size:13px;color:var(--s700)">
+      <div style="width:7px;height:7px;border-radius:50%;background:#EF4444;flex-shrink:0;margin-top:5px"></div>${p}</div>`).join('');
+  document.getElementById('res-opportunities').innerHTML = genOpportunities().map(o =>
+    `<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--s100);font-size:13px;color:var(--s700)">
+      <div style="width:7px;height:7px;border-radius:50%;background:#22C55E;flex-shrink:0;margin-top:5px"></div>${o}</div>`).join('');
+  buildImpact('res-impact');
+}
+
+// ─── Problem & Opportunity generators ────────────────────────
+function genProblems() {
+  const p = [];
+  if (S.scores.donnees < 50)      p.push('Manque de données fiables pour piloter l\'organisation');
+  if (S.q_tdb === 'non')           p.push('Absence de tableau de bord de suivi des performances');
+  if (S.q_decision !== 'data')     p.push('Prise de décision non basée sur des données objectives');
+  if (S.q_kpi === 'non')           p.push('Pas de suivi régulier des indicateurs de performance (KPI)');
+  if (S.q_vision === 'non')        p.push('Vision stratégique non documentée ou peu partagée');
+  if (S.scores.structure < 50)    p.push('Structure organisationnelle insuffisamment formalisée');
+  if (!p.length) p.push('Aucun problème critique — optimisation continue recommandée');
+  return p.slice(0, 5);
+}
+
+function genOpportunities() {
+  const o = [];
+  if (S.q_tdb === 'non')    o.push('Déploiement d\'un tableau de bord BI (Power BI, Metabase)');
+  if (S.q_kpi === 'non')    o.push('Mise en place de KPI adaptés à votre secteur');
+  if (S.q_donnees === 'non') o.push('Digitalisation de la collecte de données opérationnelles');
+  o.push('Automatisation des rapports hebdomadaires de performance');
+  o.push('Formation des équipes aux outils d\'analyse de données');
+  if (S.secteur === 'ong')        o.push('Indicateurs d\'impact social mesurables pour les bailleurs');
+  if (S.secteur === 'entreprise') o.push('Optimisation du tunnel commercial via la data');
+  if (S.taille === 'petite')      o.push('Outils SaaS légers : Notion, Airtable, Google Data Studio');
+  return o.slice(0, 5);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RECOMMENDATION ENGINE — 7 / 30 / 90 day plans
+// ═══════════════════════════════════════════════════════════════
+function genTasks() {
+  const base = [
+    { title: 'Cartographier tous les processus décisionnels clés',          prio:'urgent',    deadline:'J+7',  axis:'structure'   },
+    { title: 'Centraliser les sources de données existantes',               prio:'urgent',    deadline:'J+7',  axis:'donnees'     },
+    { title: 'Définir 5 KPI prioritaires à suivre immédiatement',           prio:'urgent',    deadline:'J+7',  axis:'decision'    },
+    { title: 'Organiser un atelier de diagnostic avec les équipes',          prio:'important', deadline:'J+14', axis:'structure'   },
+    { title: 'Déployer un tableau de bord de suivi hebdomadaire',            prio:'urgent',    deadline:'J+30', axis:'donnees'     },
+    { title: 'Former les managers à la décision data-driven',                prio:'important', deadline:'J+30', axis:'decision'    },
+    { title: 'Automatiser les rapports de performance',                      prio:'planned',   deadline:'J+30', axis:'performance' },
+    { title: 'Structurer la vision stratégique sur 12 mois',                 prio:'important', deadline:'J+30', axis:'structure'   },
+    { title: 'Implémenter une solution BI complète (Power BI / Metabase)',   prio:'important', deadline:'J+90', axis:'donnees'     },
+    { title: 'Mettre en place une gouvernance des données',                  prio:'planned',   deadline:'J+90', axis:'donnees'     },
+    { title: 'Déployer une culture data-driven dans l\'organisation',        prio:'planned',   deadline:'J+90', axis:'performance' },
+  ];
+  const sectorBonus = {
+    ong:         [{ title:'Définir des indicateurs d\'impact social mesurables', prio:'urgent', deadline:'J+7', axis:'decision' }],
+    entreprise:  [{ title:'Analyser la rentabilité par produit/service',         prio:'urgent', deadline:'J+7', axis:'performance' }],
+    ecole:       [{ title:'Suivre les taux de réussite par cohorte',             prio:'urgent', deadline:'J+7', axis:'donnees' }],
+    institution: [{ title:'Cartographier les services et leurs indicateurs',     prio:'urgent', deadline:'J+7', axis:'structure' }],
+  };
+  return [...base, ...(sectorBonus[S.secteur] || [])];
+}
+
+function buildRecommendations() {
+  const all = genTasks();
+  const periods = [
+    { p: 7,  badge:'d7',  num:'n7',  icon:'🔥', label:'7 premiers jours' },
+    { p: 30, badge:'d30', num:'n30', icon:'📈', label:'30 jours' },
+    { p: 90, badge:'d90', num:'n90', icon:'🏆', label:'90 jours' },
+  ];
+  const deadlineMap = { 7: 'J+7', 30: 'J+30', 90: 'J+90' };
+  document.getElementById('tl-grid').innerHTML = periods.map(pe => {
+    const items = all.filter(t => t.deadline === deadlineMap[pe.p]).slice(0, 5);
+    return `<div class="tl-card">
+      <div class="tl-head">
+        <div class="tl-badge ${pe.badge}">${pe.icon} Plan</div>
+        <div class="tl-period">${pe.label}</div>
+      </div>
+      <div class="tl-body">
+        ${items.map((a,i) => `
+          <div class="tl-item">
+            <div class="tl-num ${pe.num}">${i+1}</div>
+            <div class="tl-text">${a.title}</div>
+            <div class="tl-prio ${a.prio==='urgent'?'high':a.prio==='important'?'med':'low'}">
+              ${a.prio==='urgent'?'Urgent':a.prio==='important'?'Moyen':'Planifié'}
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ACTION PLAN — Task management
+// ═══════════════════════════════════════════════════════════════
+function buildActionPlan() {
+  if (!S.tasks.length) {
+    const gen = genTasks();
+    S.tasks = gen.map((t, i) => ({
+      ...t, id: Date.now() + i, done: false,
+      assigneeId: S.team[i % S.team.length]?.id || null,
+      createdAt: new Date().toISOString(),
+    }));
+    LS.save('tasks', S.tasks);
+  }
+  renderTasks('all');
+  updateTaskCounts();
+  updateTaskBadge();
+  const sel = document.getElementById('task-assignee-input');
+  if (sel) sel.innerHTML = '<option value="">Non assigné</option>' +
+    S.team.map(m => `<option value="${m.id}">${m.name}</option>`).join('');
+}
+
+function renderTasks(filter) {
+  let tasks = S.tasks;
+  if (filter === 'urgent')    tasks = tasks.filter(t => t.prio === 'urgent'    && !t.done);
+  if (filter === 'important') tasks = tasks.filter(t => t.prio === 'important' && !t.done);
+  if (filter === 'done')      tasks = tasks.filter(t => t.done);
+
+  const tl = document.getElementById('task-list');
+  if (!tasks.length) {
+    tl.innerHTML = `<div class="ap-empty"><div class="ap-empty-icon">✅</div>
+      <div class="ap-empty-title">${filter==='done'?'Aucune tâche terminée':'Aucune tâche dans cette catégorie'}</div></div>`;
+    return;
+  }
+  tl.innerHTML = tasks.map(t => {
+    const member = S.team.find(m => m.id === t.assigneeId);
+    const color  = member?.color || '#94A3B8';
+    const initials = member ? member.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2) : '—';
+    return `<div class="task-card ${t.done?'done-card':''}" id="tc-${t.id}">
+      <div class="task-check ${t.done?'checked':''}" onclick="toggleTask(${t.id},event)">${t.done?'✓':''}</div>
+      <div class="task-main">
+        <div class="task-title">${t.title}</div>
+        <div class="task-meta">
+          <span class="task-prio prio-${t.prio}">${priLabel(t.prio)}</span>
+          <span class="task-deadline">📅 ${t.deadline}</span>
+          ${member ? `<span class="task-assignee">
+            <div class="task-assignee-dot" style="background:${color}">${initials}</div>${member.name}
+          </span>` : ''}
+        </div>
+      </div>
+      <div class="task-actions">
+        <button class="btn-sm ghost" onclick="deleteTask(${t.id},event)" title="Supprimer">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function priLabel(p) { return p==='urgent'?'Urgent':p==='important'?'Important':'Planifié'; }
+
+function toggleTask(id, e) {
+  e.stopPropagation();
+  const t = S.tasks.find(t => t.id === id);
+  if (t) { t.done = !t.done; LS.save('tasks', S.tasks); }
+  const f = document.querySelector('.ap-tab.act')?.dataset.filter || 'all';
+  renderTasks(f); updateTaskCounts(); updateTaskBadge();
+  toast(t?.done ? 'Tâche terminée ✓' : 'Tâche réouverte', 'success');
+}
+
+function deleteTask(id, e) {
+  e.stopPropagation();
+  S.tasks = S.tasks.filter(t => t.id !== id);
+  LS.save('tasks', S.tasks);
+  const f = document.querySelector('.ap-tab.act')?.dataset.filter || 'all';
+  renderTasks(f); updateTaskCounts(); updateTaskBadge();
+}
+
+function filterTasks(btn) {
+  document.querySelectorAll('.ap-tab').forEach(b => b.classList.remove('act'));
+  btn.classList.add('act');
+  renderTasks(btn.dataset.filter);
+}
+
+function updateTaskCounts() {
+  document.getElementById('cnt-all').textContent       = S.tasks.length;
+  document.getElementById('cnt-urgent').textContent    = S.tasks.filter(t => t.prio==='urgent' && !t.done).length;
+  document.getElementById('cnt-important').textContent = S.tasks.filter(t => t.prio==='important' && !t.done).length;
+  document.getElementById('cnt-done').textContent      = S.tasks.filter(t => t.done).length;
+}
+
+function updateTaskBadge() {
+  const open = S.tasks.filter(t => !t.done && t.prio === 'urgent').length;
+  const b = document.getElementById('badge-tasks');
+  if (b) { b.textContent = open || ''; b.style.display = open ? '' : 'none'; }
+}
+
+function openAddTaskModal() {
+  openModal('modal-task');
+  const d = new Date(); d.setDate(d.getDate() + 7);
+  document.getElementById('task-deadline-input').value = d.toISOString().split('T')[0];
+}
+
+function fmtDeadline(isoDate) {
+  if (!isoDate) return 'J+7';
+  try {
+    return new Date(isoDate).toLocaleDateString('fr-FR', { day:'2-digit', month:'short', year:'numeric' });
+  } catch(e) { return isoDate; }
+}
+
+function addTask() {
+  const title = document.getElementById('task-title-input').value.trim();
+  if (!title) { toast('Titre requis', 'warn'); return; }
+  const assigneeId = parseInt(document.getElementById('task-assignee-input').value) || null;
+  const rawDate    = document.getElementById('task-deadline-input').value;
+  const deadline   = rawDate ? fmtDeadline(rawDate) : 'J+7';
+  S.tasks.unshift({
+    id: Date.now(), title, prio: S.taskPrio || 'urgent',
+    done: false, assigneeId, deadline, axis: 'structure',
+    createdAt: new Date().toISOString(),
+  });
+  LS.save('tasks', S.tasks);
+  closeModal('modal-task');
+  document.getElementById('task-title-input').value = '';
+  renderTasks('all'); updateTaskCounts(); updateTaskBadge();
+  toast('Tâche créée avec succès', 'success');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ALERTS ENGINE
+// ═══════════════════════════════════════════════════════════════
+function genAlerts() {
+  const alerts = [];
+  if (S.global < 50)            alerts.push({ type:'crit', icon:'🚨', title:'Score critique — Intervention urgente',
+    text:`Votre score de ${S.global}/100 nécessite une action immédiate. Consultez le plan d'action.` });
+  if (S.scores.donnees < 40)   alerts.push({ type:'crit', icon:'📊', title:'Données insuffisantes',
+    text:`Score Données ${S.scores.donnees}/100. La prise de décision est compromise.` });
+  if (S.q_tdb === 'non')        alerts.push({ type:'warn', icon:'⚠️', title:'Absence de tableau de bord',
+    text:'Vous pilotez sans visibilité. Déployez un TDB en priorité (J+7).' });
+  if (S.q_kpi === 'non')        alerts.push({ type:'warn', icon:'📉', title:'Pas de KPI définis',
+    text:'Sans indicateurs, impossible de mesurer la performance et de progresser.' });
+  if (S.q_vision === 'non')     alerts.push({ type:'warn', icon:'🗺️', title:'Vision stratégique manquante',
+    text:"L'absence de vision documentée freine l'alignement des équipes." });
+  if (S.scores.decision < 45)  alerts.push({ type:'warn', icon:'🧠', title:'Décisions non structurées',
+    text:`Processus décisionnel (${S.scores.decision}/100) — risques opérationnels élevés.` });
+  if (S.global >= 70)           alerts.push({ type:'ok',   icon:'✅', title:'Bonne maturité globale',
+    text:`Score ${S.global}/100 — Continuez sur cette dynamique et visez le niveau 4.` });
+  return alerts;
+}
+
+function buildAlerts() {
+  const alerts = genAlerts();
+  document.getElementById('alert-dot').classList.toggle('show', alerts.length > 0);
+  const render = arr => arr.map(a => `
+    <div class="alert-item ${a.type}">
+      <div class="alert-icon">${a.icon}</div>
+      <div><div class="alert-title">${a.title}</div><div class="alert-text">${a.text}</div></div>
+    </div>`).join('');
+  document.getElementById('dash-alerts').innerHTML   = render(alerts.slice(0, 4));
+  document.getElementById('drawer-alerts').innerHTML = render(alerts) ||
+    '<div style="text-align:center;padding:32px;color:var(--s400)">Aucune alerte active</div>';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TRACKING CHARTS
+// ═══════════════════════════════════════════════════════════════
+function buildTrackingCharts() {
+  const analyses = S.analyses || [];
+
+  // History table
+  document.getElementById('hist-tbody').innerHTML = analyses.map((a, i) => {
+    const prev = analyses[i-1];
+    const diff = prev ? a.global - prev.global : null;
+    const cls  = diff === null ? 'same' : diff > 0 ? 'up' : 'down';
+    const arrow = diff === null ? '—' : diff > 0 ? `↑ +${diff}` : `↓ ${diff}`;
+    const lvl = levelInfo(a.level);
+    return `<tr>
+      <td>${new Date(a.date).toLocaleDateString('fr-FR')}</td>
+      <td>${a.orgName}</td>
+      <td><span class="hist-score" style="color:${scoreColor(a.global).stroke}">${a.global}</span></td>
+      <td><span class="hist-level" style="background:${lvl.bg};color:${lvl.text}">${lvl.label.split('—')[0].trim()}</span></td>
+      <td>${a.scores.structure}</td><td>${a.scores.donnees}</td>
+      <td>${a.scores.decision}</td><td>${a.scores.performance}</td>
+      <td><span class="hist-compare ${cls}">${arrow}</span></td>
+    </tr>`;
+  }).join('');
+
+  // Evolution line chart
+  const c1 = document.getElementById('evolChart'); if (!c1) return;
+  const ctx1 = c1.getContext('2d');
+  if (S.charts.evol) S.charts.evol.destroy();
+  S.charts.evol = new Chart(ctx1, {
+    type: 'line',
+    data: {
+      labels: analyses.map((_, i) => `Analyse ${i+1}`),
+      datasets: [{ label: 'Score global', data: analyses.map(a => a.global),
+        borderColor: '#1E6FD9', backgroundColor: 'rgba(30,111,217,.1)',
+        borderWidth: 2.5, pointRadius: 5, pointBackgroundColor: '#1E6FD9', fill: true, tension: .4 }],
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{ y:{ min:0, max:100, ticks:{color:'#94A3B8'}, grid:{color:'rgba(0,0,0,.05)'} },
+               x:{ ticks:{color:'#94A3B8'}, grid:{color:'rgba(0,0,0,.04)'} } } },
+  });
+
+  // Projection chart
+  const g = S.global;
+  const c2 = document.getElementById('projChart'); if (!c2) return;
+  const ctx2 = c2.getContext('2d');
+  if (S.charts.proj) S.charts.proj.destroy();
+  S.charts.proj = new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: ["Aujourd'hui", 'J+7', 'J+30', 'J+60', 'J+90'],
+      datasets: [{ label: 'Projection',
+        data: [g, Math.min(100,Math.round(g*1.07)), Math.min(100,Math.round(g*1.17)),
+               Math.min(100,Math.round(g*1.27)), Math.min(100,Math.round(g*1.38))],
+        borderColor:'#F97316', backgroundColor:'rgba(249,115,22,.08)',
+        borderWidth:2.5, pointRadius:5, fill:true, tension:.4, borderDash:[6,3] }],
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{ y:{ min:Math.max(0,g-10), max:100, ticks:{color:'#94A3B8'}, grid:{color:'rgba(0,0,0,.05)'} },
+               x:{ ticks:{color:'#94A3B8'}, grid:{color:'rgba(0,0,0,.04)'} } } },
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ORGANISATION
+// ═══════════════════════════════════════════════════════════════
+function buildOrganization() {
+  document.getElementById('org-sub').textContent =
+    `${S.orgName||'Mon organisation'} · ${S.team.length} membres · ${S.tasks.filter(t=>!t.done).length} tâches ouvertes`;
+  document.getElementById('org-stats').innerHTML = `
+    <div class="kpi-card"><div class="kpi-val">${S.team.length}<span> membres</span></div><div class="kpi-label">Équipe totale</div></div>
+    <div class="kpi-card"><div class="kpi-val">${S.tasks.filter(t=>!t.done).length}<span> tâches</span></div><div class="kpi-label">En cours</div></div>
+    <div class="kpi-card"><div class="kpi-val">${S.tasks.filter(t=>t.done).length}<span> terminées</span></div><div class="kpi-label">Complétées</div></div>`;
+  document.getElementById('team-grid').innerHTML = S.team.map(m => {
+    const myTasks  = S.tasks.filter(t => t.assigneeId === m.id && !t.done).length;
+    const initials = m.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+    return `<div class="member-card">
+      <div class="member-avatar" style="background:${m.color||'#1E6FD9'}">${initials}</div>
+      <div class="member-name">${m.name}</div>
+      <div class="member-role">${m.post}</div>
+      <div class="member-tasks">${myTasks} tâche${myTasks!==1?'s':''} en cours</div>
+      <span class="role-badge role-${m.role}">${m.role}</span>
+    </div>`;
+  }).join('');
+}
+
+function buildTeamChart() {
+  if (!S.team.length) return;
+  const canvas = document.getElementById('teamChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (S.charts.team) S.charts.team.destroy();
+  const colors = S.team.map(m => m.color || '#1E6FD9');
+  S.charts.team = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: S.team.map(m => m.name.split(' ')[0]),
+      datasets: [{ label: 'Tâches assignées',
+        data: S.team.map(m => S.tasks.filter(t => t.assigneeId===m.id && !t.done).length),
+        backgroundColor: colors.map(c => c + '33'), borderColor: colors, borderWidth: 2, borderRadius: 6 }],
+    },
+    options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} },
+      scales:{ y:{ beginAtZero:true, ticks:{color:'#94A3B8',stepSize:1}, grid:{color:'rgba(0,0,0,.05)'} },
+               x:{ ticks:{color:'#94A3B8'}, grid:{display:false} } } },
+  });
+}
+
+function openAddMemberModal() { openModal('modal-member'); }
+
+function addMember() {
+  const name = document.getElementById('member-name-input').value.trim();
+  if (!name) { toast('Nom requis', 'warn'); return; }
+  const post = document.getElementById('member-post-input').value.trim();
+  const colors = ['#8B5CF6','#EC4899','#14B8A6','#F59E0B','#06B6D4'];
+  S.team.push({ id: Date.now(), name, post, role: S.memberRole||'user', color: colors[S.team.length % colors.length] });
+  LS.save('team', S.team);
+  closeModal('modal-member');
+  document.getElementById('member-name-input').value = '';
+  document.getElementById('member-post-input').value = '';
+  buildOrganization();
+  // Rebuild chart after DOM update
+  setTimeout(() => buildTeamChart(), 50);
+  const sel = document.getElementById('task-assignee-input');
+  if (sel) sel.innerHTML = '<option value="">Non assigné</option>' +
+    S.team.map(m => `<option value="${m.id}">${m.name}</option>`).join('');
+  toast('Membre ajouté', 'success');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// AI ASSISTANT — Rule-based copilot using real S data
+// ═══════════════════════════════════════════════════════════════
+function initChat() {
+  S.chatHistory = [];
+  document.getElementById('chat-messages').innerHTML = '';
+  addBotMsg(
+    `Bonjour ! Je suis votre **Copilote IA IAConsult**.\n\n` +
+    `J'ai analysé **${S.orgName||'votre organisation'}** et voici votre situation :\n` +
+    `• Score global : **${S.global}/100** — ${levelInfo(S.level).label}\n` +
+    `• Point fort : **${bestAxis()}**\n` +
+    `• Axe critique : **${worstAxis()}**\n\n` +
+    `Comment puis-je vous aider aujourd'hui ?`
+  );
+  document.getElementById('chat-suggestions').innerHTML = [
+    "Que dois-je faire aujourd'hui ?",
+    'Quels sont mes risques ?',
+    'Quel est mon impact financier ?',
+    'Comment améliorer mes données ?',
+    'Quelles sont mes priorités ?',
+  ].map(s => `<button class="chat-suggestion" onclick="sendSuggestion('${s}')">${s}</button>`).join('');
+}
+
+function bestAxis()  {
+  const m = {structure:'Structure',donnees:'Données',decision:'Décision',performance:'Performance'};
+  return m[Object.entries(S.scores).sort((a,b)=>b[1]-a[1])[0][0]];
+}
+function worstAxis() {
+  const m = {structure:'Structure',donnees:'Données',decision:'Décision',performance:'Performance'};
+  return m[Object.entries(S.scores).sort((a,b)=>a[1]-b[1])[0][0]];
+}
+
+function processAI(q) {
+  const ql = q.toLowerCase();
+  const { global, scores, level, secteur, employes, q_tdb, q_kpi, q_vision, q_decision, q_donnees } = S;
+  const lvl = levelInfo(level);
+
+  // ── Today / What to do
+  if (/aujourd|maintenant|faire|commencer|début|start/.test(ql)) {
+    const urgent = S.tasks.filter(t => !t.done && t.prio==='urgent').slice(0,3);
+    const list = urgent.length
+      ? urgent.map(t => `• ${t.title}`).join('\n')
+      : '• Centraliser vos sources de données\n• Définir 3 KPI prioritaires\n• Organiser un atelier de diagnostic';
+    return `Vos **3 priorités immédiates** :\n\n${list}\n\nAvec un score de **${global}/100**, l'action la plus impactante est de renforcer **${worstAxis()} (${Math.min(...Object.values(scores))}/100)**. Chaque point gagné ici améliore directement votre prise de décision.`;
+  }
+
+  // ── Risks / Problems
+  if (/risque|danger|critique|faible|problème|alert/.test(ql)) {
+    const risks = [];
+    if (scores.donnees < 50)  risks.push(`**Données (${scores.donnees}/100)** — Décisions basées sur l'intuition, risque stratégique élevé`);
+    if (q_tdb === 'non')       risks.push('**Absence de TDB** — Pilotage sans visibilité, impossible de détecter les dérives');
+    if (q_kpi === 'non')       risks.push('**Pas de KPI** — Aucun indicateur pour mesurer la progression');
+    if (q_decision !== 'data') risks.push('**Décisions non data-driven** — Biais cognitifs et incohérences de pilotage');
+    if (!risks.length) return `Votre profil de risque est **maîtrisé** (${global}/100). Continuez à renforcer vos acquis.`;
+    return `**${risks.length} risques majeurs** dans votre organisation :\n\n${risks.join('\n\n')}\n\n**Priorité absolue J+7 :** traiter ${risks[0].split('**')[1]}.`;
+  }
+
+  // ── Priorities / Focus
+  if (/priorité|urgent|important|focus|concentrer/.test(ql)) {
+    const [key, val] = Object.entries(scores).sort((a,b)=>a[1]-b[1])[0];
+    const labels = { structure:'Structure', donnees:'Données', decision:'Décision', performance:'Performance' };
+    return `Priorité n°1 : axe **${labels[key]} (${val}/100)**.\n\nPlan d'attaque :\n• **J+1 à J+7** : Diagnostic précis de l'axe ${labels[key]}\n• **J+7 à J+30** : Implémentation des 3 actions prioritaires\n• **J+30 à J+90** : Consolidation et mesure\n\nObjectif réaliste : **+${Math.min(25,100-val)} points** en 90 jours → score global projeté **${Math.min(100,global+Math.round((100-val)*0.25))}/100**.`;
+  }
+
+  // ── Financial impact
+  if (/financ|coût|perte|argent|gain|impact|xof|fcfa/.test(ql)) {
+    const { totalLoss, gain, opp } = calcImpact();
+    return `**Impact financier estimé** pour ${S.orgName||'votre organisation'} :\n\n• **Perte annuelle** liée à l'inefficacité : ~${fmtXOF(totalLoss)} XOF\n• **Gain potentiel** après implémentation : ~${fmtXOF(gain)} XOF\n• **Opportunité totale** à débloquer : ~${fmtXOF(opp)} XOF\n\nBasé sur ${employes} employés et un score de ${global}/100. Chaque point gagné ≈ ${fmtXOF(Math.round(totalLoss/100))} XOF récupérés par an.`;
+  }
+
+  // ── Data
+  if (/données|data|information|base de données/.test(ql)) {
+    return `Score **Données : ${scores.donnees}/100**${scores.donnees<50?' — c\'est votre point le plus critique':' — bon début'}.\n\n${q_donnees==='non'?'Vous n\'avez pas de données fiables. Par où commencer :':'Vos données existent mais sont sous-exploitées :'}\n\n• **J+3** : Auditer toutes vos sources existantes\n• **J+7** : Centraliser dans un outil (Google Sheets, Airtable)\n• **J+30** : Déployer un dashboard BI (Power BI, Metabase)\n\nPotentiel : passer de **${scores.donnees} → ~${Math.min(100,scores.donnees+30)}/100** en 30 jours.`;
+  }
+
+  // ── Dashboard / KPIs
+  if (/dashboard|tableau de bord|tdb|kpi|indicateur/.test(ql)) {
+    if (q_tdb === 'non')
+      return `Vous n'avez **pas de tableau de bord** — c'est une priorité absolue.\n\n**Plan en 3 phases :**\n• **J+7** : Google Sheets avec 5 KPI essentiels (0€)\n• **J+30** : Migration vers Power BI Free ou Metabase\n• **J+90** : Automatisation des mises à jour + alertes\n\n**Budget démarrage : 0€** avec Google Data Studio.`;
+    return `Vous avez un TDB — **excellente base**.\nPour l'optimiser :\n• Ajouter des alertes automatiques sur seuils critiques\n• Intégrer les données en temps réel (pas seulement manuels)\n• Créer des vues par département`;
+  }
+
+  // ── Greeting
+  if (/bonjour|salut|bonsoir|hello/.test(ql)) {
+    return `Bonjour ! Voici un résumé rapide :\n• Score : **${global}/100** — ${lvl.label}\n• Point fort : **${bestAxis()}** (${Math.max(...Object.values(scores))}/100)\n• À améliorer : **${worstAxis()}** (${Math.min(...Object.values(scores))}/100)\n\nQue souhaitez-vous approfondir ?`;
+  }
+
+  // ── Thanks
+  if (/merci|super|parfait|excellent/.test(ql)) {
+    return `Avec plaisir ! La transformation organisationnelle est un **marathon, pas un sprint**. Concentrez-vous sur **1 axe à la fois**, mesurez chaque semaine, et revenez faire une nouvelle analyse dans 30 jours.`;
+  }
+
+  // ── Improve / Grow
+  if (/améliorer|progresser|grandir|avancer/.test(ql)) {
+    const [key, val] = Object.entries(scores).sort((a,b)=>a[1]-b[1])[0];
+    const labels = { structure:'Structure', donnees:'Données', decision:'Décision', performance:'Performance' };
+    return `Pour progresser le plus vite : concentrez-vous sur **${labels[key]} (${val}/100)**.\n\n• **Semaine 1** : Diagnostic précis\n• **Semaine 2–4** : 3 actions prioritaires\n• **Mois 2–3** : Consolidation\n\nObjectif : **+${Math.min(25,100-val)} points** → score global **${Math.min(100,global+Math.round((100-val)*0.25))}/100** en 90 jours.`;
+  }
+
+  // ── Default fallback
+  return `Je comprends votre question sur **"${q}"**.\n\nSituation actuelle :\n• Score : **${global}/100** — ${lvl.label}\n• Fort : ${bestAxis()} (${Math.max(...Object.values(scores))}/100)\n• Faible : ${worstAxis()} (${Math.min(...Object.values(scores))}/100)\n\nEssayez : *"Quels sont mes risques ?"*, *"Que faire aujourd'hui ?"*, ou *"Quel est mon impact financier ?"*`;
+}
+
+// ─── Chat UI ─────────────────────────────────────────────────
+function addBotMsg(text) {
+  const msgs = document.getElementById('chat-messages');
+  const div  = document.createElement('div');
+  div.className = 'chat-msg bot';
+  const formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+  div.innerHTML = `<div class="chat-avatar">⚡</div><div class="chat-bubble">${formatted}</div>`;
+  msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
+}
+
+function addUserMsg(text) {
+  const msgs = document.getElementById('chat-messages');
+  const div  = document.createElement('div');
+  div.className = 'chat-msg user';
+  div.innerHTML = `<div class="chat-avatar">👤</div><div class="chat-bubble">${text}</div>`;
+  msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chat-messages');
+  const div  = document.createElement('div');
+  div.className = 'chat-msg bot'; div.id = 'typing-indicator';
+  div.innerHTML = `<div class="chat-avatar">⚡</div>
+    <div class="chat-typing">
+      <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+    </div>`;
+  msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+function chatKeydown(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); } }
+function sendSuggestion(txt) { document.getElementById('chat-input').value = txt; sendChat(); }
+
+function sendChat() {
+  const input = document.getElementById('chat-input');
+  const text  = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addUserMsg(text);
+  const typing = showTyping();
+  setTimeout(() => { typing.remove(); addBotMsg(processAI(text)); }, 900 + Math.random() * 600);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MODALS / EXPORT / TOAST / UTILS
+// ═══════════════════════════════════════════════════════════════
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function exportPDF() {
+  toast('Génération du rapport PDF…', 'info');
+  setTimeout(() => window.print(), 600);
+}
+
+function toast(msg, type = 'info') {
+  const t = document.getElementById('toast');
+  t.className = 'toast ' + type;
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3400);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INIT — App bootstrap
+// ═══════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  // Restore persisted data
+  S.analyses = LS.load('analyses', []);
+  S.tasks    = LS.load('tasks',    []);
+  S.team     = LS.load('team',     []);
+  // Show landing page
+  goTo('landing');
+  // Close alert drawer on outside click
+  document.addEventListener('click', e => {
+    const d = document.getElementById('alert-drawer');
+    if (S.alertDrawerOpen && !d.contains(e.target) && !e.target.closest('.alert-bell')) {
+      S.alertDrawerOpen = false; d.classList.remove('open');
+    }
+    // Close modals on overlay click
+    if (e.target.classList.contains('modal-overlay')) e.target.classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
+
+
 
