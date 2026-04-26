@@ -455,6 +455,109 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
   .wstep .step-label{display:none}
   .hero-title{font-size:28px}
 }
+
+/* ─── Badges ─────────────────────────────────────────────────────── */
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.badge-rec{background:#DCFCE7;color:#166534}
+.badge-prio{background:#FEE2E2;color:#991B1B}
+.badge-impl{background:#DBEAFE;color:#1A4F9A}
+.badge-compat{background:#FFF7ED;color:#EA580C}
+.badge-tpl{background:#F3E8FF;color:#6B21A8}
+
+/* ─── Wizard inline validation ───────────────────────────────────── */
+.finput.error{border-color:#EF4444!important;box-shadow:0 0 0 4px rgba(239,68,68,.12)!important}
+.opt-group.error .opt-btn{border-color:#EF4444!important}
+.field-error{font-size:12px;color:#EF4444;margin-top:6px;display:none;align-items:center;gap:4px}
+.field-error.show{display:flex}
+.field-error::before{content:'⚠';font-size:11px}
+.wiz-step-wrap{display:none;animation:fadeSlideIn .35s ease}
+.wiz-step-wrap.active{display:block}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── Analyzing step sub-descriptions ───────────────────────────── */
+.anlz-step-desc{font-size:11px;color:rgba(255,255,255,.28);margin-top:3px;line-height:1.4}
+.anlz-step.act .anlz-step-desc{color:rgba(255,255,255,.55)}
+.anlz-step.done .anlz-step-desc{color:rgba(255,255,255,.38)}
+
+/* ─── Strategy section ───────────────────────────────────────────── */
+.strat-hero{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:28px;margin-bottom:24px;color:#fff;position:relative;overflow:hidden}
+.strat-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:rgba(255,255,255,.04);border-radius:50%}
+.strat-name{font-size:22px;font-weight:800;margin-bottom:6px}
+.strat-tagline{font-size:14px;opacity:.7;margin-bottom:20px}
+.strat-goals{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.strat-goal-card{background:rgba(255,255,255,.08);border-radius:12px;padding:14px}
+.strat-goal-label{font-size:10px;font-weight:700;opacity:.6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.strat-goal-items{list-style:none;padding:0;margin:0}
+.strat-goal-items li{font-size:12px;opacity:.85;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.strat-goal-items li:last-child{border-bottom:none}
+.strat-goal-items li::before{content:'→ ';opacity:.5}
+.strat-kpi-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.strat-kpi-chip{background:rgba(255,255,255,.1);border-radius:8px;padding:6px 12px;font-size:12px}
+.strat-risk-box{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:14px;margin-top:16px}
+.strat-risk-title{font-size:11px;font-weight:700;color:#FCA5A5;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.strat-risk-list{list-style:none;padding:0;margin:0}
+.strat-risk-list li{font-size:12px;color:rgba(255,255,255,.7);padding:3px 0}
+.strat-risk-list li::before{content:'⚠ ';color:#FCA5A5}
+
+/* ─── Method section ─────────────────────────────────────────────── */
+.method-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.method-card{background:#fff;border:1px solid var(--s200);border-radius:16px;padding:20px;transition:all .25s;cursor:pointer;position:relative}
+.method-card:hover{border-color:var(--b4);transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,111,217,.15)}
+.method-card.recommended{border-color:var(--b5);box-shadow:0 0 0 2px rgba(30,111,217,.2)}
+.method-badge-wrap{position:absolute;top:14px;right:14px}
+.method-icon{font-size:28px;margin-bottom:12px}
+.method-name{font-size:15px;font-weight:700;color:var(--s900);margin-bottom:6px}
+.method-desc{font-size:13px;color:var(--s500);line-height:1.5;margin-bottom:12px}
+.method-tags{display:flex;flex-wrap:wrap;gap:6px}
+.method-tag{background:var(--s100);color:var(--s500);font-size:11px;padding:3px 8px;border-radius:6px}
+.method-steps{margin-top:12px;border-top:1px solid var(--s200);padding-top:12px}
+.method-step-item{display:flex;align-items:flex-start;gap:8px;padding:5px 0;font-size:12px;color:var(--s600)}
+.method-step-num{width:20px;height:20px;border-radius:50%;background:var(--b5);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ─── Procedures section ─────────────────────────────────────────── */
+.proc-accordion{display:flex;flex-direction:column;gap:10px}
+.proc-item{background:#fff;border:1px solid var(--s200);border-radius:12px;overflow:hidden}
+.proc-item.recommended{border-color:rgba(30,111,217,.4)}
+.proc-header{display:flex;align-items:center;gap:12px;padding:16px;cursor:pointer;transition:background .2s}
+.proc-header:hover{background:var(--s50)}
+.proc-header-left{display:flex;align-items:center;gap:12px;flex:1}
+.proc-icon{width:36px;height:36px;border-radius:10px;background:var(--s100);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.proc-title{font-size:14px;font-weight:600;color:var(--s800)}
+.proc-freq{font-size:11px;color:var(--s400);margin-top:2px}
+.proc-chevron{font-size:12px;color:var(--s400);transition:transform .25s;margin-left:auto}
+.proc-item.open .proc-chevron{transform:rotate(180deg)}
+.proc-body{display:none;padding:0 16px 16px;border-top:1px solid var(--s200)}
+.proc-item.open .proc-body{display:block}
+.proc-step-list{list-style:none;padding:0;margin:12px 0 0}
+.proc-step-list li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--s100);font-size:13px;color:var(--s700)}
+.proc-step-list li:last-child{border-bottom:none}
+.proc-step-num{width:22px;height:22px;border-radius:50%;background:var(--b5);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.proc-owner{display:inline-block;background:var(--s100);color:var(--s500);font-size:11px;padding:2px 8px;border-radius:6px;margin-top:6px}
+.proc-duration{font-size:12px;color:var(--b5);margin-top:8px;font-weight:600}
+.proc-filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.proc-filter-btn{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid var(--s200);background:#fff;color:var(--s500);cursor:pointer;transition:all .2s}
+.proc-filter-btn.active{background:var(--b5);color:#fff;border-color:var(--b5)}
+
+/* ─── Library section ────────────────────────────────────────────── */
+.lib-filter-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.lib-filter-btn{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid var(--s200);background:#fff;color:var(--s500);cursor:pointer;transition:all .2s}
+.lib-filter-btn.active{background:var(--b5);color:#fff;border-color:var(--b5)}
+.lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.lib-card{background:#fff;border:1px solid var(--s200);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;transition:all .25s;position:relative}
+.lib-card:hover{border-color:var(--b4);transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,111,217,.12)}
+.lib-card.recommended{border-color:var(--b5);box-shadow:0 0 0 2px rgba(30,111,217,.2)}
+.lib-badge-row{display:flex;gap:6px;flex-wrap:wrap}
+.lib-icon{font-size:32px;margin-bottom:4px}
+.lib-name{font-size:15px;font-weight:700;color:var(--s900)}
+.lib-sector{font-size:12px;color:var(--s400);margin-bottom:4px}
+.lib-desc{font-size:13px;color:var(--s500);line-height:1.5;flex:1}
+.lib-features{list-style:none;padding:0;margin:4px 0 0}
+.lib-features li{font-size:12px;color:var(--s700);padding:3px 0}
+.lib-features li::before{content:'✓ ';color:var(--b5);font-weight:700}
+.lib-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid var(--s200)}
+.lib-price{font-size:14px;font-weight:700;color:var(--b5)}
+.lib-cta{padding:8px 16px;background:var(--b5);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:opacity .2s}
+.lib-cta:hover{opacity:.85}
   </style>
 </head>
 <body>
@@ -513,10 +616,9 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
         <p class="step-desc">Ces informations adaptent votre diagnostic et vos recommandations.</p>
       </div>
 
-      <!-- Secteur -->
-      <div class="fg">
+      <div class="fg" id="fg-secteur">
         <label class="flabel">Secteur d'activité <span class="req">*</span></label>
-        <div class="opt-grid c2">
+        <div class="opt-grid c2" id="og-secteur">
           <button class="opt-btn" data-g="secteur" data-v="ong" onclick="selOpt(this)">
             <div class="oi">🌍</div><div><div class="ol">ONG / Associatif</div><div class="os">Impact social &amp; humanitaire</div></div>
           </button>
@@ -530,12 +632,12 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
             <div class="oi">🏛️</div><div><div class="ol">Institution publique</div><div class="os">Administration &amp; gouvernance</div></div>
           </button>
         </div>
+        <div class="field-error" id="err-secteur">Veuillez sélectionner votre secteur d'activité</div>
       </div>
 
-      <!-- Taille -->
-      <div class="fg">
+      <div class="fg" id="fg-taille">
         <label class="flabel">Taille de l'organisation <span class="req">*</span></label>
-        <div class="opt-grid c3">
+        <div class="opt-grid c3" id="og-taille">
           <button class="opt-btn" data-g="taille" data-v="petite" onclick="selOpt(this)">
             <div class="oi">🌱</div><div><div class="ol">Petite</div><div class="os">&lt; 50 pers.</div></div>
           </button>
@@ -546,9 +648,9 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
             <div class="oi">🏙️</div><div><div class="ol">Grande</div><div class="os">500+ pers.</div></div>
           </button>
         </div>
+        <div class="field-error" id="err-taille">Veuillez sélectionner la taille de votre organisation</div>
       </div>
 
-      <!-- Infos libres -->
       <div class="fg">
         <label class="flabel">Localisation</label>
         <input type="text" class="finput" id="localisation" placeholder="Ex: Dakar, Sénégal">
@@ -591,23 +693,25 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
 
       <div class="fg">
         <label class="flabel">Avez-vous des données fiables et accessibles ?</label>
-        <div class="yn-grid">
+        <div class="yn-grid" id="og-q_donnees">
           <button class="yn-btn" data-g="q_donnees" data-v="oui" onclick="selYN(this)">✓ Oui</button>
           <button class="yn-btn" data-g="q_donnees" data-v="non" onclick="selYN(this)">✗ Non</button>
         </div>
+        <div class="field-error" id="err-q_donnees">Veuillez répondre à cette question</div>
       </div>
 
       <div class="fg">
         <label class="flabel">Disposez-vous d'un tableau de bord de pilotage ?</label>
-        <div class="yn-grid">
+        <div class="yn-grid" id="og-q_tdb">
           <button class="yn-btn" data-g="q_tdb" data-v="oui" onclick="selYN(this)">✓ Oui</button>
           <button class="yn-btn" data-g="q_tdb" data-v="non" onclick="selYN(this)">✗ Non</button>
         </div>
+        <div class="field-error" id="err-q_tdb">Veuillez répondre à cette question</div>
       </div>
 
       <div class="fg">
         <label class="flabel">Comment prenez-vous vos décisions stratégiques ?</label>
-        <div class="opt-grid">
+        <div class="opt-grid" id="og-q_decision">
           <button class="opt-btn" data-g="q_decision" data-v="intuition" onclick="selOpt(this)">
             <div class="oi">💭</div><div><div class="ol">Par intuition / expérience</div><div class="os">Sans base de données formelle</div></div>
           </button>
@@ -618,22 +722,25 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
             <div class="oi">📈</div><div><div class="ol">Sur la base de données</div><div class="os">Approche data-driven</div></div>
           </button>
         </div>
+        <div class="field-error" id="err-q_decision">Veuillez sélectionner votre mode de décision</div>
       </div>
 
       <div class="fg">
         <label class="flabel">Suivez-vous des KPI régulièrement ?</label>
-        <div class="yn-grid">
+        <div class="yn-grid" id="og-q_kpi">
           <button class="yn-btn" data-g="q_kpi" data-v="oui" onclick="selYN(this)">✓ Oui</button>
           <button class="yn-btn" data-g="q_kpi" data-v="non" onclick="selYN(this)">✗ Non</button>
         </div>
+        <div class="field-error" id="err-q_kpi">Veuillez répondre à cette question</div>
       </div>
 
       <div class="fg">
         <label class="flabel">Avez-vous une vision stratégique documentée ?</label>
-        <div class="yn-grid">
+        <div class="yn-grid" id="og-q_vision">
           <button class="yn-btn" data-g="q_vision" data-v="oui" onclick="selYN(this)">✓ Oui</button>
           <button class="yn-btn" data-g="q_vision" data-v="non" onclick="selYN(this)">✗ Non</button>
         </div>
+        <div class="field-error" id="err-q_vision">Veuillez répondre à cette question</div>
       </div>
 
       <div class="wiz-nav">
@@ -677,7 +784,8 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
 
       <div class="fg">
         <label class="flabel">Nombre d'employés <span class="req">*</span></label>
-        <input type="number" class="finput" id="employes" placeholder="Ex: 85" min="1">
+        <input type="number" class="finput" id="employes" placeholder="Ex: 85" min="1" oninput="this.classList.remove('error');showFieldError('employes',false)">
+        <div class="field-error" id="err-employes">Veuillez saisir le nombre d'employés (min. 1)</div>
       </div>
 
       <div class="fg">
@@ -709,7 +817,7 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
 
       <div class="wiz-nav">
         <button class="btn-back" onclick="goTo('step2')">← Retour</button>
-        <button class="btn-next orange" onclick="runAnalysis()">🚀 Lancer l'analyse IA</button>
+        <button class="btn-next orange" id="btn-analyse" onclick="startAIAnalysis()">🚀 Lancer l'analyse IA</button>
       </div>
     </div>
   </div>
@@ -723,11 +831,26 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
   <h2 class="anlz-title">Analyse en cours…</h2>
   <p class="anlz-sub">Le moteur IA évalue votre organisation sur 4 dimensions</p>
   <div class="anlz-steps">
-    <div class="anlz-step" id="as1"><div class="anlz-dot"></div>Analyse du profil organisationnel</div>
-    <div class="anlz-step" id="as2"><div class="anlz-dot"></div>Calcul du score de maturité (4 axes)</div>
-    <div class="anlz-step" id="as3"><div class="anlz-dot"></div>Calcul de l'impact business</div>
-    <div class="anlz-step" id="as4"><div class="anlz-dot"></div>Génération du plan d'action IA</div>
-    <div class="anlz-step" id="as5"><div class="anlz-dot"></div>Création du dashboard &amp; alertes</div>
+    <div class="anlz-step" id="as1">
+      <div class="anlz-dot"></div>
+      <div><div>Analyse du profil organisationnel</div><div class="anlz-step-desc">Secteur, taille, localisation, contexte stratégique</div></div>
+    </div>
+    <div class="anlz-step" id="as2">
+      <div class="anlz-dot"></div>
+      <div><div>Calcul du score de maturité (4 axes)</div><div class="anlz-step-desc">Structure · Données · Décision · Performance — pondération 25/30/25/20</div></div>
+    </div>
+    <div class="anlz-step" id="as3">
+      <div class="anlz-dot"></div>
+      <div><div>Calcul de l'impact business</div><div class="anlz-step-desc">Pertes XOF estimées, potentiel de gain, opportunité de croissance</div></div>
+    </div>
+    <div class="anlz-step" id="as4">
+      <div class="anlz-dot"></div>
+      <div><div>Génération du plan d'action IA</div><div class="anlz-step-desc">Recommandations 7j · 30j · 90j, stratégie, méthode, procédures</div></div>
+    </div>
+    <div class="anlz-step" id="as5">
+      <div class="anlz-dot"></div>
+      <div><div>Création du dashboard &amp; alertes</div><div class="anlz-step-desc">Radar de maturité, KPIs critiques, alertes intelligentes, bibliothèque</div></div>
+    </div>
   </div>
 </div>
 
@@ -782,6 +905,26 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
       </div>
     </div>
 
+    <div class="sb-section">
+      <div class="sb-section-label">Intelligence</div>
+      <div class="sb-item" data-sec="strategie" onclick="appNav('strategie')">
+        <div class="sb-item-icon">🧭</div>
+        <span class="sb-item-text">Stratégie</span>
+      </div>
+      <div class="sb-item" data-sec="methode" onclick="appNav('methode')">
+        <div class="sb-item-icon">⚙️</div>
+        <span class="sb-item-text">Méthode</span>
+      </div>
+      <div class="sb-item" data-sec="procedures" onclick="appNav('procedures')">
+        <div class="sb-item-icon">📋</div>
+        <span class="sb-item-text">Procédures</span>
+      </div>
+      <div class="sb-item" data-sec="bibliotheque" onclick="appNav('bibliotheque')">
+        <div class="sb-item-icon">📚</div>
+        <span class="sb-item-text">Bibliothèque</span>
+      </div>
+    </div>
+
     <div class="sb-footer">
       <div class="sb-org-info">
         <div class="sb-org-avatar">🏢</div>
@@ -821,14 +964,8 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
       <section class="app-section active" id="sec-dashboard">
         <div class="sec-title" id="dash-title">Dashboard de pilotage</div>
         <div class="sec-sub" id="dash-sub">Vue synthétique de votre maturité organisationnelle</div>
-
-        <!-- KPI Row: 4 axes -->
         <div class="dash-kpi-row" id="dash-kpis"></div>
-
-        <!-- Score global + Radar | Alertes -->
         <div class="dash-wide-grid" style="margin-bottom:20px">
-
-          <!-- Score circle + Radar -->
           <div class="card card-p" style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">
             <div style="text-align:center;flex-shrink:0">
               <div class="score-circle-wrap">
@@ -849,16 +986,12 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
               <canvas id="radarChart" height="240"></canvas>
             </div>
           </div>
-
-          <!-- Alertes actives -->
           <div class="card card-p">
             <div class="card-title">Alertes actives</div>
             <div class="card-subtitle" style="margin-bottom:16px">Situations nécessitant votre attention</div>
             <div class="alert-list" id="dash-alerts"></div>
           </div>
         </div>
-
-        <!-- Indices IAConsult + Impact Business -->
         <div class="dash-main-grid" style="margin-bottom:20px">
           <div class="card card-p">
             <div class="card-title">Indices IAConsult</div>
@@ -871,8 +1004,6 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
             <div class="impact-grid" id="dash-impact"></div>
           </div>
         </div>
-
-        <!-- Top 3 priorités -->
         <div class="card card-p">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
             <div>
@@ -942,12 +1073,8 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
         <div class="tl-grid" id="tl-grid"></div>
         <div class="card card-p" style="text-align:center">
           <div class="card-title" style="margin-bottom:6px">Prêt à démarrer ?</div>
-          <div class="card-subtitle" style="margin-bottom:16px">
-            Transformez ce plan en tâches avec suivi et assignation d'équipe
-          </div>
-          <button class="btn-next" onclick="appNav('action-plan')" style="display:inline-flex">
-            Accéder au plan d'action →
-          </button>
+          <div class="card-subtitle" style="margin-bottom:16px">Transformez ce plan en tâches avec suivi et assignation d'équipe</div>
+          <button class="btn-next" onclick="appNav('action-plan')" style="display:inline-flex">Accéder au plan d'action →</button>
         </div>
       </section>
 
@@ -1017,6 +1144,36 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
             </div>
           </div>
         </div>
+      </section>
+
+      <!-- ══ SECTION: STRATÉGIE ══ -->
+      <section class="app-section" id="sec-strategie">
+        <div class="sec-title">Stratégie recommandée</div>
+        <div class="sec-sub">Basée sur vos scores de maturité — mis à jour à chaque analyse.</div>
+        <div id="strategie-content"></div>
+      </section>
+
+      <!-- ══ SECTION: MÉTHODE ══ -->
+      <section class="app-section" id="sec-methode">
+        <div class="sec-title">Méthodes de pilotage</div>
+        <div class="sec-sub">5 méthodes éprouvées — la recommandée est mise en avant selon votre profil.</div>
+        <div id="methode-content" class="method-grid"></div>
+      </section>
+
+      <!-- ══ SECTION: PROCÉDURES ══ -->
+      <section class="app-section" id="sec-procedures">
+        <div class="sec-title">Procédures opérationnelles</div>
+        <div class="sec-sub">Procédures adaptées à vos faiblesses détectées — prêtes à implémenter.</div>
+        <div class="proc-filter-bar" id="proc-filter-bar"></div>
+        <div class="proc-accordion" id="proc-content"></div>
+      </section>
+
+      <!-- ══ SECTION: BIBLIOTHÈQUE ══ -->
+      <section class="app-section" id="sec-bibliotheque">
+        <div class="sec-title">Bibliothèque de templates</div>
+        <div class="sec-sub">8 solutions métier — le template conseillé est mis en avant selon votre secteur et vos scores.</div>
+        <div class="lib-filter-bar" id="lib-filter-bar"></div>
+        <div class="lib-grid" id="lib-content"></div>
       </section>
 
     </div><!-- /app-content -->
@@ -1125,21 +1282,17 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
 // STATE — Single source of truth
 // ═══════════════════════════════════════════════════════════════
 const S = {
-  // Wizard inputs
   secteur: null, taille: null, localisation: '', orgName: '',
   q_donnees: null, q_tdb: null, q_decision: null, q_kpi: null, q_vision: null,
   ca: null, employes: 0, projets: 0, performance: 50,
-  // Computed results
   scores: { structure: 0, donnees: 0, decision: 0, performance: 0 },
   global: 0, level: 1,
-  // App data
   tasks: [], team: [], analyses: [], chatHistory: [],
   taskPrio: 'urgent', memberRole: 'manager',
   charts: { radar: null, evol: null, proj: null, team: null },
   alertDrawerOpen: false, sidebarCollapsed: false,
 };
 
-// ─── LocalStorage helpers ─────────────────────────────────────
 const LS = {
   save(key, val) { try { localStorage.setItem('iac_' + key, JSON.stringify(val)); } catch(e) {} },
   load(key, def) { try { const v = localStorage.getItem('iac_' + key); return v ? JSON.parse(v) : def; } catch(e) { return def; } },
@@ -1166,11 +1319,16 @@ function appNav(sec) {
     dashboard: 'Dashboard', results: 'Résultats',
     'action-plan': "Plan d'action", recommendations: 'Recommandations',
     tracking: 'Suivi de performance', organization: 'Organisation', assistant: 'Assistant IA',
+    strategie: 'Stratégie', methode: 'Méthode', procedures: 'Procédures', bibliotheque: 'Bibliothèque',
   };
   document.getElementById('topbar-page').textContent = labels[sec] || sec;
   if (sec === 'assistant' && S.chatHistory.length === 0) initChat();
   if (sec === 'tracking') buildTrackingCharts();
   if (sec === 'organization') { buildOrganization(); setTimeout(() => buildTeamChart(), 50); }
+  if (sec === 'strategie') buildStrategie();
+  if (sec === 'methode') buildMethode();
+  if (sec === 'procedures') buildProcedures();
+  if (sec === 'bibliotheque') buildBibliotheque();
   window.scrollTo({ top: 0 });
 }
 
@@ -1178,12 +1336,10 @@ function showApp() {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const shell = document.getElementById('app-shell');
   shell.style.display = 'flex';
-  // Small delay so DOM is ready before chart renders
   setTimeout(() => appNav('dashboard'), 50);
 }
 
 function restartWizard() {
-  // Reset wizard inputs + derived state; preserve team/tasks
   Object.assign(S, {
     secteur: null, taille: null, localisation: '', orgName: '',
     q_donnees: null, q_tdb: null, q_decision: null, q_kpi: null, q_vision: null,
@@ -1197,7 +1353,6 @@ function restartWizard() {
   if (r) { r.value = 50; r.style.setProperty('--val', '50%'); }
   const pv = document.getElementById('pval'); if (pv) pv.textContent = '50';
   const csvStatus = document.getElementById('csv-status'); if (csvStatus) csvStatus.textContent = 'Aucun fichier';
-  // Clear text inputs
   ['localisation','org-name','ca','employes','projets'].forEach(id => {
     const el = document.getElementById(id); if (el) el.value = '';
   });
@@ -1224,10 +1379,10 @@ function selOpt(btn) {
   const g = btn.dataset.g;
   document.querySelectorAll(`[data-g="${g}"]`).forEach(b => b.classList.remove('sel'));
   btn.classList.add('sel');
-  // Map hyphenated data-g keys to camelCase state keys
   const keyMap = { 'task-prio': 'taskPrio', 'member-role': 'memberRole' };
   const stateKey = keyMap[g] || g;
   S[stateKey] = btn.dataset.v;
+  showFieldError(g, false);
 }
 
 function selYN(btn) {
@@ -1235,6 +1390,7 @@ function selYN(btn) {
   document.querySelectorAll(`[data-g="${g}"]`).forEach(b => b.classList.remove('sy', 'sn'));
   btn.classList.add(btn.dataset.v === 'oui' ? 'sy' : 'sn');
   S[g] = btn.dataset.v;
+  showFieldError(g, false);
 }
 
 function upRange(inp) {
@@ -1244,17 +1400,35 @@ function upRange(inp) {
   S.performance = parseInt(v);
 }
 
+function showFieldError(id, show) {
+  const el = document.getElementById('err-' + id);
+  if (el) el.style.display = show ? 'flex' : 'none';
+  const inp = document.getElementById('f-' + id) || document.querySelector(`[data-g="${id}"]`);
+  if (inp) inp.classList.toggle('field-error', show);
+}
+
+function clearFieldErrors(...ids) {
+  ids.forEach(id => showFieldError(id, false));
+}
+
 function goStep2() {
-  if (!S.secteur || !S.taille) { toast('Veuillez sélectionner secteur et taille', 'warn'); return; }
-  S.localisation = document.getElementById('localisation').value;
-  S.orgName = document.getElementById('org-name').value || 'Mon organisation';
+  let ok = true;
+  if (!S.secteur) { showFieldError('secteur', true); ok = false; }
+  if (!S.taille) { showFieldError('taille', true); ok = false; }
+  if (!S.maturite) { showFieldError('maturite', true); ok = false; }
+  if (!S.budget) { showFieldError('budget', true); ok = false; }
+  if (!ok) { toast('Veuillez compléter tous les champs obligatoires.', 'error'); return; }
+  clearFieldErrors('secteur','taille','maturite','budget');
   goTo('step2');
 }
 
 function goStep3() {
-  if (!S.q_donnees || !S.q_tdb || !S.q_decision || !S.q_kpi || !S.q_vision) {
-    toast('Veuillez répondre à toutes les questions', 'warn'); return;
-  }
+  let ok = true;
+  if (!S.objectif) { showFieldError('objectif', true); ok = false; }
+  if (!S.urgence) { showFieldError('urgence', true); ok = false; }
+  if (!S.delai) { showFieldError('delai', true); ok = false; }
+  if (!ok) { toast('Veuillez compléter tous les champs obligatoires.', 'error'); return; }
+  clearFieldErrors('objectif','urgence','delai');
   goTo('step3');
 }
 
@@ -1263,944 +1437,1273 @@ function importCSV(input) {
   if (!file) return;
   const reader = new FileReader();
   reader.onload = e => {
-    const rows = e.target.result.split('\n').filter(r => r.trim());
-    if (rows.length < 2) { toast('Format CSV invalide', 'warn'); return; }
-    const headers = rows[0].split(',').map(h => h.trim().toLowerCase());
-    const data = rows[1].split(',');
-    const get = k => { const i = headers.indexOf(k); return i >= 0 ? data[i].trim() : null; };
-    const emp = get('employes') || get('employees') || get('effectif');
-    const ca  = get('ca') || get('chiffre') || get('revenue');
-    const proj = get('projets') || get('projects');
-    const perf = get('performance') || get('taux');
-    if (emp) { const el = document.getElementById('employes'); if(el) el.value = parseInt(emp) || ''; }
-    if (ca)  { const el = document.getElementById('ca');  if(el) el.value = parseInt(ca.replace(/\s/g,'')) || ''; }
-    if (proj){ const el = document.getElementById('projets'); if(el) el.value = parseInt(proj) || ''; }
-    if (perf){ const v = Math.min(100, Math.max(0, parseInt(perf) || 50));
-               const r = document.getElementById('perf-range'); if(r) { r.value = v; upRange(r); } }
-    const st = document.getElementById('csv-status'); if(st) st.textContent = '✓ ' + file.name;
-    toast('Données importées depuis ' + file.name, 'success');
+    try {
+      const lines = e.target.result.split('\n').filter(l => l.trim());
+      if (lines.length < 2) { toast('Fichier CSV invalide.', 'error'); return; }
+      const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+      const row = lines[1].split(',').map(v => v.trim());
+      const map = {};
+      headers.forEach((h, i) => map[h] = row[i] || '');
+      if (map.secteur) S.secteur = map.secteur;
+      if (map.taille) S.taille = map.taille;
+      if (map.maturite) S.maturite = map.maturite;
+      if (map.budget) S.budget = map.budget;
+      if (map.objectif) S.objectif = map.objectif;
+      if (map.performance) S.performance = parseInt(map.performance) || 50;
+      toast('Données importées avec succès.', 'success');
+    } catch(err) { toast('Erreur lors de l\'import CSV.', 'error'); }
   };
   reader.readAsText(file);
+  input.value = '';
 }
 
-// ═══════════════════════════════════════════════════════════════
-// SCORING ENGINE — Core business logic
-// ═══════════════════════════════════════════════════════════════
 function computeScores() {
-  /* ── STRUCTURE (/100)
-     Base: organisational formalism, size, vision, headcount */
-  let str = 38;
-  if (S.taille === 'grande')  str += 22;
-  else if (S.taille === 'moyenne') str += 13;
-  else str += 5;                          // petite
-  if (S.q_vision === 'oui')   str += 24; // documented strategic vision
-  if (S.employes > 100)        str += 12; // organisation complexity bonus
-  if (S.secteur === 'institution') str += 8; // public sector structural bonus
-  S.scores.structure = Math.min(100, Math.round(str));
+  const w = { process: 25, digital: 30, rh: 25, finance: 20 };
+  const mMap = { debutant: 1, intermediaire: 2, avance: 3, expert: 4 };
+  const bMap = { faible: 1, moyen: 2, eleve: 3, 'tres-eleve': 4 };
+  const uMap = { faible: 1, moyenne: 2, elevee: 3, critique: 4 };
+  const tMap = { '3mois': 4, '6mois': 3, '1an': 2, 'plus1an': 1 };
+  const oMap = { performance: [4,3,2,1], transformation: [3,4,3,2], conformite: [2,3,4,3], croissance: [1,2,3,4] };
 
-  /* ── DONNÉES (/100)
-     Measures data availability, dashboards, KPI tracking */
-  let dat = 18;
-  if (S.q_donnees === 'oui') dat += 42;  // reliable data exists
-  if (S.q_tdb === 'oui')    dat += 26;  // has a dashboard
-  if (S.q_kpi === 'oui')    dat += 14;  // tracks KPIs regularly
-  S.scores.donnees = Math.min(100, Math.round(dat));
+  const m = mMap[S.maturite] || 2;
+  const b = bMap[S.budget] || 2;
+  const u = uMap[S.urgence] || 2;
+  const t = tMap[S.delai] || 2;
+  const perf = (S.performance || 50) / 100;
+  const obj = oMap[S.objectif] || [2,2,2,2];
 
-  /* ── DÉCISION (/100)
-     Measures decision quality and process maturity */
-  let dec = 22;
-  if (S.q_decision === 'data')        dec += 52; // data-driven decisions
-  else if (S.q_decision === 'discussion') dec += 26; // collective decisions
-  else                                 dec += 6;  // intuition only
-  if (S.q_kpi === 'oui')    dec += 14; // KPIs support decisions
-  if (S.q_vision === 'oui') dec += 10; // vision guides decisions
-  S.scores.decision = Math.min(100, Math.round(dec));
+  S.scores = {
+    process: Math.min(100, Math.round((m * 15 + u * 10 + obj[0] * 10 + perf * 40 + t * 5) * w.process / 25)),
+    digital: Math.min(100, Math.round((m * 10 + b * 15 + obj[1] * 10 + perf * 35 + t * 10) * w.digital / 30)),
+    rh: Math.min(100, Math.round((m * 12 + u * 8 + obj[2] * 12 + perf * 38 + b * 5) * w.rh / 25)),
+    finance: Math.min(100, Math.round((b * 15 + m * 10 + obj[3] * 10 + perf * 30 + t * 10) * w.finance / 20))
+  };
 
-  /* ── PERFORMANCE (/100)
-     Measures operational effectiveness */
-  let perf = S.performance * 0.52;     // self-reported base
-  if (S.q_kpi === 'oui')  perf += 20; // measurable results
-  if (S.projets > 5)       perf += 14; // active project density
-  if (S.q_tdb === 'oui')  perf += 14; // dashboard-driven management
-  S.scores.performance = Math.min(100, Math.round(perf));
+  const vals = Object.values(S.scores);
+  S.globalScore = Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
 
-  /* ── GLOBAL: weighted composite
-     Données weighted highest — data is the foundation of everything */
-  S.global = Math.round(
-    S.scores.structure   * 0.25 +
-    S.scores.donnees     * 0.30 +
-    S.scores.decision    * 0.25 +
-    S.scores.performance * 0.20
-  );
+  if (S.globalScore >= 80) S.level = 4;
+  else if (S.globalScore >= 60) S.level = 3;
+  else if (S.globalScore >= 40) S.level = 2;
+  else S.level = 1;
 
-  /* ── MATURITY LEVEL */
-  S.level = S.global >= 75 ? 4 : S.global >= 55 ? 3 : S.global >= 35 ? 2 : 1;
+  S.indices = {
+    resilience: Math.min(100, Math.round((S.scores.finance + S.scores.process) / 2 + (b - 1) * 5)),
+    innovation: Math.min(100, Math.round((S.scores.digital + S.scores.rh) / 2 + (m - 1) * 5)),
+    agilite: Math.min(100, Math.round((u * 15 + t * 15 + S.scores.process * 0.4 + S.scores.digital * 0.3))),
+    durabilite: Math.min(100, Math.round((S.scores.rh * 0.4 + S.scores.finance * 0.3 + m * 12 + b * 8))),
+    competitivite: Math.min(100, Math.round((S.globalScore * 0.6 + b * 10 + m * 10 + (obj[3] || 2) * 5)))
+  };
 }
 
-// ─── Level metadata ──────────────────────────────────────────
 function levelInfo(l) {
-  return {
-    1: { label: 'Niveau 1 — Émergent',       desc: 'Organisation peu structurée, décisions informelles.',         bg: '#FEE2E2', text: '#991B1B' },
-    2: { label: 'Niveau 2 — En développement', desc: 'Premiers systèmes en place, mais insuffisants.',            bg: '#FEF9C3', text: '#713F12' },
-    3: { label: 'Niveau 3 — Structuré',        desc: 'Bonne base organisationnelle, optimisations à réaliser.',  bg: '#DBEAFE', text: '#1A4F9A' },
-    4: { label: 'Niveau 4 — Optimisé',         desc: 'Organisation mature et data-driven. Maintenez la dynamique.', bg: '#DCFCE7', text: '#166534' },
-  }[l];
+  const info = {
+    1: { label: 'Débutant', color: '#ef4444', desc: 'Organisation en phase d\'initiation — bases à structurer.' },
+    2: { label: 'Intermédiaire', color: '#f97316', desc: 'Processus partiellement formalisés — consolidation nécessaire.' },
+    3: { label: 'Avancé', color: '#3b82f6', desc: 'Bonne maîtrise opérationnelle — optimisation stratégique en vue.' },
+    4: { label: 'Expert', color: '#10b981', desc: 'Excellence opérationnelle — leadership sectoriel accessible.' }
+  };
+  return info[l] || info[1];
 }
 
-// ─── Score color coding ───────────────────────────────────────
 function scoreColor(v) {
-  if (v >= 70) return { stroke: '#22C55E', bg: '#DCFCE7', text: '#166534', label: 'Solide' };
-  if (v >= 45) return { stroke: '#EAB308', bg: '#FEF9C3', text: '#713F12', label: 'À améliorer' };
-  return         { stroke: '#EF4444', bg: '#FEE2E2', text: '#991B1B', label: 'Critique' };
+  if (v >= 75) return '#10b981';
+  if (v >= 55) return '#3b82f6';
+  if (v >= 35) return '#f97316';
+  return '#ef4444';
 }
 
-// ═══════════════════════════════════════════════════════════════
-// IMPACT CALCULATION — Financial interpretation
-// ═══════════════════════════════════════════════════════════════
 function calcImpact() {
-  const emp = S.employes || 10;
-  const monthSalary = 450_000; // XOF avg salary
-  // Productivity loss ratio scales with score
-  const lossRatio = S.global < 35 ? 0.30 : S.global < 55 ? 0.20 : S.global < 75 ? 0.10 : 0.05;
-  const annualSalaryLoss = Math.round(emp * monthSalary * 12 * lossRatio);
-  // CA-based opportunity loss (if CA provided)
-  const caLoss = S.ca ? Math.round(S.ca * (1 - S.global / 100) * 0.07) : null;
-  const totalLoss = caLoss ? Math.round((annualSalaryLoss + caLoss) / 2) : annualSalaryLoss;
-  const gain = Math.round(totalLoss * 0.65);   // conservative recovery estimate
-  const opp  = Math.round(totalLoss * 1.20);   // full opportunity value
-  return { totalLoss, gain, opp };
+  const salaryMap = { 'pme': 350000, 'eti': 500000, 'ge': 800000, 'startup': 280000, 'administration': 400000 };
+  const lossMap = { 1: 0.35, 2: 0.22, 3: 0.12, 4: 0.05 };
+  const empMap = { '1-10': 5, '11-50': 30, '51-200': 120, '201-500': 350, '500+': 700 };
+  const salary = salaryMap[S.taille] || 400000;
+  const emp = empMap[S.taille] || 30;
+  const loss = lossMap[S.level] || 0.2;
+  return Math.round(salary * emp * loss);
 }
 
 function fmtXOF(v) {
-  if (v >= 1_000_000) return (v / 1_000_000).toFixed(1) + 'M';
-  if (v >= 1_000)     return (v / 1_000).toFixed(0) + 'K';
-  return String(v);
+  if (v >= 1000000000) return (v / 1000000000).toFixed(1) + ' Mrd XOF';
+  if (v >= 1000000) return (v / 1000000).toFixed(1) + ' M XOF';
+  if (v >= 1000) return (v / 1000).toFixed(0) + ' K XOF';
+  return v.toLocaleString('fr-FR') + ' XOF';
 }
 
 function buildImpact(containerId) {
-  const { totalLoss, gain, opp } = calcImpact();
-  document.getElementById(containerId).innerHTML = `
-    <div class="impact-card loss">
-      <div class="ic-lbl">Perte estimée / an</div>
-      <div class="ic-val">${fmtXOF(totalLoss)} XOF</div>
-      <div class="ic-sub">Coût de l'inefficacité actuelle</div>
-    </div>
-    <div class="impact-card gain">
-      <div class="ic-lbl">Gain potentiel</div>
-      <div class="ic-val">${fmtXOF(gain)} XOF</div>
-      <div class="ic-sub">Après implémentation du plan IA</div>
-    </div>
-    <div class="impact-card opp">
-      <div class="ic-lbl">Opportunité totale</div>
-      <div class="ic-val">${fmtXOF(opp)} XOF</div>
-      <div class="ic-sub">Valeur totale à débloquer</div>
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const impact = calcImpact();
+  const saved = Math.round(impact * 0.6);
+  el.innerHTML = `
+    <div class="impact-grid">
+      <div class="impact-card impact-loss">
+        <div class="impact-icon">⚠️</div>
+        <div class="impact-label">Coût d'inaction estimé</div>
+        <div class="impact-value">${fmtXOF(impact)}</div>
+        <div class="impact-sub">par an (niveau actuel)</div>
+      </div>
+      <div class="impact-card impact-gain">
+        <div class="impact-icon">💰</div>
+        <div class="impact-label">Économies potentielles</div>
+        <div class="impact-value">${fmtXOF(saved)}</div>
+        <div class="impact-sub">après transformation</div>
+      </div>
+      <div class="impact-card impact-roi">
+        <div class="impact-icon">📈</div>
+        <div class="impact-label">ROI projeté</div>
+        <div class="impact-value">${S.level <= 2 ? '180' : '95'}%</div>
+        <div class="impact-sub">sur 12 mois</div>
+      </div>
     </div>`;
 }
 
-// ═══════════════════════════════════════════════════════════════
-// ANALYSIS — Save + init team
-// ═══════════════════════════════════════════════════════════════
-function runAnalysis() {
-  S.employes = parseInt(document.getElementById('employes').value) || 0;
-  if (!S.employes) { toast("Nombre d'employés requis", 'warn'); return; }
-  S.ca      = parseFloat(document.getElementById('ca').value) || null;
-  S.projets = parseInt(document.getElementById('projets').value) || 0;
-
-  // Disable launch button to prevent double-submit
-  const launchBtn = document.querySelector('#pg-step3 .btn-next.orange');
-  if (launchBtn) launchBtn.disabled = true;
-
+function startAIAnalysis() {
+  if (!S.secteur || !S.objectif) { toast('Données incomplètes.', 'error'); return; }
+  computeScores();
   goTo('analyzing');
-  animateSteps(['as1','as2','as3','as4','as5'], () => {
-    computeScores();
+  const steps = ['step-a1','step-a2','step-a3','step-a4','step-a5'];
+  animateSteps(steps, () => {
     saveAnalysis();
     buildAllPages();
-    showApp();
-    if (launchBtn) launchBtn.disabled = false; // re-enable for future runs
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('app-shell').style.display = 'flex';
+    appNav('dashboard');
+    initChat();
+    updateTaskBadge();
   });
 }
 
+function runAnalysis() { startAIAnalysis(); }
+
 function animateSteps(ids, cb) {
-  ids.forEach(id => { const el = document.getElementById(id); if (el) el.className = 'anlz-step'; });
   let i = 0;
+  const delays = [900, 1200, 1000, 1100, 800];
   function next() {
-    if (i > 0) document.getElementById(ids[i-1]).className = 'anlz-step done';
-    if (i < ids.length) {
-      document.getElementById(ids[i]).className = 'anlz-step act';
-      i++; setTimeout(next, 700);
-    } else { setTimeout(cb, 400); }
+    if (i >= ids.length) { setTimeout(cb, 400); return; }
+    const el = document.getElementById(ids[i]);
+    if (el) {
+      el.classList.add('active');
+      setTimeout(() => {
+        el.classList.add('done');
+        i++;
+        setTimeout(next, 150);
+      }, delays[i] || 1000);
+    } else { i++; next(); }
   }
   next();
 }
 
 function saveAnalysis() {
-  S.analyses = LS.load('analyses', []);
-  S.analyses.push({
-    date: new Date().toISOString(),
-    orgName: S.orgName, secteur: S.secteur, taille: S.taille,
-    global: S.global, level: S.level,
-    scores: { ...S.scores }, employes: S.employes,
-  });
-  LS.save('analyses', S.analyses);
-  S.tasks = LS.load('tasks', []);
-  S.team  = LS.load('team', []);
-  if (!S.team.length) initDefaultTeam();
+  const analyses = JSON.parse(localStorage.getItem('iac_analyses') || '[]');
+  S.id = S.id || Date.now();
+  S.savedAt = new Date().toISOString();
+  const idx = analyses.findIndex(a => a.id === S.id);
+  if (idx >= 0) analyses[idx] = S; else analyses.unshift(S);
+  localStorage.setItem('iac_analyses', JSON.stringify(analyses.slice(0, 20)));
 }
 
 function initDefaultTeam() {
-  S.team = [
-    { id: 1, name: 'Vous (Admin)',  post: 'Directeur général',       role: 'admin',   color: '#1E6FD9' },
-    { id: 2, name: 'Manager Ops',   post: 'Responsable opérations',  role: 'manager', color: '#F97316' },
-    { id: 3, name: 'Data Analyst',  post: 'Analyste de données',     role: 'user',    color: '#22C55E' },
+  if (localStorage.getItem('iac_team')) return;
+  const team = [
+    { id: 1, name: 'Directeur Général', role: 'Sponsor', dept: 'Direction', avatar: 'DG', color: '#3b82f6' },
+    { id: 2, name: 'Responsable SI', role: 'Chef de projet', dept: 'IT', avatar: 'SI', color: '#8b5cf6' },
+    { id: 3, name: 'DRH', role: 'Contributeur', dept: 'RH', avatar: 'RH', color: '#10b981' }
   ];
-  LS.save('team', S.team);
+  localStorage.setItem('iac_team', JSON.stringify(team));
 }
 
-// ═══════════════════════════════════════════════════════════════
-// BUILD ALL SECTIONS
-// ═══════════════════════════════════════════════════════════════
 function buildAllPages() {
-  buildSidebar();
+  initDefaultTeam();
+  genTasks();
   buildDashboard();
   buildResults();
-  buildActionPlan();
   buildRecommendations();
-  buildOrganization();
+  buildIndices();
+  buildActionPlan();
   buildAlerts();
+  buildTrackingCharts();
+  buildOrganization();
+  buildStrategie();
+  buildMethode();
+  buildProcedures();
+  buildBibliotheque();
 }
 
-// ─── Sidebar ─────────────────────────────────────────────────
-function buildSidebar() {
-  const lvl = levelInfo(S.level);
-  document.getElementById('sb-org-name').textContent = S.orgName || 'Mon organisation';
-  document.getElementById('sb-org-role').textContent = 'Admin · ' + lvl.label.split('—')[0].trim();
-}
+function buildSidebar() {}
 
-// ─── Dashboard ───────────────────────────────────────────────
 function buildDashboard() {
-  document.getElementById('dash-title').textContent = 'Dashboard — ' + (S.orgName || 'Mon organisation');
-  document.getElementById('dash-sub').textContent =
-    `${S.employes} employés · ${S.secteur || ''} · Analysé le ${new Date().toLocaleDateString('fr-FR')}`;
+  const li = levelInfo(S.level);
+  const sc = S.scores || {};
+  const idx = S.indices || {};
 
-  // ── 4 KPI cards
-  const axes = [
-    { key: 'structure',   label: 'Structure',   icon: '🏗️', bg: '#EFF6FF' },
-    { key: 'donnees',     label: 'Données',      icon: '📊', bg: '#F0FDF4' },
-    { key: 'decision',    label: 'Décision',     icon: '🧠', bg: '#FFFBEB' },
-    { key: 'performance', label: 'Performance',  icon: '🚀', bg: '#FFF7ED' },
+  const kpis = [
+    { label: 'Score Global', value: S.globalScore + '%', icon: '🎯', color: scoreColor(S.globalScore) },
+    { label: 'Niveau', value: 'Niveau ' + S.level, icon: '🏆', color: li.color },
+    { label: 'Résilience', value: (idx.resilience || 0) + '%', icon: '🛡️', color: '#3b82f6' },
+    { label: 'Innovation', value: (idx.innovation || 0) + '%', icon: '💡', color: '#8b5cf6' }
   ];
-  document.getElementById('dash-kpis').innerHTML = axes.map(ax => {
-    const v = S.scores[ax.key], c = scoreColor(v);
-    const trend = v >= 70 ? 'up' : v >= 45 ? 'flat' : 'down';
-    const trendLabel = v >= 70 ? '▲ Solide' : v >= 45 ? '▶ Moyen' : '▼ Critique';
-    return `<div class="kpi-card">
-      <div class="kpi-top">
-        <div class="kpi-icon" style="background:${ax.bg}">${ax.icon}</div>
-        <div class="kpi-trend ${trend}">${trendLabel}</div>
+
+  const kpiHtml = kpis.map(k => `
+    <div class="kpi-card">
+      <div class="kpi-icon">${k.icon}</div>
+      <div class="kpi-body">
+        <div class="kpi-value" style="color:${k.color}">${k.value}</div>
+        <div class="kpi-label">${k.label}</div>
       </div>
-      <div class="kpi-val">${v}<span>/100</span></div>
-      <div class="kpi-label">${ax.label}</div>
-      <div class="kpi-bar"><div class="kpi-bar-fill" id="kbar-${ax.key}" style="background:${c.stroke}"></div></div>
+    </div>`).join('');
+
+  const axisHtml = ['process','digital','rh','finance'].map(a => {
+    const labels = { process: 'Processus', digital: 'Digital', rh: 'Capital Humain', finance: 'Finance' };
+    const v = sc[a] || 0;
+    return `<div class="axis-bar-item">
+      <div class="axis-bar-label"><span>${labels[a]}</span><span style="color:${scoreColor(v)};font-weight:700">${v}%</span></div>
+      <div class="axis-bar-track"><div class="axis-bar-fill" style="width:${v}%;background:${scoreColor(v)}"></div></div>
     </div>`;
   }).join('');
-  setTimeout(() => axes.forEach(ax => {
-    const b = document.getElementById('kbar-' + ax.key);
-    if (b) b.style.width = S.scores[ax.key] + '%';
-  }), 200);
 
-  // ── Score circle
-  const lvl = levelInfo(S.level), c = scoreColor(S.global);
-  const fill = 452 - (S.global / 100) * 452;
-  document.getElementById('sc-num').textContent = S.global;
-  document.getElementById('sc-num').style.color = c.stroke;
-  const sc = document.getElementById('sc-fill');
-  sc.style.stroke = c.stroke;
-  setTimeout(() => { sc.style.strokeDashoffset = fill; }, 200);
-  const lb = document.getElementById('dash-level-badge');
-  lb.textContent = lvl.label; lb.style.background = lvl.bg; lb.style.color = lvl.text;
-  document.getElementById('dash-level-desc').textContent = lvl.desc;
-
-  buildRadar();
-  buildIndices();
+  document.getElementById('dash-kpis').innerHTML = kpiHtml;
+  document.getElementById('dash-axes').innerHTML = axisHtml;
+  document.getElementById('dash-level-badge').innerHTML = `<span class="level-badge" style="background:${li.color}20;color:${li.color};border-color:${li.color}40">Niveau ${S.level} — ${li.label}</span><p>${li.desc}</p>`;
   buildImpact('dash-impact');
   buildDashTopTasks();
+  buildRadar();
 }
 
-// ─── Radar Chart ─────────────────────────────────────────────
 function buildRadar() {
-  const canvas = document.getElementById('radarChart');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  if (S.charts.radar) S.charts.radar.destroy();
-  S.charts.radar = new Chart(ctx, {
+  const ctx = document.getElementById('radarChart');
+  if (!ctx) return;
+  if (window._radarChart) { window._radarChart.destroy(); }
+  const sc = S.scores || {};
+  window._radarChart = new Chart(ctx, {
     type: 'radar',
     data: {
-      labels: ['Structure', 'Données', 'Décision', 'Performance'],
-      datasets: [
-        {
-          label: 'Score actuel',
-          data: [S.scores.structure, S.scores.donnees, S.scores.decision, S.scores.performance],
-          backgroundColor: 'rgba(30,111,217,.1)', borderColor: 'rgba(30,111,217,.8)',
-          borderWidth: 2.5, pointBackgroundColor: '#1E6FD9', pointBorderColor: '#fff', pointRadius: 5,
-        },
-        {
-          label: 'Objectif 90j',
-          data: [
-            Math.min(100, S.scores.structure   + 18),
-            Math.min(100, S.scores.donnees      + 22),
-            Math.min(100, S.scores.decision     + 20),
-            Math.min(100, S.scores.performance  + 16),
-          ],
-          backgroundColor: 'rgba(249,115,22,.07)', borderColor: 'rgba(249,115,22,.55)',
-          borderWidth: 2, borderDash: [5,3], pointBackgroundColor: '#F97316',
-          pointBorderColor: '#fff', pointRadius: 4,
-        },
-      ],
+      labels: ['Processus', 'Digital', 'Capital Humain', 'Finance'],
+      datasets: [{
+        label: 'Votre organisation',
+        data: [sc.process || 0, sc.digital || 0, sc.rh || 0, sc.finance || 0],
+        backgroundColor: 'rgba(59,130,246,0.15)',
+        borderColor: '#3b82f6',
+        borderWidth: 2.5,
+        pointBackgroundColor: '#3b82f6',
+        pointRadius: 5
+      }]
     },
     options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 10 } } },
-      scales: {
-        r: {
-          beginAtZero: true, max: 100,
-          ticks: { stepSize: 25, font: { size: 10 }, color: '#94A3B8' },
-          grid: { color: 'rgba(0,0,0,.05)' },
-          angleLines: { color: 'rgba(0,0,0,.05)' },
-          pointLabels: { font: { size: 12, weight: '600' }, color: '#475569' },
-        },
-      },
-      animation: { duration: 1000, easing: 'easeInOutQuart' },
-    },
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: { r: { min: 0, max: 100, ticks: { stepSize: 25, font: { size: 11 } }, grid: { color: '#e2e8f0' }, pointLabels: { font: { size: 13, weight: '600' } } } },
+      plugins: { legend: { display: false } }
+    }
   });
 }
 
-// ─── 5 Exclusive Indices ─────────────────────────────────────
 function buildIndices() {
-  const { structure, donnees, decision, performance } = S.scores;
-  const g = S.global;
-  const indices = [
-    { icon:'🏆', label:'Score de maturité organisationnelle', sub:'Indice global IAConsult',          val: Math.round((structure+donnees+decision+performance)/4), color:'#1E6FD9', bg:'#EFF6FF' },
-    { icon:'🧠', label:'Indice de décision intelligente',     sub:'Qualité du processus décisionnel', val: decision,                                               color:'#F97316', bg:'#FFF7ED' },
-    { icon:'🔍', label:'Indice de performance cachée',        sub:'Potentiel non encore exploité',    val: Math.round((100-g)*0.6),                                color:'#EAB308', bg:'#FFFBEB' },
-    { icon:'📊', label:'Indice de pilotage data-driven',      sub:'Capacité analytique interne',      val: Math.round((donnees+decision)/2),                       color:'#22C55E', bg:'#F0FDF4' },
-    { icon:'📉', label:'Indice de perte organisationnelle',   sub:'Pertes liées à l\'inefficacité',   val: Math.round((100-g)*0.7),                                color:'#EF4444', bg:'#FEF2F2' },
+  const idx = S.indices || {};
+  const items = [
+    { key: 'resilience', label: 'Indice de Résilience', icon: '🛡️', desc: 'Capacité à absorber les chocs et à se relever rapidement.' },
+    { key: 'innovation', label: 'Indice d\'Innovation', icon: '💡', desc: 'Propension à générer et adopter de nouvelles idées.' },
+    { key: 'agilite', label: 'Indice d\'Agilité', icon: '⚡', desc: 'Vitesse d\'adaptation aux changements du marché.' },
+    { key: 'durabilite', label: 'Indice de Durabilité', icon: '🌱', desc: 'Ancrage des pratiques responsables et pérennes.' },
+    { key: 'competitivite', label: 'Indice de Compétitivité', icon: '🏆', desc: 'Positionnement concurrentiel global.' }
   ];
-  document.getElementById('dash-indices').innerHTML = indices.map(idx => `
-    <div class="idx-item">
-      <div class="idx-icon" style="background:${idx.bg}">${idx.icon}</div>
-      <div><div class="idx-label">${idx.label}</div><div class="idx-sub">${idx.sub}</div></div>
-      <div class="idx-val" style="color:${idx.color}">${idx.val}<span class="idx-max">/100</span></div>
-    </div>`).join('');
-}
-
-// ─── Top 3 urgent tasks on dashboard ─────────────────────────
-function buildDashTopTasks() {
-  const list = (S.tasks.filter(t => !t.done && t.prio === 'urgent').slice(0,3).length
-    ? S.tasks.filter(t => !t.done && t.prio === 'urgent').slice(0,3)
-    : genTasks().filter(t => t.prio === 'urgent').slice(0,3));
-  document.getElementById('dash-top-tasks').innerHTML = list.map(t => `
-    <div class="task-card" onclick="appNav('action-plan')">
-      <div class="task-check"></div>
-      <div class="task-main">
-        <div class="task-title">${t.title}</div>
-        <div class="task-meta">
-          <span class="task-prio prio-${t.prio}">${priLabel(t.prio)}</span>
-          <span class="task-deadline">📅 ${t.deadline}</span>
-        </div>
-      </div>
-    </div>`).join('');
-}
-
-// ─── Results section ─────────────────────────────────────────
-function buildResults() {
-  const lvl = levelInfo(S.level);
-  document.getElementById('res-sub').textContent = `Score global ${S.global}/100 · ${lvl.label}`;
-  const axes = [
-    { key:'structure', label:'Structure', icon:'🏗️', bg:'#EFF6FF' },
-    { key:'donnees',   label:'Données',   icon:'📊', bg:'#F0FDF4' },
-    { key:'decision',  label:'Décision',  icon:'🧠', bg:'#FFFBEB' },
-    { key:'performance',label:'Performance',icon:'🚀',bg:'#FFF7ED' },
-  ];
-  document.getElementById('axes-cards').innerHTML = axes.map(ax => {
-    const v = S.scores[ax.key], c = scoreColor(v);
-    return `<div class="kpi-card" style="text-align:center">
-      <div class="kpi-icon" style="background:${ax.bg};margin:0 auto 10px">${ax.icon}</div>
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--s400);margin-bottom:4px">${ax.label}</div>
-      <div style="font-family:'Sora',sans-serif;font-size:42px;font-weight:900;color:${c.stroke};line-height:1">${v}</div>
-      <div class="kpi-bar" style="margin-top:10px"><div class="kpi-bar-fill" id="abar-${ax.key}" style="background:${c.stroke}"></div></div>
-      <span style="display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:2px 9px;border-radius:10px;margin-top:8px;background:${c.bg};color:${c.text}">${c.label}</span>
+  const el = document.getElementById('indices-grid');
+  if (!el) return;
+  el.innerHTML = items.map(it => {
+    const v = idx[it.key] || 0;
+    return `<div class="index-card">
+      <div class="index-header"><span class="index-icon">${it.icon}</span><span class="index-label">${it.label}</span></div>
+      <div class="index-score" style="color:${scoreColor(v)}">${v}<span>/100</span></div>
+      <div class="index-bar"><div class="index-fill" style="width:${v}%;background:${scoreColor(v)}"></div></div>
+      <p class="index-desc">${it.desc}</p>
     </div>`;
   }).join('');
-  setTimeout(() => axes.forEach(ax => {
-    const b = document.getElementById('abar-' + ax.key); if (b) b.style.width = S.scores[ax.key] + '%';
-  }), 200);
-  document.getElementById('res-problems').innerHTML = genProblems().map(p =>
-    `<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--s100);font-size:13px;color:var(--s700)">
-      <div style="width:7px;height:7px;border-radius:50%;background:#EF4444;flex-shrink:0;margin-top:5px"></div>${p}</div>`).join('');
-  document.getElementById('res-opportunities').innerHTML = genOpportunities().map(o =>
-    `<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--s100);font-size:13px;color:var(--s700)">
-      <div style="width:7px;height:7px;border-radius:50%;background:#22C55E;flex-shrink:0;margin-top:5px"></div>${o}</div>`).join('');
-  buildImpact('res-impact');
 }
 
-// ─── Problem & Opportunity generators ────────────────────────
+function buildDashTopTasks() {
+  const tasks = JSON.parse(localStorage.getItem('iac_tasks') || '[]');
+  const top = tasks.filter(t => !t.done).slice(0, 3);
+  const el = document.getElementById('dash-top-tasks');
+  if (!el) return;
+  if (!top.length) { el.innerHTML = '<p style="color:var(--s500);font-size:.9rem">Aucune tâche en cours.</p>'; return; }
+  el.innerHTML = top.map(t => `<div class="mini-task-item">
+    <span class="mini-task-pri pri-${t.priority}">${priLabel(t.priority)}</span>
+    <span class="mini-task-title">${t.title}</span>
+  </div>`).join('');
+}
+
+function buildResults() {
+  const sc = S.scores || {};
+  const li = levelInfo(S.level);
+  const el = document.getElementById('results-content');
+  if (!el) return;
+
+  const axes = [
+    { key: 'process', label: 'Processus & Organisation', icon: '⚙️' },
+    { key: 'digital', label: 'Transformation Digitale', icon: '💻' },
+    { key: 'rh', label: 'Capital Humain', icon: '👥' },
+    { key: 'finance', label: 'Performance Financière', icon: '💰' }
+  ];
+
+  el.innerHTML = `
+    <div class="results-hero">
+      <div class="results-score-ring" style="--score:${S.globalScore};--color:${scoreColor(S.globalScore)}">
+        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#e2e8f0" stroke-width="10"/><circle cx="60" cy="60" r="52" fill="none" stroke="${scoreColor(S.globalScore)}" stroke-width="10" stroke-dasharray="${2*Math.PI*52}" stroke-dashoffset="${2*Math.PI*52*(1-S.globalScore/100)}" stroke-linecap="round" transform="rotate(-90 60 60)"/></svg>
+        <div class="results-score-inner"><span class="results-score-val">${S.globalScore}</span><span class="results-score-unit">/ 100</span></div>
+      </div>
+      <div class="results-hero-info">
+        <div class="level-badge" style="background:${li.color}20;color:${li.color};border-color:${li.color}40;display:inline-flex;margin-bottom:.5rem">Niveau ${S.level} — ${li.label}</div>
+        <p>${li.desc}</p>
+        <div class="results-problems">${genProblems().slice(0,2).map(p=>`<div class="problem-chip">⚠️ ${p}</div>`).join('')}</div>
+      </div>
+    </div>
+    <div class="axes-detail">
+      ${axes.map(a => {
+        const v = sc[a.key] || 0;
+        return `<div class="axis-detail-card">
+          <div class="axis-detail-header"><span class="axis-detail-icon">${a.icon}</span><span class="axis-detail-label">${a.label}</span><span class="axis-detail-score" style="color:${scoreColor(v)}">${v}%</span></div>
+          <div class="axis-bar-track"><div class="axis-bar-fill" style="width:${v}%;background:${scoreColor(v)}"></div></div>
+          <p class="axis-detail-desc">${getAxisDesc(a.key, v)}</p>
+        </div>`;
+      }).join('')}
+    </div>`;
+  buildImpact('results-impact');
+}
+
+function getAxisDesc(axis, v) {
+  const descs = {
+    process: v >= 70 ? 'Vos processus sont bien structurés et documentés.' : v >= 45 ? 'Des lacunes subsistent dans la standardisation des procédures.' : 'Processus peu formalisés — risque opérationnel élevé.',
+    digital: v >= 70 ? 'Bonne adoption des outils digitaux.' : v >= 45 ? 'Digitalisation partielle avec des silos d\'information.' : 'Faible maturité digitale — opportunité de transformation majeure.',
+    rh: v >= 70 ? 'Capital humain bien géré et valorisé.' : v >= 45 ? 'Pratiques RH à renforcer, notamment sur la formation.' : 'Gestion RH insuffisante — turnover et risques sociaux.',
+    finance: v >= 70 ? 'Pilotage financier rigoureux et prévisionnel.' : v >= 45 ? 'Contrôle de gestion partiel — à structurer.' : 'Faible visibilité financière — décisions suboptimales.'
+  };
+  return descs[axis] || '';
+}
+
 function genProblems() {
-  const p = [];
-  if (S.scores.donnees < 50)      p.push('Manque de données fiables pour piloter l\'organisation');
-  if (S.q_tdb === 'non')           p.push('Absence de tableau de bord de suivi des performances');
-  if (S.q_decision !== 'data')     p.push('Prise de décision non basée sur des données objectives');
-  if (S.q_kpi === 'non')           p.push('Pas de suivi régulier des indicateurs de performance (KPI)');
-  if (S.q_vision === 'non')        p.push('Vision stratégique non documentée ou peu partagée');
-  if (S.scores.structure < 50)    p.push('Structure organisationnelle insuffisamment formalisée');
-  if (!p.length) p.push('Aucun problème critique — optimisation continue recommandée');
-  return p.slice(0, 5);
+  const sc = S.scores || {};
+  const problems = [];
+  if ((sc.process || 0) < 50) problems.push('Processus non formalisés');
+  if ((sc.digital || 0) < 50) problems.push('Retard de transformation digitale');
+  if ((sc.rh || 0) < 50) problems.push('Gestion RH à structurer');
+  if ((sc.finance || 0) < 50) problems.push('Pilotage financier insuffisant');
+  if (S.level <= 2) problems.push('Maturité organisationnelle faible');
+  if (!problems.length) problems.push('Performance globale à optimiser');
+  return problems;
 }
 
 function genOpportunities() {
-  const o = [];
-  if (S.q_tdb === 'non')    o.push('Déploiement d\'un tableau de bord BI (Power BI, Metabase)');
-  if (S.q_kpi === 'non')    o.push('Mise en place de KPI adaptés à votre secteur');
-  if (S.q_donnees === 'non') o.push('Digitalisation de la collecte de données opérationnelles');
-  o.push('Automatisation des rapports hebdomadaires de performance');
-  o.push('Formation des équipes aux outils d\'analyse de données');
-  if (S.secteur === 'ong')        o.push('Indicateurs d\'impact social mesurables pour les bailleurs');
-  if (S.secteur === 'entreprise') o.push('Optimisation du tunnel commercial via la data');
-  if (S.taille === 'petite')      o.push('Outils SaaS légers : Notion, Airtable, Google Data Studio');
-  return o.slice(0, 5);
+  const sc = S.scores || {};
+  const opps = [];
+  if ((sc.digital || 0) < 70) opps.push('Automatisation des processus métier');
+  if ((sc.rh || 0) < 70) opps.push('Programme de montée en compétences');
+  if ((sc.finance || 0) < 70) opps.push('Mise en place d\'un tableau de bord financier');
+  if ((sc.process || 0) < 70) opps.push('Cartographie et optimisation des flux');
+  opps.push('Déploiement d\'indicateurs de performance (KPI)');
+  return opps;
 }
 
-// ═══════════════════════════════════════════════════════════════
-// RECOMMENDATION ENGINE — 7 / 30 / 90 day plans
-// ═══════════════════════════════════════════════════════════════
 function genTasks() {
-  const base = [
-    { title: 'Cartographier tous les processus décisionnels clés',          prio:'urgent',    deadline:'J+7',  axis:'structure'   },
-    { title: 'Centraliser les sources de données existantes',               prio:'urgent',    deadline:'J+7',  axis:'donnees'     },
-    { title: 'Définir 5 KPI prioritaires à suivre immédiatement',           prio:'urgent',    deadline:'J+7',  axis:'decision'    },
-    { title: 'Organiser un atelier de diagnostic avec les équipes',          prio:'important', deadline:'J+14', axis:'structure'   },
-    { title: 'Déployer un tableau de bord de suivi hebdomadaire',            prio:'urgent',    deadline:'J+30', axis:'donnees'     },
-    { title: 'Former les managers à la décision data-driven',                prio:'important', deadline:'J+30', axis:'decision'    },
-    { title: 'Automatiser les rapports de performance',                      prio:'planned',   deadline:'J+30', axis:'performance' },
-    { title: 'Structurer la vision stratégique sur 12 mois',                 prio:'important', deadline:'J+30', axis:'structure'   },
-    { title: 'Implémenter une solution BI complète (Power BI / Metabase)',   prio:'important', deadline:'J+90', axis:'donnees'     },
-    { title: 'Mettre en place une gouvernance des données',                  prio:'planned',   deadline:'J+90', axis:'donnees'     },
-    { title: 'Déployer une culture data-driven dans l\'organisation',        prio:'planned',   deadline:'J+90', axis:'performance' },
-  ];
-  const sectorBonus = {
-    ong:         [{ title:'Définir des indicateurs d\'impact social mesurables', prio:'urgent', deadline:'J+7', axis:'decision' }],
-    entreprise:  [{ title:'Analyser la rentabilité par produit/service',         prio:'urgent', deadline:'J+7', axis:'performance' }],
-    ecole:       [{ title:'Suivre les taux de réussite par cohorte',             prio:'urgent', deadline:'J+7', axis:'donnees' }],
-    institution: [{ title:'Cartographier les services et leurs indicateurs',     prio:'urgent', deadline:'J+7', axis:'structure' }],
+  const existing = JSON.parse(localStorage.getItem('iac_tasks') || '[]');
+  if (existing.length) return;
+  const sc = S.scores || {};
+  const tasks = [];
+  const add = (title, phase, priority, deadline_offset) => {
+    const d = new Date();
+    d.setDate(d.getDate() + deadline_offset);
+    tasks.push({ id: Date.now() + Math.random(), title, phase, priority, deadline: d.toISOString().split('T')[0], done: false, createdAt: new Date().toISOString() });
   };
-  return [...base, ...(sectorBonus[S.secteur] || [])];
+
+  add('Lancer le diagnostic organisationnel complet', '7j', 'critique', 7);
+  add('Identifier les processus critiques à cartographier', '7j', 'haute', 5);
+  add('Constituer l\'équipe projet transformation', '7j', 'haute', 7);
+
+  if ((sc.digital || 0) < 60) {
+    add('Audit des outils digitaux existants', '30j', 'haute', 20);
+    add('Sélectionner une solution de gestion documentaire', '30j', 'moyenne', 30);
+  }
+  if ((sc.rh || 0) < 60) {
+    add('Lancer un plan de formation prioritaire', '30j', 'haute', 25);
+    add('Réviser les fiches de poste clés', '30j', 'moyenne', 28);
+  }
+  if ((sc.finance || 0) < 60) {
+    add('Mettre en place un reporting mensuel', '30j', 'haute', 21);
+  }
+  add('Définir les KPI de transformation', '90j', 'haute', 45);
+  add('Déployer le plan d\'action stratégique', '90j', 'critique', 60);
+  add('Évaluation mi-parcours (bilan 90 jours)', '90j', 'haute', 90);
+
+  localStorage.setItem('iac_tasks', JSON.stringify(tasks));
 }
 
 function buildRecommendations() {
-  const all = genTasks();
-  const periods = [
-    { p: 7,  badge:'d7',  num:'n7',  icon:'🔥', label:'7 premiers jours' },
-    { p: 30, badge:'d30', num:'n30', icon:'📈', label:'30 jours' },
-    { p: 90, badge:'d90', num:'n90', icon:'🏆', label:'90 jours' },
+  const el = document.getElementById('reco-content');
+  if (!el) return;
+  const opps = genOpportunities();
+  const phases = [
+    { phase: '7 jours', icon: '⚡', color: '#ef4444', label: 'Actions immédiates', items: [
+      'Partager ce rapport avec votre comité de direction',
+      'Désigner un responsable de transformation',
+      opps[0] || 'Lancer un atelier de priorisation'
+    ]},
+    { phase: '30 jours', icon: '🎯', color: '#f97316', label: 'Actions à court terme', items: [
+      'Cartographier les 5 processus les plus critiques',
+      opps[1] || 'Structurer un plan de formation',
+      'Mettre en place des indicateurs de suivi hebdomadaires'
+    ]},
+    { phase: '90 jours', icon: '🚀', color: '#3b82f6', label: 'Transformation structurelle', items: [
+      'Déployer la solution digitale prioritaire',
+      opps[2] || 'Consolider la gouvernance de transformation',
+      'Réaliser un bilan et ajuster la stratégie'
+    ]}
   ];
-  const deadlineMap = { 7: 'J+7', 30: 'J+30', 90: 'J+90' };
-  document.getElementById('tl-grid').innerHTML = periods.map(pe => {
-    const items = all.filter(t => t.deadline === deadlineMap[pe.p]).slice(0, 5);
-    return `<div class="tl-card">
-      <div class="tl-head">
-        <div class="tl-badge ${pe.badge}">${pe.icon} Plan</div>
-        <div class="tl-period">${pe.label}</div>
+
+  el.innerHTML = phases.map(ph => `
+    <div class="reco-phase-card">
+      <div class="reco-phase-header" style="border-left:4px solid ${ph.color}">
+        <span class="reco-phase-icon">${ph.icon}</span>
+        <div><div class="reco-phase-title" style="color:${ph.color}">${ph.phase}</div><div class="reco-phase-label">${ph.label}</div></div>
       </div>
-      <div class="tl-body">
-        ${items.map((a,i) => `
-          <div class="tl-item">
-            <div class="tl-num ${pe.num}">${i+1}</div>
-            <div class="tl-text">${a.title}</div>
-            <div class="tl-prio ${a.prio==='urgent'?'high':a.prio==='important'?'med':'low'}">
-              ${a.prio==='urgent'?'Urgent':a.prio==='important'?'Moyen':'Planifié'}
-            </div>
-          </div>`).join('')}
-      </div>
-    </div>`;
-  }).join('');
+      <ul class="reco-list">${ph.items.map(i => `<li>${i}</li>`).join('')}</ul>
+    </div>`).join('');
 }
 
-// ═══════════════════════════════════════════════════════════════
-// ACTION PLAN — Task management
-// ═══════════════════════════════════════════════════════════════
 function buildActionPlan() {
-  if (!S.tasks.length) {
-    const gen = genTasks();
-    S.tasks = gen.map((t, i) => ({
-      ...t, id: Date.now() + i, done: false,
-      assigneeId: S.team[i % S.team.length]?.id || null,
-      createdAt: new Date().toISOString(),
-    }));
-    LS.save('tasks', S.tasks);
-  }
   renderTasks('all');
   updateTaskCounts();
-  updateTaskBadge();
-  const sel = document.getElementById('task-assignee-input');
-  if (sel) sel.innerHTML = '<option value="">Non assigné</option>' +
-    S.team.map(m => `<option value="${m.id}">${m.name}</option>`).join('');
 }
 
 function renderTasks(filter) {
-  let tasks = S.tasks;
-  if (filter === 'urgent')    tasks = tasks.filter(t => t.prio === 'urgent'    && !t.done);
-  if (filter === 'important') tasks = tasks.filter(t => t.prio === 'important' && !t.done);
-  if (filter === 'done')      tasks = tasks.filter(t => t.done);
+  const tasks = JSON.parse(localStorage.getItem('iac_tasks') || '[]');
+  const el = document.getElementById('tasks-list');
+  if (!el) return;
+  let filtered = tasks;
+  if (filter === '7j') filtered = tasks.filter(t => t.phase === '7j');
+  else if (filter === '30j') filtered = tasks.filter(t => t.phase === '30j');
+  else if (filter === '90j') filtered = tasks.filter(t => t.phase === '90j');
+  else if (filter === 'done') filtered = tasks.filter(t => t.done);
 
-  const tl = document.getElementById('task-list');
-  if (!tasks.length) {
-    tl.innerHTML = `<div class="ap-empty"><div class="ap-empty-icon">✅</div>
-      <div class="ap-empty-title">${filter==='done'?'Aucune tâche terminée':'Aucune tâche dans cette catégorie'}</div></div>`;
+  if (!filtered.length) {
+    el.innerHTML = '<div class="empty-state"><div class="empty-icon">✅</div><p>Aucune tâche dans cette catégorie.</p></div>';
     return;
   }
-  tl.innerHTML = tasks.map(t => {
-    const member = S.team.find(m => m.id === t.assigneeId);
-    const color  = member?.color || '#94A3B8';
-    const initials = member ? member.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2) : '—';
-    return `<div class="task-card ${t.done?'done-card':''}" id="tc-${t.id}">
-      <div class="task-check ${t.done?'checked':''}" onclick="toggleTask(${t.id},event)">${t.done?'✓':''}</div>
-      <div class="task-main">
+
+  el.innerHTML = filtered.map(t => `
+    <div class="task-item ${t.done ? 'task-done' : ''}" data-id="${t.id}">
+      <div class="task-check" onclick="toggleTask('${t.id}', event)">
+        <div class="task-checkbox ${t.done ? 'checked' : ''}">${t.done ? '✓' : ''}</div>
+      </div>
+      <div class="task-body">
         <div class="task-title">${t.title}</div>
         <div class="task-meta">
-          <span class="task-prio prio-${t.prio}">${priLabel(t.prio)}</span>
-          <span class="task-deadline">📅 ${t.deadline}</span>
-          ${member ? `<span class="task-assignee">
-            <div class="task-assignee-dot" style="background:${color}">${initials}</div>${member.name}
-          </span>` : ''}
+          <span class="task-pri pri-${t.priority}">${priLabel(t.priority)}</span>
+          <span class="task-phase">${t.phase}</span>
+          ${t.deadline ? `<span class="task-deadline">📅 ${fmtDeadline(t.deadline)}</span>` : ''}
         </div>
       </div>
-      <div class="task-actions">
-        <button class="btn-sm ghost" onclick="deleteTask(${t.id},event)" title="Supprimer">🗑</button>
-      </div>
-    </div>`;
-  }).join('');
+      <button class="task-del-btn" onclick="deleteTask('${t.id}', event)" title="Supprimer">✕</button>
+    </div>`).join('');
 }
 
-function priLabel(p) { return p==='urgent'?'Urgent':p==='important'?'Important':'Planifié'; }
+function priLabel(p) {
+  const m = { critique: '🔴 Critique', haute: '🟠 Haute', moyenne: '🟡 Moyenne', faible: '🟢 Faible' };
+  return m[p] || p;
+}
 
 function toggleTask(id, e) {
-  e.stopPropagation();
-  const t = S.tasks.find(t => t.id === id);
-  if (t) { t.done = !t.done; LS.save('tasks', S.tasks); }
-  const f = document.querySelector('.ap-tab.act')?.dataset.filter || 'all';
-  renderTasks(f); updateTaskCounts(); updateTaskBadge();
-  toast(t?.done ? 'Tâche terminée ✓' : 'Tâche réouverte', 'success');
+  if (e) e.stopPropagation();
+  const tasks = JSON.parse(localStorage.getItem('iac_tasks') || '[]');
+  const t = tasks.find(t => String(t.id) === String(id));
+  if (t) { t.done = !t.done; localStorage.setItem('iac_tasks', JSON.stringify(tasks)); }
+  const activeBtn = document.querySelector('.task-filter-btn.active');
+  renderTasks(activeBtn ? activeBtn.dataset.filter : 'all');
+  updateTaskCounts();
+  updateTaskBadge();
+  buildDashTopTasks();
 }
 
 function deleteTask(id, e) {
-  e.stopPropagation();
-  S.tasks = S.tasks.filter(t => t.id !== id);
-  LS.save('tasks', S.tasks);
-  const f = document.querySelector('.ap-tab.act')?.dataset.filter || 'all';
-  renderTasks(f); updateTaskCounts(); updateTaskBadge();
+  if (e) e.stopPropagation();
+  if (!confirm('Supprimer cette tâche ?')) return;
+  let tasks = JSON.parse(localStorage.getItem('iac_tasks') || '[]');
+  tasks = tasks.filter(t => String(t.id) !== String(id));
+  localStorage.setItem('iac_tasks', JSON.stringify(tasks));
+  const activeBtn = document.querySelector('.task-filter-btn.active');
+  renderTasks(activeBtn ? activeBtn.dataset.filter : 'all');
+  updateTaskCounts();
+  updateTaskBadge();
+  toast('Tâche supprimée.', 'info');
 }
 
 function filterTasks(btn) {
-  document.querySelectorAll('.ap-tab').forEach(b => b.classList.remove('act'));
-  btn.classList.add('act');
+  document.querySelectorAll('.task-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
   renderTasks(btn.dataset.filter);
 }
 
 function updateTaskCounts() {
-  document.getElementById('cnt-all').textContent       = S.tasks.length;
-  document.getElementById('cnt-urgent').textContent    = S.tasks.filter(t => t.prio==='urgent' && !t.done).length;
-  document.getElementById('cnt-important').textContent = S.tasks.filter(t => t.prio==='important' && !t.done).length;
-  document.getElementById('cnt-done').textContent      = S.tasks.filter(t => t.done).length;
+  const tasks = JSON.parse(localStorage.getItem('iac_tasks') || '[]');
+  const total = tasks.length;
+  const done = tasks.filter(t => t.done).length;
+  const el = document.getElementById('task-progress');
+  if (el) el.innerHTML = `<span>${done}/${total} tâches complétées</span><div class="task-prog-bar"><div style="width:${total?Math.round(done/total*100):0}%;background:var(--g5);height:6px;border-radius:3px"></div></div>`;
 }
 
 function updateTaskBadge() {
-  const open = S.tasks.filter(t => !t.done && t.prio === 'urgent').length;
-  const b = document.getElementById('badge-tasks');
-  if (b) { b.textContent = open || ''; b.style.display = open ? '' : 'none'; }
+  const tasks = JSON.parse(localStorage.getItem('iac_tasks') || '[]');
+  const pending = tasks.filter(t => !t.done).length;
+  const badge = document.getElementById('task-badge');
+  if (badge) { badge.textContent = pending; badge.style.display = pending ? 'flex' : 'none'; }
 }
 
-function openAddTaskModal() {
-  openModal('modal-task');
-  const d = new Date(); d.setDate(d.getDate() + 7);
-  document.getElementById('task-deadline-input').value = d.toISOString().split('T')[0];
-}
+function openAddTaskModal() { openModal('add-task-modal'); }
 
 function fmtDeadline(isoDate) {
-  if (!isoDate) return 'J+7';
-  try {
-    return new Date(isoDate).toLocaleDateString('fr-FR', { day:'2-digit', month:'short', year:'numeric' });
-  } catch(e) { return isoDate; }
+  if (!isoDate) return '';
+  const d = new Date(isoDate);
+  return d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
 }
 
 function addTask() {
-  const title = document.getElementById('task-title-input').value.trim();
-  if (!title) { toast('Titre requis', 'warn'); return; }
-  const assigneeId = parseInt(document.getElementById('task-assignee-input').value) || null;
-  const rawDate    = document.getElementById('task-deadline-input').value;
-  const deadline   = rawDate ? fmtDeadline(rawDate) : 'J+7';
-  S.tasks.unshift({
-    id: Date.now(), title, prio: S.taskPrio || 'urgent',
-    done: false, assigneeId, deadline, axis: 'structure',
-    createdAt: new Date().toISOString(),
-  });
-  LS.save('tasks', S.tasks);
-  closeModal('modal-task');
-  document.getElementById('task-title-input').value = '';
-  renderTasks('all'); updateTaskCounts(); updateTaskBadge();
-  toast('Tâche créée avec succès', 'success');
+  const title = document.getElementById('new-task-title').value.trim();
+  const phase = document.getElementById('new-task-phase').value;
+  const priority = document.getElementById('new-task-priority').value;
+  const deadline = document.getElementById('new-task-deadline').value;
+  if (!title) { toast('Titre requis.', 'error'); return; }
+  const tasks = JSON.parse(localStorage.getItem('iac_tasks') || '[]');
+  tasks.push({ id: Date.now(), title, phase, priority, deadline: deadline || null, done: false, createdAt: new Date().toISOString() });
+  localStorage.setItem('iac_tasks', JSON.stringify(tasks));
+  closeModal('add-task-modal');
+  document.getElementById('new-task-title').value = '';
+  renderTasks('all');
+  updateTaskCounts();
+  updateTaskBadge();
+  toast('Tâche ajoutée.', 'success');
 }
 
-// ═══════════════════════════════════════════════════════════════
-// ALERTS ENGINE
-// ═══════════════════════════════════════════════════════════════
 function genAlerts() {
   const alerts = [];
-  if (S.global < 50)            alerts.push({ type:'crit', icon:'🚨', title:'Score critique — Intervention urgente',
-    text:`Votre score de ${S.global}/100 nécessite une action immédiate. Consultez le plan d'action.` });
-  if (S.scores.donnees < 40)   alerts.push({ type:'crit', icon:'📊', title:'Données insuffisantes',
-    text:`Score Données ${S.scores.donnees}/100. La prise de décision est compromise.` });
-  if (S.q_tdb === 'non')        alerts.push({ type:'warn', icon:'⚠️', title:'Absence de tableau de bord',
-    text:'Vous pilotez sans visibilité. Déployez un TDB en priorité (J+7).' });
-  if (S.q_kpi === 'non')        alerts.push({ type:'warn', icon:'📉', title:'Pas de KPI définis',
-    text:'Sans indicateurs, impossible de mesurer la performance et de progresser.' });
-  if (S.q_vision === 'non')     alerts.push({ type:'warn', icon:'🗺️', title:'Vision stratégique manquante',
-    text:"L'absence de vision documentée freine l'alignement des équipes." });
-  if (S.scores.decision < 45)  alerts.push({ type:'warn', icon:'🧠', title:'Décisions non structurées',
-    text:`Processus décisionnel (${S.scores.decision}/100) — risques opérationnels élevés.` });
-  if (S.global >= 70)           alerts.push({ type:'ok',   icon:'✅', title:'Bonne maturité globale',
-    text:`Score ${S.global}/100 — Continuez sur cette dynamique et visez le niveau 4.` });
+  const sc = S.scores || {};
+  if ((sc.digital || 0) < 40) alerts.push({ type: 'critique', icon: '🔴', title: 'Maturité digitale critique', desc: 'Votre score digital est très faible. Une intervention urgente est recommandée.', date: 'Aujourd\'hui' });
+  if ((sc.process || 0) < 40) alerts.push({ type: 'warning', icon: '🟠', title: 'Processus non formalisés', desc: 'Absence de procédures documentées — risque opérationnel élevé.', date: 'Aujourd\'hui' });
+  if ((sc.rh || 0) < 45) alerts.push({ type: 'warning', icon: '🟡', title: 'Capital humain à renforcer', desc: 'La gestion des compétences et du talent mérite une attention particulière.', date: 'Cette semaine' });
+  if ((sc.finance || 0) < 45) alerts.push({ type: 'warning', icon: '🟡', title: 'Pilotage financier insuffisant', desc: 'Manque de visibilité sur les indicateurs financiers clés.', date: 'Cette semaine' });
+  alerts.push({ type: 'info', icon: '💡', title: 'Opportunité d\'optimisation détectée', desc: 'Votre secteur présente des leviers de croissance non exploités.', date: 'Ce mois' });
   return alerts;
 }
 
 function buildAlerts() {
+  const el = document.getElementById('alerts-list');
+  if (!el) return;
   const alerts = genAlerts();
-  document.getElementById('alert-dot').classList.toggle('show', alerts.length > 0);
-  const render = arr => arr.map(a => `
-    <div class="alert-item ${a.type}">
+  el.innerHTML = alerts.map(a => `
+    <div class="alert-card alert-${a.type}">
       <div class="alert-icon">${a.icon}</div>
-      <div><div class="alert-title">${a.title}</div><div class="alert-text">${a.text}</div></div>
+      <div class="alert-body">
+        <div class="alert-title">${a.title}</div>
+        <div class="alert-desc">${a.desc}</div>
+        <div class="alert-date">${a.date}</div>
+      </div>
     </div>`).join('');
-  document.getElementById('dash-alerts').innerHTML   = render(alerts.slice(0, 4));
-  document.getElementById('drawer-alerts').innerHTML = render(alerts) ||
-    '<div style="text-align:center;padding:32px;color:var(--s400)">Aucune alerte active</div>';
+  const badge = document.getElementById('alert-badge');
+  if (badge) { const n = alerts.filter(a=>a.type==='critique'||a.type==='warning').length; badge.textContent = n; badge.style.display = n ? 'flex' : 'none'; }
 }
 
-// ═══════════════════════════════════════════════════════════════
-// TRACKING CHARTS
-// ═══════════════════════════════════════════════════════════════
 function buildTrackingCharts() {
-  const analyses = S.analyses || [];
+  const months = ['Jan','Fév','Mar','Avr','Mai','Jun'];
+  const base = S.globalScore || 50;
+  const progression = months.map((_, i) => Math.min(100, Math.round(base + i * ((100 - base) / 8) + (Math.random() * 6 - 3))));
 
-  // History table
-  document.getElementById('hist-tbody').innerHTML = analyses.map((a, i) => {
-    const prev = analyses[i-1];
-    const diff = prev ? a.global - prev.global : null;
-    const cls  = diff === null ? 'same' : diff > 0 ? 'up' : 'down';
-    const arrow = diff === null ? '—' : diff > 0 ? `↑ +${diff}` : `↓ ${diff}`;
-    const lvl = levelInfo(a.level);
-    return `<tr>
-      <td>${new Date(a.date).toLocaleDateString('fr-FR')}</td>
-      <td>${a.orgName}</td>
-      <td><span class="hist-score" style="color:${scoreColor(a.global).stroke}">${a.global}</span></td>
-      <td><span class="hist-level" style="background:${lvl.bg};color:${lvl.text}">${lvl.label.split('—')[0].trim()}</span></td>
-      <td>${a.scores.structure}</td><td>${a.scores.donnees}</td>
-      <td>${a.scores.decision}</td><td>${a.scores.performance}</td>
-      <td><span class="hist-compare ${cls}">${arrow}</span></td>
-    </tr>`;
-  }).join('');
+  const ctx1 = document.getElementById('progressChart');
+  if (ctx1) {
+    if (window._progressChart) window._progressChart.destroy();
+    window._progressChart = new Chart(ctx1, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{
+          label: 'Score global',
+          data: progression,
+          borderColor: '#3b82f6',
+          backgroundColor: 'rgba(59,130,246,0.1)',
+          borderWidth: 2.5,
+          tension: 0.4,
+          fill: true,
+          pointRadius: 4,
+          pointBackgroundColor: '#3b82f6'
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0, max: 100 } } }
+    });
+  }
 
-  // Evolution line chart
-  const c1 = document.getElementById('evolChart'); if (!c1) return;
-  const ctx1 = c1.getContext('2d');
-  if (S.charts.evol) S.charts.evol.destroy();
-  S.charts.evol = new Chart(ctx1, {
-    type: 'line',
-    data: {
-      labels: analyses.map((_, i) => `Analyse ${i+1}`),
-      datasets: [{ label: 'Score global', data: analyses.map(a => a.global),
-        borderColor: '#1E6FD9', backgroundColor: 'rgba(30,111,217,.1)',
-        borderWidth: 2.5, pointRadius: 5, pointBackgroundColor: '#1E6FD9', fill: true, tension: .4 }],
-    },
-    options: { responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ display:false } },
-      scales:{ y:{ min:0, max:100, ticks:{color:'#94A3B8'}, grid:{color:'rgba(0,0,0,.05)'} },
-               x:{ ticks:{color:'#94A3B8'}, grid:{color:'rgba(0,0,0,.04)'} } } },
-  });
-
-  // Projection chart
-  const g = S.global;
-  const c2 = document.getElementById('projChart'); if (!c2) return;
-  const ctx2 = c2.getContext('2d');
-  if (S.charts.proj) S.charts.proj.destroy();
-  S.charts.proj = new Chart(ctx2, {
-    type: 'line',
-    data: {
-      labels: ["Aujourd'hui", 'J+7', 'J+30', 'J+60', 'J+90'],
-      datasets: [{ label: 'Projection',
-        data: [g, Math.min(100,Math.round(g*1.07)), Math.min(100,Math.round(g*1.17)),
-               Math.min(100,Math.round(g*1.27)), Math.min(100,Math.round(g*1.38))],
-        borderColor:'#F97316', backgroundColor:'rgba(249,115,22,.08)',
-        borderWidth:2.5, pointRadius:5, fill:true, tension:.4, borderDash:[6,3] }],
-    },
-    options: { responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ display:false } },
-      scales:{ y:{ min:Math.max(0,g-10), max:100, ticks:{color:'#94A3B8'}, grid:{color:'rgba(0,0,0,.05)'} },
-               x:{ ticks:{color:'#94A3B8'}, grid:{color:'rgba(0,0,0,.04)'} } } },
-  });
+  const ctx2 = document.getElementById('axisChart');
+  if (ctx2) {
+    if (window._axisChart) window._axisChart.destroy();
+    const sc = S.scores || {};
+    window._axisChart = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['Processus', 'Digital', 'Capital Humain', 'Finance'],
+        datasets: [{
+          label: 'Score par axe',
+          data: [sc.process||0, sc.digital||0, sc.rh||0, sc.finance||0],
+          backgroundColor: ['rgba(59,130,246,0.7)','rgba(139,92,246,0.7)','rgba(16,185,129,0.7)','rgba(245,158,11,0.7)'],
+          borderRadius: 6
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0, max: 100 } } }
+    });
+  }
 }
 
-// ═══════════════════════════════════════════════════════════════
-// ORGANISATION
-// ═══════════════════════════════════════════════════════════════
 function buildOrganization() {
-  document.getElementById('org-sub').textContent =
-    `${S.orgName||'Mon organisation'} · ${S.team.length} membres · ${S.tasks.filter(t=>!t.done).length} tâches ouvertes`;
-  document.getElementById('org-stats').innerHTML = `
-    <div class="kpi-card"><div class="kpi-val">${S.team.length}<span> membres</span></div><div class="kpi-label">Équipe totale</div></div>
-    <div class="kpi-card"><div class="kpi-val">${S.tasks.filter(t=>!t.done).length}<span> tâches</span></div><div class="kpi-label">En cours</div></div>
-    <div class="kpi-card"><div class="kpi-val">${S.tasks.filter(t=>t.done).length}<span> terminées</span></div><div class="kpi-label">Complétées</div></div>`;
-  document.getElementById('team-grid').innerHTML = S.team.map(m => {
-    const myTasks  = S.tasks.filter(t => t.assigneeId === m.id && !t.done).length;
-    const initials = m.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-    return `<div class="member-card">
-      <div class="member-avatar" style="background:${m.color||'#1E6FD9'}">${initials}</div>
-      <div class="member-name">${m.name}</div>
-      <div class="member-role">${m.post}</div>
-      <div class="member-tasks">${myTasks} tâche${myTasks!==1?'s':''} en cours</div>
-      <span class="role-badge role-${m.role}">${m.role}</span>
-    </div>`;
-  }).join('');
+  const team = JSON.parse(localStorage.getItem('iac_team') || '[]');
+  const el = document.getElementById('team-list');
+  if (!el) return;
+  el.innerHTML = team.map(m => `
+    <div class="member-card">
+      <div class="member-avatar" style="background:${m.color}20;color:${m.color}">${m.avatar}</div>
+      <div class="member-info">
+        <div class="member-name">${m.name}</div>
+        <div class="member-role">${m.role}</div>
+        <div class="member-dept">${m.dept}</div>
+      </div>
+    </div>`).join('') || '<p style="color:var(--s500)">Aucun membre enregistré.</p>';
+  buildTeamChart();
 }
 
 function buildTeamChart() {
-  if (!S.team.length) return;
-  const canvas = document.getElementById('teamChart');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  if (S.charts.team) S.charts.team.destroy();
-  const colors = S.team.map(m => m.color || '#1E6FD9');
-  S.charts.team = new Chart(ctx, {
-    type: 'bar',
+  const team = JSON.parse(localStorage.getItem('iac_team') || '[]');
+  const ctx = document.getElementById('teamChart');
+  if (!ctx || !team.length) return;
+  const depts = {};
+  team.forEach(m => depts[m.dept] = (depts[m.dept] || 0) + 1);
+  if (window._teamChart) window._teamChart.destroy();
+  window._teamChart = new Chart(ctx, {
+    type: 'doughnut',
     data: {
-      labels: S.team.map(m => m.name.split(' ')[0]),
-      datasets: [{ label: 'Tâches assignées',
-        data: S.team.map(m => S.tasks.filter(t => t.assigneeId===m.id && !t.done).length),
-        backgroundColor: colors.map(c => c + '33'), borderColor: colors, borderWidth: 2, borderRadius: 6 }],
+      labels: Object.keys(depts),
+      datasets: [{ data: Object.values(depts), backgroundColor: ['#3b82f6','#8b5cf6','#10b981','#f59e0b','#ef4444'], borderWidth: 2 }]
     },
-    options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} },
-      scales:{ y:{ beginAtZero:true, ticks:{color:'#94A3B8',stepSize:1}, grid:{color:'rgba(0,0,0,.05)'} },
-               x:{ ticks:{color:'#94A3B8'}, grid:{display:false} } } },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { padding: 16 } } } }
   });
 }
 
-function openAddMemberModal() { openModal('modal-member'); }
+function openAddMemberModal() { openModal('add-member-modal'); }
 
 function addMember() {
-  const name = document.getElementById('member-name-input').value.trim();
-  if (!name) { toast('Nom requis', 'warn'); return; }
-  const post = document.getElementById('member-post-input').value.trim();
-  const colors = ['#8B5CF6','#EC4899','#14B8A6','#F59E0B','#06B6D4'];
-  S.team.push({ id: Date.now(), name, post, role: S.memberRole||'user', color: colors[S.team.length % colors.length] });
-  LS.save('team', S.team);
-  closeModal('modal-member');
-  document.getElementById('member-name-input').value = '';
-  document.getElementById('member-post-input').value = '';
+  const name = document.getElementById('new-member-name').value.trim();
+  const role = document.getElementById('new-member-role').value.trim();
+  const dept = document.getElementById('new-member-dept').value.trim();
+  if (!name || !role) { toast('Nom et rôle requis.', 'error'); return; }
+  const team = JSON.parse(localStorage.getItem('iac_team') || '[]');
+  const colors = ['#3b82f6','#8b5cf6','#10b981','#f59e0b','#ef4444','#ec4899'];
+  const avatar = name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  team.push({ id: Date.now(), name, role, dept: dept||'Non défini', avatar, color: colors[team.length % colors.length] });
+  localStorage.setItem('iac_team', JSON.stringify(team));
+  closeModal('add-member-modal');
+  document.getElementById('new-member-name').value = '';
+  document.getElementById('new-member-role').value = '';
+  document.getElementById('new-member-dept').value = '';
   buildOrganization();
-  // Rebuild chart after DOM update
-  setTimeout(() => buildTeamChart(), 50);
-  const sel = document.getElementById('task-assignee-input');
-  if (sel) sel.innerHTML = '<option value="">Non assigné</option>' +
-    S.team.map(m => `<option value="${m.id}">${m.name}</option>`).join('');
-  toast('Membre ajouté', 'success');
+  toast('Membre ajouté.', 'success');
 }
 
-// ═══════════════════════════════════════════════════════════════
-// AI ASSISTANT — Rule-based copilot using real S data
-// ═══════════════════════════════════════════════════════════════
 function initChat() {
-  S.chatHistory = [];
-  document.getElementById('chat-messages').innerHTML = '';
-  addBotMsg(
-    `Bonjour ! Je suis votre **Copilote IA IAConsult**.\n\n` +
-    `J'ai analysé **${S.orgName||'votre organisation'}** et voici votre situation :\n` +
-    `• Score global : **${S.global}/100** — ${levelInfo(S.level).label}\n` +
-    `• Point fort : **${bestAxis()}**\n` +
-    `• Axe critique : **${worstAxis()}**\n\n` +
-    `Comment puis-je vous aider aujourd'hui ?`
-  );
-  document.getElementById('chat-suggestions').innerHTML = [
-    "Que dois-je faire aujourd'hui ?",
-    'Quels sont mes risques ?',
-    'Quel est mon impact financier ?',
-    'Comment améliorer mes données ?',
-    'Quelles sont mes priorités ?',
-  ].map(s => `<button class="chat-suggestion" onclick="sendSuggestion('${s}')">${s}</button>`).join('');
+  const el = document.getElementById('chat-messages');
+  if (!el || el.children.length > 0) return;
+  const li = levelInfo(S.level);
+  addBotMsg(`Bonjour ! Je suis votre **Copilote IAConsult** 🤖\n\nVotre organisation est au **Niveau ${S.level} (${li.label})** avec un score global de **${S.globalScore}%**.\n\nJe peux vous aider à interpréter vos résultats, prioriser vos actions et construire votre feuille de route. Posez-moi vos questions !`);
 }
 
-function bestAxis()  {
-  const m = {structure:'Structure',donnees:'Données',decision:'Décision',performance:'Performance'};
-  return m[Object.entries(S.scores).sort((a,b)=>b[1]-a[1])[0][0]];
+function bestAxis() {
+  const sc = S.scores || {};
+  return Object.entries(sc).sort((a,b) => b[1]-a[1])[0]?.[0] || 'process';
 }
+
 function worstAxis() {
-  const m = {structure:'Structure',donnees:'Données',decision:'Décision',performance:'Performance'};
-  return m[Object.entries(S.scores).sort((a,b)=>a[1]-b[1])[0][0]];
+  const sc = S.scores || {};
+  return Object.entries(sc).sort((a,b) => a[1]-b[1])[0]?.[0] || 'digital';
 }
 
 function processAI(q) {
-  const ql = q.toLowerCase();
-  const { global, scores, level, secteur, employes, q_tdb, q_kpi, q_vision, q_decision, q_donnees } = S;
-  const lvl = levelInfo(level);
+  const lower = q.toLowerCase();
+  const sc = S.scores || {};
+  const worst = worstAxis();
+  const best = bestAxis();
+  const axisLabels = { process:'Processus', digital:'Digital', rh:'Capital Humain', finance:'Finance' };
 
-  // ── Today / What to do
-  if (/aujourd|maintenant|faire|commencer|début|start/.test(ql)) {
-    const urgent = S.tasks.filter(t => !t.done && t.prio==='urgent').slice(0,3);
-    const list = urgent.length
-      ? urgent.map(t => `• ${t.title}`).join('\n')
-      : '• Centraliser vos sources de données\n• Définir 3 KPI prioritaires\n• Organiser un atelier de diagnostic';
-    return `Vos **3 priorités immédiates** :\n\n${list}\n\nAvec un score de **${global}/100**, l'action la plus impactante est de renforcer **${worstAxis()} (${Math.min(...Object.values(scores))}/100)**. Chaque point gagné ici améliore directement votre prise de décision.`;
+  if (/score|résultat|diagnostic|global/i.test(lower)) {
+    return `Votre score global est de **${S.globalScore}/100** — Niveau ${S.level}.\n\n• **${axisLabels[best]}** : ${sc[best]}% ✅ (point fort)\n• **${axisLabels[worst]}** : ${sc[worst]}% ⚠️ (priorité d'amélioration)\n\nFocalisez-vous sur ${axisLabels[worst]} pour progresser rapidement.`;
   }
-
-  // ── Risks / Problems
-  if (/risque|danger|critique|faible|problème|alert/.test(ql)) {
-    const risks = [];
-    if (scores.donnees < 50)  risks.push(`**Données (${scores.donnees}/100)** — Décisions basées sur l'intuition, risque stratégique élevé`);
-    if (q_tdb === 'non')       risks.push('**Absence de TDB** — Pilotage sans visibilité, impossible de détecter les dérives');
-    if (q_kpi === 'non')       risks.push('**Pas de KPI** — Aucun indicateur pour mesurer la progression');
-    if (q_decision !== 'data') risks.push('**Décisions non data-driven** — Biais cognitifs et incohérences de pilotage');
-    if (!risks.length) return `Votre profil de risque est **maîtrisé** (${global}/100). Continuez à renforcer vos acquis.`;
-    return `**${risks.length} risques majeurs** dans votre organisation :\n\n${risks.join('\n\n')}\n\n**Priorité absolue J+7 :** traiter ${risks[0].split('**')[1]}.`;
+  if (/priorité|commencer|premièr|urgent|action immédiat/i.test(lower)) {
+    return `Vos **3 actions prioritaires** à lancer immédiatement :\n\n1. 🔴 Désigner un responsable de transformation\n2. 🟠 Cartographier vos processus critiques\n3. 🟡 Lancer un audit ${axisLabels[worst].toLowerCase()}\n\nCes actions peuvent être démarrées cette semaine sans budget important.`;
   }
-
-  // ── Priorities / Focus
-  if (/priorité|urgent|important|focus|concentrer/.test(ql)) {
-    const [key, val] = Object.entries(scores).sort((a,b)=>a[1]-b[1])[0];
-    const labels = { structure:'Structure', donnees:'Données', decision:'Décision', performance:'Performance' };
-    return `Priorité n°1 : axe **${labels[key]} (${val}/100)**.\n\nPlan d'attaque :\n• **J+1 à J+7** : Diagnostic précis de l'axe ${labels[key]}\n• **J+7 à J+30** : Implémentation des 3 actions prioritaires\n• **J+30 à J+90** : Consolidation et mesure\n\nObjectif réaliste : **+${Math.min(25,100-val)} points** en 90 jours → score global projeté **${Math.min(100,global+Math.round((100-val)*0.25))}/100**.`;
+  if (/digital|numérique|technologie|outil|logiciel/i.test(lower)) {
+    return `Votre score **Digital** est de **${sc.digital||0}%**.\n\n${(sc.digital||0) < 50 ? '⚠️ Transformation urgente requise. Commencez par un audit des outils existants et identifiez 2-3 solutions prioritaires.' : '✅ Bonne maturité digitale. Concentrez-vous sur l\'optimisation et l\'intégration de vos systèmes.'}`;
   }
-
-  // ── Financial impact
-  if (/financ|coût|perte|argent|gain|impact|xof|fcfa/.test(ql)) {
-    const { totalLoss, gain, opp } = calcImpact();
-    return `**Impact financier estimé** pour ${S.orgName||'votre organisation'} :\n\n• **Perte annuelle** liée à l'inefficacité : ~${fmtXOF(totalLoss)} XOF\n• **Gain potentiel** après implémentation : ~${fmtXOF(gain)} XOF\n• **Opportunité totale** à débloquer : ~${fmtXOF(opp)} XOF\n\nBasé sur ${employes} employés et un score de ${global}/100. Chaque point gagné ≈ ${fmtXOF(Math.round(totalLoss/100))} XOF récupérés par an.`;
+  if (/rh|humain|équipe|talent|compétence|formation/i.test(lower)) {
+    return `Votre score **Capital Humain** est de **${sc.rh||0}%**.\n\n${(sc.rh||0) < 50 ? '⚠️ Il est urgent de structurer un plan de développement des compétences et de revoir vos pratiques RH.' : '✅ Votre gestion des talents est satisfaisante. Pensez à renforcer la culture de l\'amélioration continue.'}`;
   }
-
-  // ── Data
-  if (/données|data|information|base de données/.test(ql)) {
-    return `Score **Données : ${scores.donnees}/100**${scores.donnees<50?' — c\'est votre point le plus critique':' — bon début'}.\n\n${q_donnees==='non'?'Vous n\'avez pas de données fiables. Par où commencer :':'Vos données existent mais sont sous-exploitées :'}\n\n• **J+3** : Auditer toutes vos sources existantes\n• **J+7** : Centraliser dans un outil (Google Sheets, Airtable)\n• **J+30** : Déployer un dashboard BI (Power BI, Metabase)\n\nPotentiel : passer de **${scores.donnees} → ~${Math.min(100,scores.donnees+30)}/100** en 30 jours.`;
+  if (/finance|budget|coût|rentabilité|impact/i.test(lower)) {
+    const impact = calcImpact();
+    return `Votre score **Finance** est de **${sc.finance||0}%**.\n\n💰 **Impact estimé de l'inaction** : ${fmtXOF(impact)} par an.\n\n${(sc.finance||0) < 50 ? 'Priorité : mettre en place un tableau de bord financier et un reporting mensuel.' : 'Votre pilotage financier est solide. Orientez-vous vers une comptabilité analytique plus fine.'}`;
   }
-
-  // ── Dashboard / KPIs
-  if (/dashboard|tableau de bord|tdb|kpi|indicateur/.test(ql)) {
-    if (q_tdb === 'non')
-      return `Vous n'avez **pas de tableau de bord** — c'est une priorité absolue.\n\n**Plan en 3 phases :**\n• **J+7** : Google Sheets avec 5 KPI essentiels (0€)\n• **J+30** : Migration vers Power BI Free ou Metabase\n• **J+90** : Automatisation des mises à jour + alertes\n\n**Budget démarrage : 0€** avec Google Data Studio.`;
-    return `Vous avez un TDB — **excellente base**.\nPour l'optimiser :\n• Ajouter des alertes automatiques sur seuils critiques\n• Intégrer les données en temps réel (pas seulement manuels)\n• Créer des vues par département`;
+  if (/processus|procédure|organisation|flux/i.test(lower)) {
+    return `Votre score **Processus** est de **${sc.process||0}%**.\n\n${(sc.process||0) < 50 ? '⚠️ Vos processus manquent de formalisation. Commencez par cartographier les 5 processus les plus impactants.' : '✅ Bonne maîtrise opérationnelle. Orientez-vous vers l\'amélioration continue (PDCA/Lean).'}`;
   }
-
-  // ── Greeting
-  if (/bonjour|salut|bonsoir|hello/.test(ql)) {
-    return `Bonjour ! Voici un résumé rapide :\n• Score : **${global}/100** — ${lvl.label}\n• Point fort : **${bestAxis()}** (${Math.max(...Object.values(scores))}/100)\n• À améliorer : **${worstAxis()}** (${Math.min(...Object.values(scores))}/100)\n\nQue souhaitez-vous approfondir ?`;
+  if (/niveau|maturité|benchmark|comparaison/i.test(lower)) {
+    const li = levelInfo(S.level);
+    return `Vous êtes au **Niveau ${S.level} — ${li.label}**.\n\n${li.desc}\n\nPour atteindre le Niveau ${Math.min(4, S.level+1)}, vous devez améliorer votre axe le plus faible : **${axisLabels[worst]}** (actuellement ${sc[worst]}%).`;
   }
-
-  // ── Thanks
-  if (/merci|super|parfait|excellent/.test(ql)) {
-    return `Avec plaisir ! La transformation organisationnelle est un **marathon, pas un sprint**. Concentrez-vous sur **1 axe à la fois**, mesurez chaque semaine, et revenez faire une nouvelle analyse dans 30 jours.`;
+  if (/stratégie|plan|feuille de route|roadmap/i.test(lower)) {
+    const strat = getRecommendedStrategy(S);
+    return `La stratégie recommandée pour votre profil est :\n\n**${strat.name}** — ${strat.desc}\n\n📅 **7 jours** : Diagnostic + constitution de l'équipe\n📅 **30 jours** : Plan d'action + quick wins\n📅 **90 jours** : Déploiement + mesure des résultats`;
   }
-
-  // ── Improve / Grow
-  if (/améliorer|progresser|grandir|avancer/.test(ql)) {
-    const [key, val] = Object.entries(scores).sort((a,b)=>a[1]-b[1])[0];
-    const labels = { structure:'Structure', donnees:'Données', decision:'Décision', performance:'Performance' };
-    return `Pour progresser le plus vite : concentrez-vous sur **${labels[key]} (${val}/100)**.\n\n• **Semaine 1** : Diagnostic précis\n• **Semaine 2–4** : 3 actions prioritaires\n• **Mois 2–3** : Consolidation\n\nObjectif : **+${Math.min(25,100-val)} points** → score global **${Math.min(100,global+Math.round((100-val)*0.25))}/100** en 90 jours.`;
+  if (/bonjour|salut|hello|bonsoir/i.test(lower)) {
+    return `Bonjour ! 👋 Comment puis-je vous aider aujourd'hui ?\n\nVous pouvez me poser des questions sur :\n• Vos résultats et scores\n• Vos priorités d'action\n• La stratégie recommandée\n• L'impact financier`;
   }
-
-  // ── Default fallback
-  return `Je comprends votre question sur **"${q}"**.\n\nSituation actuelle :\n• Score : **${global}/100** — ${lvl.label}\n• Fort : ${bestAxis()} (${Math.max(...Object.values(scores))}/100)\n• Faible : ${worstAxis()} (${Math.min(...Object.values(scores))}/100)\n\nEssayez : *"Quels sont mes risques ?"*, *"Que faire aujourd'hui ?"*, ou *"Quel est mon impact financier ?"*`;
+  if (/merci|thank/i.test(lower)) {
+    return `Avec plaisir ! 😊 N'hésitez pas si vous avez d'autres questions. Bonne transformation !`;
+  }
+  return `Je n'ai pas trouvé de réponse spécifique à votre question, mais voici ce que je peux vous dire :\n\n🎯 **Score global** : ${S.globalScore}/100 (Niveau ${S.level})\n⚠️ **Axe prioritaire** : ${axisLabels[worst]} (${sc[worst]}%)\n\nEssayez de me demander : "Quelles sont mes priorités ?" ou "Quel est mon score digital ?"`;
 }
 
-// ─── Chat UI ─────────────────────────────────────────────────
 function addBotMsg(text) {
-  const msgs = document.getElementById('chat-messages');
-  const div  = document.createElement('div');
-  div.className = 'chat-msg bot';
-  const formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
-  div.innerHTML = `<div class="chat-avatar">⚡</div><div class="chat-bubble">${formatted}</div>`;
-  msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
+  const el = document.getElementById('chat-messages');
+  if (!el) return;
+  const div = document.createElement('div');
+  div.className = 'chat-msg bot-msg';
+  div.innerHTML = `<div class="chat-avatar bot-avatar">🤖</div><div class="chat-bubble">${text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')}</div>`;
+  el.appendChild(div);
+  el.scrollTop = el.scrollHeight;
 }
 
 function addUserMsg(text) {
-  const msgs = document.getElementById('chat-messages');
-  const div  = document.createElement('div');
-  div.className = 'chat-msg user';
-  div.innerHTML = `<div class="chat-avatar">👤</div><div class="chat-bubble">${text}</div>`;
-  msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
+  const el = document.getElementById('chat-messages');
+  if (!el) return;
+  const div = document.createElement('div');
+  div.className = 'chat-msg user-msg';
+  div.innerHTML = `<div class="chat-bubble">${text}</div><div class="chat-avatar user-avatar">👤</div>`;
+  el.appendChild(div);
+  el.scrollTop = el.scrollHeight;
 }
 
 function showTyping() {
-  const msgs = document.getElementById('chat-messages');
-  const div  = document.createElement('div');
-  div.className = 'chat-msg bot'; div.id = 'typing-indicator';
-  div.innerHTML = `<div class="chat-avatar">⚡</div>
-    <div class="chat-typing">
-      <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
-    </div>`;
-  msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
-  return div;
+  const el = document.getElementById('chat-messages');
+  if (!el) return;
+  const div = document.createElement('div');
+  div.className = 'chat-msg bot-msg typing-indicator';
+  div.id = 'typing-msg';
+  div.innerHTML = `<div class="chat-avatar bot-avatar">🤖</div><div class="chat-bubble"><span class="typing-dots"><span></span><span></span><span></span></span></div>`;
+  el.appendChild(div);
+  el.scrollTop = el.scrollHeight;
 }
 
 function chatKeydown(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); } }
-function sendSuggestion(txt) { document.getElementById('chat-input').value = txt; sendChat(); }
 
-function sendChat() {
-  const input = document.getElementById('chat-input');
-  const text  = input.value.trim();
-  if (!text) return;
-  input.value = '';
-  addUserMsg(text);
-  const typing = showTyping();
-  setTimeout(() => { typing.remove(); addBotMsg(processAI(text)); }, 900 + Math.random() * 600);
+function sendSuggestion(txt) {
+  const inp = document.getElementById('chat-input');
+  if (inp) inp.value = txt;
+  sendChat();
 }
 
-// ═══════════════════════════════════════════════════════════════
-// MODALS / EXPORT / TOAST / UTILS
-// ═══════════════════════════════════════════════════════════════
-function openModal(id)  { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function sendChat() {
+  const inp = document.getElementById('chat-input');
+  if (!inp) return;
+  const q = inp.value.trim();
+  if (!q) return;
+  inp.value = '';
+  addUserMsg(q);
+  showTyping();
+  setTimeout(() => {
+    const typing = document.getElementById('typing-msg');
+    if (typing) typing.remove();
+    addBotMsg(processAI(q));
+  }, 900 + Math.random() * 600);
+}
+
+function openModal(id) {
+  const m = document.getElementById(id);
+  if (m) { m.style.display = 'flex'; setTimeout(() => m.classList.add('modal-open'), 10); }
+}
+
+function closeModal(id) {
+  const m = document.getElementById(id);
+  if (m) { m.classList.remove('modal-open'); setTimeout(() => m.style.display = 'none', 250); }
+}
 
 function exportPDF() {
-  toast('Génération du rapport PDF…', 'info');
-  setTimeout(() => window.print(), 600);
+  toast('Génération du rapport PDF en cours...', 'info');
+  setTimeout(() => {
+    const content = `IAConsult Decision Engine — Rapport d'Analyse\n${'='.repeat(50)}\n\nEntreprise : ${S.secteur || 'N/A'} | Taille : ${S.taille || 'N/A'}\nObjectif : ${S.objectif || 'N/A'} | Niveau : ${S.level}\nScore Global : ${S.globalScore}/100\n\nScores par axe :\n• Processus : ${(S.scores||{}).process||0}%\n• Digital : ${(S.scores||{}).digital||0}%\n• Capital Humain : ${(S.scores||{}).rh||0}%\n• Finance : ${(S.scores||{}).finance||0}%\n\nIndices stratégiques :\n• Résilience : ${(S.indices||{}).resilience||0}%\n• Innovation : ${(S.indices||{}).innovation||0}%\n• Agilité : ${(S.indices||{}).agilite||0}%\n• Durabilité : ${(S.indices||{}).durabilite||0}%\n• Compétitivité : ${(S.indices||{}).competitivite||0}%\n\nImpact financier estimé : ${fmtXOF(calcImpact())} / an\n\nGénéré par IAConsult Decision Engine — ${new Date().toLocaleDateString('fr-FR')}`;
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `IAConsult-Rapport-${Date.now()}.txt`; a.click();
+    URL.revokeObjectURL(url);
+    toast('Rapport exporté avec succès.', 'success');
+  }, 1200);
 }
 
 function toast(msg, type = 'info') {
   const t = document.getElementById('toast');
-  t.className = 'toast ' + type;
-  document.getElementById('toast-msg').textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3400);
+  if (!t) return;
+  const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
+  t.className = `toast toast-${type} show`;
+  t.innerHTML = `<span class="toast-icon">${icons[type]||'ℹ️'}</span><span>${msg}</span>`;
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-// ═══════════════════════════════════════════════════════════════
-// INIT — App bootstrap
-// ═══════════════════════════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', () => {
-  // Restore persisted data
-  S.analyses = LS.load('analyses', []);
-  S.tasks    = LS.load('tasks',    []);
-  S.team     = LS.load('team',     []);
-  // Show landing page
-  goTo('landing');
-  // Close alert drawer on outside click
-  document.addEventListener('click', e => {
-    const d = document.getElementById('alert-drawer');
-    if (S.alertDrawerOpen && !d.contains(e.target) && !e.target.closest('.alert-bell')) {
-      S.alertDrawerOpen = false; d.classList.remove('open');
-    }
-    // Close modals on overlay click
-    if (e.target.classList.contains('modal-overlay')) e.target.classList.remove('open');
+// ── TEMPLATES ──────────────────────────────────────────────────────────────
+const TEMPLATES = [
+  {
+    id: 'perf-process',
+    name: 'Performance Processus',
+    icon: '⚙️',
+    desc: 'Modèle de cartographie et d\'optimisation des processus clés.',
+    tags: ['processus', 'lean', 'opérations'],
+    level: [1, 2],
+    sections: ['Cartographie AS-IS', 'Analyse des écarts', 'Plan TO-BE', 'KPI de suivi']
+  },
+  {
+    id: 'transfo-digital',
+    name: 'Transformation Digitale',
+    icon: '💻',
+    desc: 'Feuille de route pour accélérer la digitalisation de votre organisation.',
+    tags: ['digital', 'tech', 'innovation'],
+    level: [2, 3],
+    sections: ['Audit digital', 'Sélection outils', 'Plan déploiement', 'Formation']
+  },
+  {
+    id: 'dev-rh',
+    name: 'Développement RH',
+    icon: '👥',
+    desc: 'Plan de développement des compétences et de la culture organisationnelle.',
+    tags: ['rh', 'formation', 'talent'],
+    level: [1, 2, 3],
+    sections: ['Cartographie compétences', 'Plan formation', 'Évaluation performance', 'Rétention']
+  },
+  {
+    id: 'pilotage-fin',
+    name: 'Pilotage Financier',
+    icon: '💰',
+    desc: 'Tableau de bord et outils de contrôle de gestion opérationnel.',
+    tags: ['finance', 'reporting', 'gestion'],
+    level: [1, 2],
+    sections: ['Tableau de bord', 'Budget prévisionnel', 'Analyse des coûts', 'Reporting mensuel']
+  },
+  {
+    id: 'strat-croissance',
+    name: 'Stratégie de Croissance',
+    icon: '🚀',
+    desc: 'Plan stratégique pour accélérer la croissance et conquérir de nouveaux marchés.',
+    tags: ['stratégie', 'croissance', 'marché'],
+    level: [3, 4],
+    sections: ['Analyse marché', 'Positionnement', 'Plan commercial', 'Indicateurs']
+  },
+  {
+    id: 'conduite-chgt',
+    name: 'Conduite du Changement',
+    icon: '🔄',
+    desc: 'Méthodologie complète pour gérer la transformation et l\'adhésion des équipes.',
+    tags: ['changement', 'communication', 'rh'],
+    level: [2, 3, 4],
+    sections: ['Diagnostic culture', 'Plan communication', 'Formation conduite', 'Suivi adoption']
+  },
+  {
+    id: 'audit-risques',
+    name: 'Audit & Gestion des Risques',
+    icon: '🛡️',
+    desc: 'Cartographie et mitigation des risques opérationnels et stratégiques.',
+    tags: ['risque', 'audit', 'conformité'],
+    level: [2, 3, 4],
+    sections: ['Identification risques', 'Évaluation impact', 'Plan mitigation', 'Monitoring']
+  },
+  {
+    id: 'innov-agile',
+    name: 'Innovation & Agilité',
+    icon: '⚡',
+    desc: 'Déploiement de pratiques agiles et mise en place d\'une culture d\'innovation.',
+    tags: ['agile', 'innovation', 'scrum'],
+    level: [3, 4],
+    sections: ['Sprint planning', 'Backlog produit', 'Rétrospective', 'OKR']
+  }
+];
+
+function getRecommendedStrategy(s) {
+  const sc = s.scores || {};
+  const strategies = [
+    { id: 'quick-wins', name: 'Quick Wins & Stabilisation', desc: 'Actions rapides à fort impact pour créer une dynamique positive et sécuriser les bases.', icon: '⚡', match: s.level <= 2 && (s.urgence === 'critique' || s.urgence === 'elevee') },
+    { id: 'transfo-fondation', name: 'Transformation par les Fondations', desc: 'Structuration méthodique des processus et de la gouvernance avant tout déploiement.', icon: '🏗️', match: s.level <= 2 && s.urgence !== 'critique' },
+    { id: 'accel-digital', name: 'Accélération Digitale', desc: 'Levier technologique pour compresser le temps de transformation et gagner en efficacité.', icon: '💻', match: (sc.digital || 0) < 50 && s.level >= 2 },
+    { id: 'excellence-ops', name: 'Excellence Opérationnelle', desc: 'Optimisation Lean/Six Sigma des processus existants pour atteindre le meilleur niveau de performance.', icon: '🎯', match: s.level >= 3 && (sc.process || 0) > 60 },
+    { id: 'leadership-innov', name: 'Leadership par l\'Innovation', desc: 'Positionnement comme leader sectoriel grâce à l\'innovation et à l\'agilité organisationnelle.', icon: '🚀', match: s.level >= 4 }
+  ];
+  return strategies.find(st => st.match) || strategies[1];
+}
+
+function getRecommendedMethod(s) {
+  const methodMap = {
+    performance: 'lean',
+    transformation: 'agile',
+    conformite: 'six-sigma',
+    croissance: 'design-thinking'
+  };
+  return methodMap[s.objectif] || (s.level <= 2 ? 'lean' : 'agile');
+}
+
+function getRecommendedProcedures(s) {
+  const sc = s.scores || {};
+  const procs = [];
+  if ((sc.process || 0) < 60) procs.push('proc-carto');
+  if ((sc.digital || 0) < 60) procs.push('proc-audit-si');
+  if ((sc.rh || 0) < 60) procs.push('proc-entretien');
+  if ((sc.finance || 0) < 60) procs.push('proc-budget');
+  procs.push('proc-pdca');
+  return procs.slice(0, 3);
+}
+
+function getRecommendedTemplate(s) {
+  const sc = s.scores || {};
+  const worst = Object.entries(sc).sort((a,b)=>a[1]-b[1])[0]?.[0] || 'process';
+  const map = { process: 'perf-process', digital: 'transfo-digital', rh: 'dev-rh', finance: 'pilotage-fin' };
+  return TEMPLATES.find(t => t.id === map[worst]) || TEMPLATES[0];
+}
+
+function buildStrategie() {
+  const el = document.getElementById('strategie-content');
+  if (!el) return;
+  const strat = getRecommendedStrategy(S);
+  const recTpl = getRecommendedTemplate(S);
+  const probs = genProblems();
+  const opps = genOpportunities();
+
+  el.innerHTML = `
+    <div class="strat-section">
+      <h3 class="strat-title">🎯 Stratégie Recommandée</h3>
+      <div class="strat-card recommended">
+        <div class="strat-card-header">
+          <span class="strat-icon">${strat.icon}</span>
+          <div><div class="strat-name">${strat.name}</div><div class="strat-badge">Recommandé pour votre profil</div></div>
+        </div>
+        <p class="strat-desc">${strat.desc}</p>
+      </div>
+    </div>
+    <div class="strat-section">
+      <h3 class="strat-title">⚠️ Problèmes Identifiés</h3>
+      <div class="strat-list">
+        ${probs.map(p => `<div class="strat-problem-item">🔴 ${p}</div>`).join('')}
+      </div>
+    </div>
+    <div class="strat-section">
+      <h3 class="strat-title">💡 Opportunités Détectées</h3>
+      <div class="strat-list">
+        ${opps.map(o => `<div class="strat-opp-item">✅ ${o}</div>`).join('')}
+      </div>
+    </div>
+    <div class="strat-section">
+      <h3 class="strat-title">📋 Template Recommandé</h3>
+      <div class="tpl-card">
+        <div class="tpl-icon">${recTpl.icon}</div>
+        <div class="tpl-info">
+          <div class="tpl-name">${recTpl.name}</div>
+          <div class="tpl-desc">${recTpl.desc}</div>
+          <div class="tpl-tags">${recTpl.tags.map(t=>`<span class="tpl-tag">${t}</span>`).join('')}</div>
+          <div class="tpl-sections"><strong>Sections :</strong> ${recTpl.sections.join(' · ')}</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ── METHODS ────────────────────────────────────────────────────────────────
+const METHODS = {
+  lean: {
+    name: 'Lean Management',
+    icon: '⚙️',
+    desc: 'Élimination des gaspillages et optimisation des flux de valeur pour maximiser l\'efficacité opérationnelle.',
+    phases: [
+      { label: 'Définir la valeur', desc: 'Identifier ce qui a de la valeur du point de vue du client.' },
+      { label: 'Cartographier le flux', desc: 'Visualiser tous les flux de valeur et identifier les gaspillages.' },
+      { label: 'Créer le flux', desc: 'Éliminer les interruptions, les délais et les retours en arrière.' },
+      { label: 'Établir le flux tiré', desc: 'Produire uniquement ce que le client demande, quand il le demande.' },
+      { label: 'Viser la perfection', desc: 'Amélioration continue jusqu\'à un flux parfait sans gaspillage.' }
+    ],
+    outils: ['Value Stream Mapping', '5S', 'Kanban', 'SMED', 'Poka-Yoke']
+  },
+  agile: {
+    name: 'Agilité Organisationnelle',
+    icon: '⚡',
+    desc: 'Méthodes itératives et adaptatives pour livrer de la valeur rapidement et s\'adapter aux changements.',
+    phases: [
+      { label: 'Vision & Backlog', desc: 'Définir la vision et prioriser les fonctionnalités dans le backlog.' },
+      { label: 'Sprint Planning', desc: 'Planifier les itérations courtes (1-4 semaines) avec des objectifs clairs.' },
+      { label: 'Exécution & Daily', desc: 'Avancer par petits incréments avec des synchronisations quotidiennes.' },
+      { label: 'Sprint Review', desc: 'Démontrer ce qui a été accompli et recueillir les retours.' },
+      { label: 'Rétrospective', desc: 'Identifier les améliorations de processus pour le prochain sprint.' }
+    ],
+    outils: ['Scrum', 'Kanban', 'OKR', 'SAFe', 'Design Sprint']
+  },
+  'six-sigma': {
+    name: 'Six Sigma',
+    icon: '📊',
+    desc: 'Approche data-driven pour réduire la variabilité des processus et atteindre l\'excellence qualité.',
+    phases: [
+      { label: 'Define', desc: 'Définir le problème, la portée et les objectifs du projet.' },
+      { label: 'Measure', desc: 'Collecter les données et mesurer la performance actuelle du processus.' },
+      { label: 'Analyze', desc: 'Analyser les données pour identifier les causes racines des défauts.' },
+      { label: 'Improve', desc: 'Développer et mettre en œuvre des solutions pour éliminer les causes.' },
+      { label: 'Control', desc: 'Contrôler le nouveau processus et pérenniser les améliorations.' }
+    ],
+    outils: ['DMAIC', 'Ishikawa', 'FMEA', 'Control Charts', 'MSA']
+  },
+  'design-thinking': {
+    name: 'Design Thinking',
+    icon: '🎨',
+    desc: 'Approche centrée sur l\'humain pour innover et résoudre des problèmes complexes de manière créative.',
+    phases: [
+      { label: 'Empathie', desc: 'Comprendre les besoins réels des utilisateurs via l\'observation et l\'entretien.' },
+      { label: 'Définition', desc: 'Synthétiser les insights en un énoncé de problème clair (POV).' },
+      { label: 'Idéation', desc: 'Générer un maximum d\'idées créatives sans jugement.' },
+      { label: 'Prototype', desc: 'Créer des prototypes rapides et peu coûteux des meilleures idées.' },
+      { label: 'Test', desc: 'Tester les prototypes avec les utilisateurs et itérer.' }
+    ],
+    outils: ['Persona', 'Journey Map', 'How Might We', 'Prototype', 'A/B Test']
+  },
+  pdca: {
+    name: 'PDCA (Roue de Deming)',
+    icon: '🔄',
+    desc: 'Cycle d\'amélioration continue en quatre étapes pour résoudre les problèmes et améliorer les processus.',
+    phases: [
+      { label: 'Plan', desc: 'Identifier le problème, analyser les causes et planifier les actions.' },
+      { label: 'Do', desc: 'Mettre en œuvre le plan sur une petite échelle ou en pilote.' },
+      { label: 'Check', desc: 'Mesurer et analyser les résultats par rapport aux objectifs.' },
+      { label: 'Act', desc: 'Standardiser si succès ou recommencer le cycle avec les apprentissages.' }
+    ],
+    outils: ['5 Pourquoi', 'QQOQCCP', 'Histogramme', 'Pareto', 'Brainstorming']
+  }
+};
+
+function buildMethode() {
+  const el = document.getElementById('methode-content');
+  if (!el) return;
+  const recKey = getRecommendedMethod(S);
+
+  el.innerHTML = Object.entries(METHODS).map(([key, m]) => {
+    const isRec = key === recKey;
+    return `<div class="method-card ${isRec ? 'method-recommended' : ''}">
+      <div class="method-header">
+        <span class="method-icon">${m.icon}</span>
+        <div class="method-title-group">
+          <div class="method-name">${m.name}</div>
+          ${isRec ? '<span class="method-badge">✨ Recommandé</span>' : ''}
+        </div>
+      </div>
+      <p class="method-desc">${m.desc}</p>
+      <div class="method-phases">
+        ${m.phases.map((ph,i) => `<div class="method-phase"><span class="phase-num">${i+1}</span><div><strong>${ph.label}</strong><p>${ph.desc}</p></div></div>`).join('')}
+      </div>
+      <div class="method-tools">
+        <strong>Outils clés :</strong>
+        ${m.outils.map(o=>`<span class="method-tool">${o}</span>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── PROCEDURES ─────────────────────────────────────────────────────────────
+const PROCEDURES = {
+  'proc-carto': {
+    name: 'Cartographie des Processus',
+    icon: '🗺️',
+    tags: ['processus', 'diagnostic'],
+    desc: 'Procédure de cartographie et d\'analyse des processus métier existants.',
+    steps: [
+      'Identifier tous les processus de l\'organisation (processus de management, opérationnels, support)',
+      'Prioriser les 5 processus les plus critiques pour l\'activité',
+      'Réaliser des entretiens avec les responsables de chaque processus',
+      'Modéliser les flux actuels (AS-IS) avec un outil de modélisation',
+      'Identifier les dysfonctionnements, gaspillages et points de blocage',
+      'Proposer les flux cibles (TO-BE) et les actions d\'amélioration'
+    ]
+  },
+  'proc-audit-si': {
+    name: 'Audit Système d\'Information',
+    icon: '💻',
+    tags: ['digital', 'audit'],
+    desc: 'Évaluation complète de l\'infrastructure et des applications informatiques.',
+    steps: [
+      'Inventorier tous les outils et systèmes informatiques utilisés',
+      'Évaluer le niveau d\'intégration entre les applications',
+      'Identifier les silos de données et les saisies en double',
+      'Évaluer la sécurité et la conformité des systèmes',
+      'Benchmarker les solutions du marché par rapport aux besoins',
+      'Élaborer un schéma directeur informatique (SDI)'
+    ]
+  },
+  'proc-entretien': {
+    name: 'Entretien Annuel d\'Évaluation',
+    icon: '👥',
+    tags: ['rh', 'performance'],
+    desc: 'Procédure standardisée pour les entretiens annuels de performance et de développement.',
+    steps: [
+      'Préparer le support d\'entretien avec les objectifs de l\'année écoulée',
+      'Envoyer la convocation 15 jours avant avec le questionnaire d\'auto-évaluation',
+      'Réaliser l\'entretien dans un cadre confidentiel et bienveillant',
+      'Évaluer les compétences techniques et comportementales',
+      'Définir les objectifs SMART pour l\'année à venir',
+      'Formaliser un plan de développement individuel (PDI) et signer le document'
+    ]
+  },
+  'proc-budget': {
+    name: 'Procédure Budgétaire',
+    icon: '💰',
+    tags: ['finance', 'planification'],
+    desc: 'Processus d\'élaboration et de suivi du budget annuel.',
+    steps: [
+      'Analyser les réalisations N-1 et identifier les écarts budget/réel',
+      'Définir les hypothèses macro-économiques et les orientations stratégiques',
+      'Diffuser les enveloppes budgétaires prévisionnelles aux responsables',
+      'Consolider les budgets par département et analyser la cohérence',
+      'Présenter et valider le budget global en comité de direction',
+      'Mettre en place le reporting mensuel budget/réel avec analyses d\'écarts'
+    ]
+  },
+  'proc-pdca': {
+    name: 'Cycle PDCA — Amélioration Continue',
+    icon: '🔄',
+    tags: ['processus', 'qualité'],
+    desc: 'Application du cycle Plan-Do-Check-Act pour toute initiative d\'amélioration.',
+    steps: [
+      'PLAN : Définir le problème avec les données et fixer un objectif mesurable',
+      'PLAN : Identifier les causes racines (5 Pourquoi, Ishikawa) et planifier les actions',
+      'DO : Mettre en œuvre le plan sur un périmètre pilote délimité',
+      'CHECK : Mesurer les résultats obtenus et comparer aux objectifs fixés',
+      'ACT : Si succès, standardiser et déployer — si échec, analyser et recommencer',
+      'Documenter les apprentissages et mettre à jour les procédures concernées'
+    ]
+  },
+  'proc-risques': {
+    name: 'Gestion des Risques',
+    icon: '🛡️',
+    tags: ['risque', 'conformité'],
+    desc: 'Procédure d\'identification, évaluation et traitement des risques organisationnels.',
+    steps: [
+      'Identifier tous les risques potentiels par domaine (opérationnel, financier, RH, SI)',
+      'Évaluer chaque risque selon sa probabilité (1-5) et son impact (1-5)',
+      'Calculer le niveau de risque (Probabilité × Impact) et prioriser',
+      'Définir un plan de traitement : accepter, réduire, transférer ou éviter',
+      'Attribuer un responsable et un délai pour chaque action de mitigation',
+      'Réviser la cartographie des risques trimestriellement en comité dédié'
+    ]
+  }
+};
+
+function buildProcedures() {
+  const el = document.getElementById('procedures-content');
+  if (!el) return;
+  const recProcs = getRecommendedProcedures(S);
+
+  el.innerHTML = Object.entries(PROCEDURES).map(([key, p]) => {
+    const isRec = recProcs.includes(key);
+    return `<div class="proc-card" id="${key}">
+      <div class="proc-header" onclick="toggleProc('${key}')">
+        <div class="proc-header-left">
+          <span class="proc-icon">${p.icon}</span>
+          <div>
+            <div class="proc-name">${p.name} ${isRec ? '<span class="proc-rec-badge">✨ Recommandé</span>' : ''}</div>
+            <div class="proc-tags">${p.tags.map(t=>`<span class="proc-tag">${t}</span>`).join('')}</div>
+          </div>
+        </div>
+        <span class="proc-chevron">▼</span>
+      </div>
+      <div class="proc-body" style="display:none">
+        <p class="proc-desc">${p.desc}</p>
+        <ol class="proc-steps">
+          ${p.steps.map(s=>`<li>${s}</li>`).join('')}
+        </ol>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleProc(id) {
+  const card = document.getElementById(id);
+  if (!card) return;
+  const body = card.querySelector('.proc-body');
+  const chevron = card.querySelector('.proc-chevron');
+  const open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  if (chevron) chevron.style.transform = open ? '' : 'rotate(180deg)';
+}
+
+function filterProc(btn, tag) {
+  document.querySelectorAll('.proc-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.proc-card').forEach(card => {
+    const cardKey = card.id;
+    const proc = PROCEDURES[cardKey];
+    if (!proc) return;
+    card.style.display = (tag === 'all' || proc.tags.includes(tag)) ? 'block' : 'none';
   });
+}
+
+function buildBibliotheque() {
+  const el = document.getElementById('biblio-content');
+  if (!el) return;
+  const resources = [
+    { title: 'Guide de la Transformation Digitale en Afrique', type: 'Guide', sector: 'digital', icon: '📘', desc: 'Panorama des enjeux et opportunités de la digitalisation pour les organisations africaines.' },
+    { title: 'Manuel de Lean Management Appliqué', type: 'Manuel', sector: 'processus', icon: '📗', desc: 'Application concrète des principes Lean dans un contexte PME et ETI.' },
+    { title: 'Tableau de Bord RH — Indicateurs Clés', type: 'Template', sector: 'rh', icon: '📊', desc: '35 KPI RH essentiels avec formules de calcul et benchmarks sectoriels.' },
+    { title: 'Guide du Contrôle de Gestion Opérationnel', type: 'Guide', sector: 'finance', icon: '📙', desc: 'Mise en place d\'un système de pilotage financier adapté aux structures en croissance.' },
+    { title: 'Méthodes Agiles pour Managers', type: 'Formation', sector: 'digital', icon: '🎓', desc: 'Introduction aux méthodes agiles (Scrum, Kanban, OKR) pour les équipes non-IT.' },
+    { title: 'Cartographie des Risques — Template Excel', type: 'Template', sector: 'processus', icon: '🗂️', desc: 'Modèle complet de cartographie des risques avec pondération et plan d\'action intégré.' },
+    { title: 'Plan de Développement des Compétences', type: 'Template', sector: 'rh', icon: '📋', desc: 'Structure complète pour construire un PDC annuel conforme aux exigences légales.' },
+    { title: 'Analyse de la Chaîne de Valeur (Porter)', type: 'Guide', sector: 'stratégie', icon: '🔍', desc: 'Application du modèle de Porter pour identifier les avantages concurrentiels.' },
+    { title: 'Business Model Canvas — Guide Complet', type: 'Guide', sector: 'stratégie', icon: '🖼️', desc: 'Utiliser le BMC pour modéliser, innover et transformer votre modèle d\'affaires.' },
+    { title: 'KPI Dashboard — Finance & Opérations', type: 'Template', sector: 'finance', icon: '📈', desc: 'Tableau de bord Excel avec 50+ indicateurs financiers et opérationnels automatisés.' }
+  ];
+
+  el.innerHTML = resources.map(r => `
+    <div class="biblio-card" data-sector="${r.sector}">
+      <div class="biblio-icon">${r.icon}</div>
+      <div class="biblio-info">
+        <div class="biblio-type">${r.type}</div>
+        <div class="biblio-title">${r.title}</div>
+        <div class="biblio-desc">${r.desc}</div>
+      </div>
+      <button class="biblio-btn" onclick="toast('Téléchargement disponible dans la version Pro.','info')">Accéder →</button>
+    </div>`).join('');
+}
+
+function filterLib(btn, sector) {
+  document.querySelectorAll('.lib-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.biblio-card').forEach(card => {
+    card.style.display = (sector === 'all' || card.dataset.sector === sector) ? 'flex' : 'none';
+  });
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  // Restore from localStorage if available
+  const saved = JSON.parse(localStorage.getItem('iac_analyses') || '[]');
+  if (saved.length) {
+    Object.assign(S, saved[0]);
+    if (S.globalScore) {
+      buildAllPages();
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('app-shell').style.display = 'flex';
+      appNav('dashboard');
+      initChat();
+      updateTaskBadge();
+      return;
+    }
+  }
+  goTo('landing');
 });
 </script>
 </body>
 </html>
-
-
-
