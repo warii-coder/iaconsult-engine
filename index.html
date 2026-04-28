@@ -88,7 +88,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--s50);color:var(--
 .wconn.done{background:var(--g5)}
 .wiz-body{flex:1;display:flex;align-items:center;justify-content:center;padding:44px 24px}
 .wiz-card{background:#fff;border-radius:var(--r-2xl);box-shadow:var(--sh-md);width:100%;max-width:660px;padding:44px;border:1px solid var(--s200)}
-.step-header{margin-bottom:36px}
+.step-header{margin-bottom:28px}
 .step-tag{display:inline-block;background:var(--b1);color:var(--b6);font-size:11px;font-weight:700;padding:3px 11px;border-radius:20px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:14px}
 .step-title{font-family:'Sora',sans-serif;font-size:26px;font-weight:800;color:var(--s900);line-height:1.2;margin-bottom:7px}
 .step-desc{font-size:14px;color:var(--s500)}
@@ -235,8 +235,8 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 .kpi-label{font-size:12px;color:var(--s400);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
 .kpi-bar{height:4px;background:var(--s100);border-radius:2px;margin-top:10px;overflow:hidden}
 .kpi-bar-fill{height:100%;border-radius:2px;transition:width 1s ease;width:0}
-.dash-main-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
-.dash-wide-grid{display:grid;grid-template-columns:3fr 2fr;gap:20px;margin-bottom:20px}
+.dash-main-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;align-items:start}
+.dash-wide-grid{display:grid;grid-template-columns:3fr 2fr;gap:20px;margin-bottom:20px;align-items:start}
 
 /* Score circle */
 .score-circle-wrap{position:relative;width:160px;height:160px;margin:0 auto 16px}
@@ -466,10 +466,13 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
 
 /* ─── Wizard inline validation ───────────────────────────────────── */
 .finput.error{border-color:#EF4444!important;box-shadow:0 0 0 4px rgba(239,68,68,.12)!important}
-.opt-group.error .opt-btn{border-color:#EF4444!important}
+.opt-group.error .opt-btn,.opt-grid.error .opt-btn{border-color:#EF4444!important}
+.yn-grid.error .yn-btn{border-color:#EF4444!important}
 .field-error{font-size:12px;color:#EF4444;margin-top:6px;display:none;align-items:center;gap:4px}
 .field-error.show{display:flex}
 .field-error::before{content:'⚠';font-size:11px}
+.ferr{font-size:12px;color:#EF4444;margin-top:5px;display:none;align-items:center;gap:4px}
+.ferr::before{content:'⚠ ';font-size:11px}
 .wiz-step-wrap{display:none;animation:fadeSlideIn .35s ease}
 .wiz-step-wrap.active{display:block}
 @keyframes fadeSlideIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
@@ -558,6 +561,210 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
 .lib-price{font-size:14px;font-weight:700;color:var(--b5)}
 .lib-cta{padding:8px 16px;background:var(--b5);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:opacity .2s}
 .lib-cta:hover{opacity:.85}
+
+/* ─── Monetization layer ────────────────────────────────────── */
+/* Final summary card */
+.mono-summary{background:linear-gradient(135deg,var(--b9) 0%,var(--b7) 100%);border-radius:var(--r-xl);padding:22px 28px;color:#fff;position:relative;overflow:hidden;margin-bottom:16px}
+.mono-summary::before{content:'';position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(30,111,217,.25) 0%,transparent 70%);top:-80px;right:-80px;pointer-events:none}
+.mono-summary-top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:20px;flex-wrap:wrap}
+.mono-summary-score{text-align:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-lg);padding:18px 28px;flex-shrink:0}
+.mono-score-big{font-family:'Sora',sans-serif;font-size:52px;font-weight:900;line-height:1}
+.mono-score-lbl{font-size:12px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
+.mono-summary-body{flex:1;min-width:200px}
+.mono-summary-title{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px}
+.mono-summary-sub{font-size:14px;color:rgba(255,255,255,.55);margin-bottom:16px}
+.mono-points{display:flex;flex-direction:column;gap:8px}
+.mono-point,.mono-point-item{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.85)}
+.mono-point-dot{width:7px;height:7px;border-radius:50%;background:var(--o5);flex-shrink:0}
+.mono-gains{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1)}
+.mono-gain-chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:12px;font-weight:700;padding:10px 16px;border-radius:var(--r-md);display:flex;align-items:center;gap:10px;flex:1;min-width:130px}
+
+/* CTA monetization bar */
+.mono-cta-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.mono-cta-card{background:#fff;border:1px solid var(--s200);border-radius:var(--r-lg);padding:20px;text-align:center;transition:var(--t);display:flex;flex-direction:column;align-items:center;gap:10px}
+.mono-cta-card:hover{transform:translateY(-2px);box-shadow:var(--sh-md)}
+.mono-cta-card.tier-free{border-top:4px solid var(--g5)}
+.mono-cta-card.tier-paid{border-top:4px solid var(--o5)}
+.mono-cta-card.tier-premium{border-top:4px solid #8b5cf6}
+.mono-cta-icon{font-size:26px}
+.mono-cta-title{font-size:14px;font-weight:700;color:var(--s900)}
+.mono-cta-desc{font-size:12px;color:var(--s500);line-height:1.5}
+.mono-cta-btn{padding:9px 18px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:var(--t);width:100%}
+.mono-cta-btn.btn-free{background:var(--g1);color:#166534}
+.mono-cta-btn.btn-free:hover{background:#bbf7d0}
+.mono-cta-btn.btn-paid{background:linear-gradient(135deg,var(--o5),var(--o6));color:#fff;box-shadow:0 4px 14px rgba(249,115,22,.3)}
+.mono-cta-btn.btn-paid:hover{opacity:.9}
+.mono-cta-btn.btn-premium{background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;box-shadow:0 4px 14px rgba(139,92,246,.3)}
+.mono-cta-btn.btn-premium:hover{opacity:.9}
+
+/* Offer section */
+.offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:20px}
+.offer-card{background:#fff;border:1px solid var(--s200);border-radius:var(--r-xl);padding:24px;display:flex;flex-direction:column;gap:12px;transition:var(--t)}
+.offer-card:hover{border-color:var(--b4);box-shadow:var(--sh-md);transform:translateY(-2px)}
+.offer-card-icon{width:48px;height:48px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:4px}
+.offer-card-name{font-size:16px;font-weight:700;color:var(--s900)}
+.offer-card-price{font-size:22px;font-weight:900;color:var(--b5)}
+.offer-card-price span{font-size:13px;font-weight:500;color:var(--s400)}
+.offer-card-desc{font-size:13px;color:var(--s500);line-height:1.6;flex:1}
+.offer-features{list-style:none;padding:0;display:flex;flex-direction:column;gap:6px}
+.offer-features li{font-size:12px;color:var(--s700);display:flex;align-items:center;gap:6px}
+.offer-cta-btn{padding:10px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:var(--t);text-align:center;margin-top:auto}
+
+/* Global CTA strip */
+.global-cta-strip{background:#fff;border:1px solid var(--s200);border-radius:var(--r-lg);padding:22px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.global-cta-text{font-size:15px;font-weight:700;color:var(--s800)}
+.global-cta-text span{display:block;font-size:13px;font-weight:400;color:var(--s500);margin-top:2px}
+.global-cta-btns{display:flex;gap:10px;flex-wrap:wrap}
+
+/* Lead modal */
+.lead-modal-overlay{position:fixed;inset:0;background:rgba(9,30,66,.65);backdrop-filter:blur(8px);z-index:2000;display:none;align-items:center;justify-content:center;padding:24px}
+.lead-modal-overlay.open{display:flex}
+.lead-modal{background:#fff;border-radius:var(--r-2xl);box-shadow:0 24px 80px rgba(0,0,0,.25);width:100%;max-width:480px;overflow:hidden}
+.lead-modal-hero{background:linear-gradient(135deg,var(--b9),var(--b7));padding:28px 32px 24px;text-align:center;position:relative}
+.lead-modal-hero-title{font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:6px}
+.lead-modal-hero-sub{font-size:13px;color:rgba(255,255,255,.6);line-height:1.5}
+.lead-modal-body{padding:28px 32px}
+.lead-modal-score-row{display:flex;gap:10px;margin-bottom:20px}
+.lead-score-chip{flex:1;text-align:center;background:var(--s50);border:1px solid var(--s200);border-radius:var(--r-md);padding:12px 8px}
+.lead-score-chip-val{font-size:20px;font-weight:900;color:var(--b5)}
+.lead-score-chip-lbl{font-size:11px;color:var(--s400);margin-top:2px}
+.lead-submit-btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--b5),var(--b6));color:#fff;border:none;border-radius:var(--r-lg);font-size:15px;font-weight:700;cursor:pointer;transition:var(--t);margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px}
+.lead-submit-btn:hover{opacity:.92;transform:translateY(-1px)}
+.lead-trust{display:flex;align-items:center;justify-content:center;gap:6px;font-size:11px;color:var(--s400);margin-top:14px}
+
+/* Payment modal */
+.payment-modal-body{text-align:center;padding:32px}
+.payment-modal-icon{font-size:48px;margin-bottom:12px}
+.payment-modal-title{font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:var(--s900);margin-bottom:8px}
+.payment-modal-desc{font-size:14px;color:var(--s500);line-height:1.6;margin-bottom:20px}
+
+/* Business estimate widget */
+.biz-estimate{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.biz-card{background:#fff;border-radius:var(--r-lg);border:1px solid var(--s200);padding:18px;text-align:center}
+.biz-card-icon{font-size:24px;margin-bottom:6px}
+.biz-card-val{font-size:22px;font-weight:900;line-height:1;margin-bottom:4px}
+.biz-card-lbl{font-size:12px;color:var(--s500);font-weight:600}
+.biz-card-sub{font-size:11px;color:var(--s400);margin-top:4px}
+
+/* Print styles */
+@media print{
+  body>*:not(#print-report){display:none!important}
+  #print-report{display:block!important;font-family:'Inter',sans-serif;padding:20px;max-width:800px;margin:0 auto}
+  .print-header{text-align:center;border-bottom:2px solid #1E6FD9;padding-bottom:16px;margin-bottom:24px}
+  .print-title{font-size:22px;font-weight:800;color:#0A1628}
+  .print-sub{font-size:13px;color:#64748b;margin-top:4px}
+  .print-section{margin-bottom:20px}
+  .print-section-title{font-size:15px;font-weight:700;color:#1E6FD9;border-bottom:1px solid #e2e8f0;padding-bottom:6px;margin-bottom:10px}
+  .print-row{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:8px}
+  .print-score{font-size:48px;font-weight:900;color:#1E6FD9;text-align:center}
+  .print-axis-bar{margin:4px 0;display:flex;gap:10px;align-items:center;font-size:12px}
+  .print-axis-fill{height:8px;background:#1E6FD9;border-radius:4px}
+  .print-problem{color:#ef4444;font-size:13px;margin:3px 0}
+  .print-reco{color:#333;font-size:13px;margin:4px 0;padding-left:14px}
+  .print-footer{margin-top:32px;text-align:center;font-size:11px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:12px}
+  .print-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+  .print-table th{background:#f1f5f9;padding:7px 10px;text-align:left;font-weight:700;border:1px solid #e2e8f0}
+  .print-table td{padding:7px 10px;border:1px solid #e2e8f0;vertical-align:top}
+  .print-meta{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:20px}
+  .print-meta td{padding:4px 8px;font-size:12px;color:#475569}
+  .print-section h2{font-size:15px;font-weight:700;color:#1E6FD9;border-bottom:1px solid #e2e8f0;padding-bottom:6px;margin-bottom:10px;margin-top:0}
+}
+#print-report{display:none}
+
+@media(max-width:768px){
+  .mono-cta-bar,.offer-grid,.biz-estimate{grid-template-columns:1fr}
+  .mono-summary-top{flex-direction:column}
+}
+
+/* ─── MODULE FORMATIONS ─────────────────────────────────────── */
+.form-filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.form-filter-btn{padding:7px 16px;border-radius:20px;border:1px solid var(--s200);background:#fff;font-size:12px;font-weight:600;color:var(--s600);cursor:pointer;transition:var(--t)}
+.form-filter-btn.active{background:var(--b5);color:#fff;border-color:var(--b5)}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;margin-bottom:24px}
+.form-card{background:#fff;border:1px solid var(--s200);border-radius:var(--r-xl);overflow:hidden;transition:var(--t);display:flex;flex-direction:column}
+.form-card:hover{box-shadow:var(--sh-md);transform:translateY(-2px)}
+.form-card-top{padding:18px 20px 14px;border-bottom:1px solid var(--s100);position:relative}
+.form-card-icon{font-size:28px;margin-bottom:10px}
+.form-card-title{font-family:'Sora',sans-serif;font-size:15px;font-weight:800;color:var(--s900);margin-bottom:4px;line-height:1.3}
+.form-card-level{font-size:11px;font-weight:600;color:var(--s400);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.form-pri-badge{display:inline-flex;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;position:absolute;top:14px;right:14px}
+.form-pri-badge.eleve{background:var(--r1);color:#991B1B}
+.form-pri-badge.moyen{background:var(--y1);color:#92400E}
+.form-pri-badge.faible{background:var(--g1);color:#166534}
+.form-card-body{padding:14px 20px;flex:1;display:flex;flex-direction:column;gap:12px}
+.form-detail-row{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--s700);line-height:1.5}
+.form-detail-row .fd-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+.form-tags{display:flex;flex-wrap:wrap;gap:6px}
+.form-tag{background:var(--b1);color:var(--b6);font-size:11px;font-weight:600;padding:3px 10px;border-radius:12px;border:1px solid rgba(59,130,246,.2)}
+.form-tag.problem{background:var(--r1);color:#991B1B;border-color:rgba(239,68,68,.2)}
+.form-tag.result{background:var(--g1);color:#166534;border-color:rgba(34,197,94,.2)}
+.form-gain-bar{background:var(--g1);border:1px solid rgba(34,197,94,.25);border-radius:var(--r-md);padding:8px 14px;display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.form-gain-label{font-size:11px;color:var(--s500);font-weight:500}
+.form-gain-value{font-size:15px;font-weight:800;color:var(--g5)}
+.form-card-btns{padding:14px 20px;border-top:1px solid var(--s100);display:flex;gap:8px;flex-wrap:wrap}
+.form-btn{flex:1;min-width:80px;padding:9px 10px;border-radius:var(--r-md);font-size:12px;font-weight:700;cursor:pointer;border:none;transition:var(--t);text-align:center}
+.form-btn.primary{background:var(--b5);color:#fff}
+.form-btn.primary:hover{background:var(--b6)}
+.form-btn.outline{background:#fff;border:1.5px solid var(--s200);color:var(--s700)}
+.form-btn.outline:hover{border-color:var(--b4);color:var(--b5)}
+.form-btn.orange{background:var(--o5);color:#fff}
+.form-btn.orange:hover{background:var(--o6)}
+.form-rec-highlight{border-color:var(--b4);box-shadow:0 0 0 2px rgba(59,130,246,.1)}
+
+/* ─── MODULE OUTILS ─────────────────────────────────────────── */
+.tool-filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tool-filter-btn{padding:7px 16px;border-radius:20px;border:1px solid var(--s200);background:#fff;font-size:12px;font-weight:600;color:var(--s600);cursor:pointer;transition:var(--t)}
+.tool-filter-btn.active{background:var(--o5);color:#fff;border-color:var(--o5)}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-bottom:24px}
+.tool-card{background:#fff;border:1px solid var(--s200);border-radius:var(--r-xl);overflow:hidden;transition:var(--t);display:flex;flex-direction:column}
+.tool-card:hover{box-shadow:var(--sh-md);transform:translateY(-2px)}
+.tool-card-preview{height:150px;background:linear-gradient(135deg,var(--b9),var(--b7));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer}
+.tool-preview-img{width:100%;height:100%;object-fit:cover;display:block}
+.tool-preview-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:rgba(255,255,255,.6);font-size:12px;text-align:center}
+.tool-preview-icon{font-size:36px;opacity:.8}
+.tool-preview-overlay{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;opacity:0;transition:var(--t)}
+.tool-card-preview:hover .tool-preview-overlay{opacity:1}
+.tool-preview-overlay-txt{color:#fff;font-size:12px;font-weight:700;padding:7px 14px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px}
+.tool-badge-secteur{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:12px;text-transform:uppercase;letter-spacing:.04em}
+.tool-badge-rec{position:absolute;top:10px;right:10px;background:var(--o5);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:12px}
+.tool-card-body{padding:16px 18px;flex:1;display:flex;flex-direction:column;gap:10px}
+.tool-card-name{font-family:'Sora',sans-serif;font-size:15px;font-weight:800;color:var(--s900)}
+.tool-card-problem{font-size:12px;color:var(--r5);font-weight:600;display:flex;align-items:center;gap:5px}
+.tool-card-desc{font-size:12.5px;color:var(--s500);line-height:1.6;flex:1}
+.tool-card-level{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:12px}
+.tool-card-level.demarrage{background:var(--g1);color:#166534}
+.tool-card-level.standard{background:var(--b1);color:var(--b7)}
+.tool-card-level.avance{background:#F3E8FF;color:#6D28D9}
+.tool-card-btns{padding:12px 18px;border-top:1px solid var(--s100);display:flex;gap:8px;flex-wrap:wrap}
+.tool-btn{flex:1;min-width:70px;padding:8px 8px;border-radius:var(--r-md);font-size:11.5px;font-weight:700;cursor:pointer;border:none;transition:var(--t);text-align:center}
+.tool-btn.primary{background:var(--b5);color:#fff}
+.tool-btn.primary:hover{background:var(--b6)}
+.tool-btn.outline{background:#fff;border:1.5px solid var(--s200);color:var(--s700)}
+.tool-btn.outline:hover{border-color:var(--o4);color:var(--o6)}
+.tool-btn.orange{background:var(--o5);color:#fff}
+.tool-btn.orange:hover{background:var(--o6)}
+.tool-rec-badge{border-color:var(--o4);box-shadow:0 0 0 2px rgba(249,115,22,.1)}
+
+/* Tool detail modal */
+.tool-modal-preview{background:var(--s50);border-radius:var(--r-lg);overflow:hidden;margin-bottom:20px}
+.tool-gallery-main{height:220px;background:linear-gradient(135deg,var(--b9),var(--b7));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.tool-gallery-main img{width:100%;height:100%;object-fit:cover}
+.tool-gallery-thumbs{display:flex;gap:8px;padding:10px;background:var(--s100)}
+.tool-thumb{width:60px;height:45px;border-radius:var(--r-sm);overflow:hidden;cursor:pointer;border:2px solid transparent;transition:var(--t);flex-shrink:0;background:var(--s200);display:flex;align-items:center;justify-content:center;font-size:18px}
+.tool-thumb.active{border-color:var(--b4)}
+.tool-thumb img{width:100%;height:100%;object-fit:cover}
+.tool-upload-zone{border:2px dashed var(--s300);border-radius:var(--r-md);padding:14px;text-align:center;cursor:pointer;transition:var(--t);font-size:12px;color:var(--s400)}
+.tool-upload-zone:hover{border-color:var(--b4);color:var(--b5);background:var(--b1)}
+.tool-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.tool-detail-chip{background:var(--s50);border:1px solid var(--s200);border-radius:var(--r-md);padding:10px 14px}
+.tool-detail-chip-lbl{font-size:11px;color:var(--s400);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.tool-detail-chip-val{font-size:13px;font-weight:700;color:var(--s800)}
+
+@media(max-width:768px){
+  .form-grid{grid-template-columns:1fr}
+  .tool-grid{grid-template-columns:1fr}
+  .tool-detail-grid{grid-template-columns:1fr}
+}
   </style>
 </head>
 <body>
@@ -655,7 +862,23 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
         <label class="flabel">Localisation</label>
         <input type="text" class="finput" id="localisation" placeholder="Ex: Dakar, Sénégal">
       </div>
-      <div class="fg">
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="fg" style="margin-bottom:0">
+          <label class="flabel">Email professionnel <span class="req">*</span></label>
+          <input type="email" class="finput" id="contact-email" placeholder="contact@organisation.com" autocomplete="email"
+                 oninput="showFieldError('contact-email',false)">
+          <div class="field-error" id="err-contact-email">Adresse email valide requise</div>
+        </div>
+        <div class="fg" style="margin-bottom:0">
+          <label class="flabel">Téléphone / WhatsApp <span class="req">*</span></label>
+          <input type="tel" class="finput" id="contact-tel" placeholder="+227 XX XX XX XX" autocomplete="tel"
+                 oninput="showFieldError('contact-tel',false)">
+          <div class="field-error" id="err-contact-tel">Numéro de téléphone requis</div>
+        </div>
+      </div>
+
+      <div class="fg" style="margin-top:14px">
         <label class="flabel">Nom de l'organisation (optionnel)</label>
         <input type="text" class="finput" id="org-name" placeholder="Ex: Fondation Avenir">
       </div>
@@ -925,6 +1148,18 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
       </div>
     </div>
 
+    <div class="sb-section">
+      <div class="sb-section-label">Développement</div>
+      <div class="sb-item" data-sec="formations" onclick="appNav('formations')">
+        <div class="sb-item-icon">🎓</div>
+        <span class="sb-item-text">Formations</span>
+      </div>
+      <div class="sb-item" data-sec="outils" onclick="appNav('outils')">
+        <div class="sb-item-icon">🛠️</div>
+        <span class="sb-item-text">Outils</span>
+      </div>
+    </div>
+
     <div class="sb-footer">
       <div class="sb-org-info">
         <div class="sb-org-avatar">🏢</div>
@@ -947,8 +1182,10 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
         <div class="page-breadcrumb">IAConsult / <strong id="topbar-page">Dashboard</strong></div>
       </div>
       <div class="app-topbar-right">
-        <button class="topbar-btn" onclick="document.getElementById('csv-import-shell').click()">📂 Importer</button>
-        <input type="file" id="csv-import-shell" accept=".csv" style="display:none" onchange="importCSV(this)">
+        <button class="topbar-btn" onclick="document.getElementById('lib-import-input').click()">📂 Importer</button>
+        <input type="file" id="lib-import-input"
+               accept=".pdf,.docx,.doc,.xlsx,.xls,.pptx,.ppt,.csv,.txt,.png,.jpg,.jpeg"
+               style="display:none" onchange="importToLibrary(this)">
         <button class="topbar-btn" onclick="exportPDF()">⬇ Export PDF</button>
         <button class="topbar-btn primary" onclick="restartWizard()">+ Nouvelle analyse</button>
         <div class="alert-bell" onclick="toggleAlertDrawer()" title="Alertes">
@@ -964,6 +1201,9 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
       <section class="app-section active" id="sec-dashboard">
         <div class="sec-title" id="dash-title">Dashboard de pilotage</div>
         <div class="sec-sub" id="dash-sub">Vue synthétique de votre maturité organisationnelle</div>
+        <!-- Monetization: summary card + CTA bar (injected by JS) -->
+        <div id="dash-final-summary"></div>
+        <div id="dash-cta-mono" style="margin-bottom:20px"></div>
         <div class="dash-kpi-row" id="dash-kpis"></div>
         <div class="dash-wide-grid" style="margin-bottom:20px">
           <div class="card card-p" style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">
@@ -981,9 +1221,11 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
               <div class="level-badge" id="dash-level-badge">—</div>
               <div style="font-size:12px;color:var(--s400);max-width:160px;margin:0 auto" id="dash-level-desc">—</div>
             </div>
-            <div style="flex:1;min-width:220px;position:relative">
-              <div class="card-title" style="margin-bottom:12px">Radar de maturité</div>
-              <canvas id="radarChart" height="240"></canvas>
+            <div style="flex:1;min-width:200px;position:relative;max-width:340px">
+              <div class="card-title" style="margin-bottom:10px">Radar de maturité</div>
+              <div style="position:relative;height:190px">
+                <canvas id="radarChart" style="max-height:190px"></canvas>
+              </div>
             </div>
           </div>
           <div class="card card-p">
@@ -1014,6 +1256,9 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
           </div>
           <div class="task-list" id="dash-top-tasks"></div>
         </div>
+        <!-- Monetization: offer section + global CTA (injected by JS) -->
+        <div id="dash-offer-section"></div>
+        <div id="dash-global-cta"></div>
       </section>
 
       <!-- ══ SECTION: RÉSULTATS ══ -->
@@ -1176,6 +1421,41 @@ button:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
         <div class="lib-grid" id="lib-content"></div>
       </section>
 
+      <!-- ══ SECTION: FORMATIONS ══ -->
+      <section class="app-section" id="sec-formations">
+        <div class="sec-title">🎓 Formations recommandées</div>
+        <div class="sec-sub">Programmes sélectionnés selon votre diagnostic — classés par priorité d'impact</div>
+        <div class="form-filter-bar" id="form-filter-bar"></div>
+        <div class="form-grid" id="form-content"></div>
+        <!-- CTA de bas de page -->
+        <div class="global-cta-strip" id="form-cta-strip" style="display:none">
+          <div>
+            <div class="global-cta-text">🎓 Vous souhaitez un programme sur mesure pour votre équipe ?</div>
+            <div style="font-size:12px;color:var(--s500);margin-top:3px">IAConsult propose des formations intra-entreprise adaptées à vos faiblesses détectées</div>
+          </div>
+          <div class="global-cta-btns">
+            <button class="btn-sm solid" onclick="contactIAConsult()">📞 Demander un programme</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ SECTION: OUTILS ══ -->
+      <section class="app-section" id="sec-outils">
+        <div class="sec-title">🛠️ Outils recommandés</div>
+        <div class="sec-sub">Solutions digitales adaptées à votre secteur et vos faiblesses détectées</div>
+        <div class="tool-filter-bar" id="tool-filter-bar"></div>
+        <div class="tool-grid" id="tool-content"></div>
+        <div class="global-cta-strip" id="outils-cta-strip" style="display:none">
+          <div>
+            <div class="global-cta-text">🛠️ Besoin d'une démonstration ou d'un accès personnalisé ?</div>
+            <div style="font-size:12px;color:var(--s500);margin-top:3px">Nos consultants vous montrent l'outil adapté à votre contexte en 30 minutes</div>
+          </div>
+          <div class="global-cta-btns">
+            <button class="btn-sm solid" onclick="contactIAConsult()">📞 Demander une démo</button>
+          </div>
+        </div>
+      </section>
+
     </div><!-- /app-content -->
   </div><!-- /app-main -->
 </div><!-- /app-shell -->
@@ -1320,6 +1600,7 @@ function appNav(sec) {
     'action-plan': "Plan d'action", recommendations: 'Recommandations',
     tracking: 'Suivi de performance', organization: 'Organisation', assistant: 'Assistant IA',
     strategie: 'Stratégie', methode: 'Méthode', procedures: 'Procédures', bibliotheque: 'Bibliothèque',
+    formations: 'Formations recommandées', outils: 'Outils recommandés'
   };
   document.getElementById('topbar-page').textContent = labels[sec] || sec;
   if (sec === 'assistant' && S.chatHistory.length === 0) initChat();
@@ -1329,6 +1610,8 @@ function appNav(sec) {
   if (sec === 'methode') buildMethode();
   if (sec === 'procedures') buildProcedures();
   if (sec === 'bibliotheque') buildBibliotheque();
+  if (sec === 'formations') buildFormations();
+  if (sec === 'outils') buildOutils();
   window.scrollTo({ top: 0 });
 }
 
@@ -1401,34 +1684,100 @@ function upRange(inp) {
 }
 
 function showFieldError(id, show) {
-  const el = document.getElementById('err-' + id);
-  if (el) el.style.display = show ? 'flex' : 'none';
-  const inp = document.getElementById('f-' + id) || document.querySelector(`[data-g="${id}"]`);
-  if (inp) inp.classList.toggle('field-error', show);
+  // Show/hide the inline error message
+  const errEl = document.getElementById('err-' + id);
+  if (errEl) {
+    errEl.style.display = show ? 'flex' : 'none';
+  }
+  // Highlight the container (opt-grid / yn-grid) or the input itself
+  const container = document.getElementById('og-' + id);
+  if (container) {
+    container.classList.toggle('error', show);
+  } else {
+    const inp = document.getElementById(id);
+    if (inp) inp.classList.toggle('error', show);
+  }
 }
 
 function clearFieldErrors(...ids) {
   ids.forEach(id => showFieldError(id, false));
 }
 
-function goStep2() {
+// ── Per-step validators — each checks ONLY its own step's fields ──────────
+
+function validateStep1() {
   let ok = true;
+
   if (!S.secteur) { showFieldError('secteur', true); ok = false; }
-  if (!S.taille) { showFieldError('taille', true); ok = false; }
-  if (!S.maturite) { showFieldError('maturite', true); ok = false; }
-  if (!S.budget) { showFieldError('budget', true); ok = false; }
-  if (!ok) { toast('Veuillez compléter tous les champs obligatoires.', 'error'); return; }
-  clearFieldErrors('secteur','taille','maturite','budget');
+  else             { showFieldError('secteur', false); }
+  if (!S.taille)  { showFieldError('taille',  true); ok = false; }
+  else             { showFieldError('taille',  false); }
+
+  // Email — required, valid format
+  const emailEl = document.getElementById('contact-email');
+  const emailVal = emailEl ? emailEl.value.trim() : '';
+  const emailRe  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailVal || !emailRe.test(emailVal)) { showFieldError('contact-email', true); ok = false; }
+  else                                       { showFieldError('contact-email', false); }
+
+  // Tel — required, any non-empty value accepted
+  const telEl  = document.getElementById('contact-tel');
+  const telVal = telEl ? telEl.value.trim() : '';
+  if (!telVal) { showFieldError('contact-tel', true); ok = false; }
+  else          { showFieldError('contact-tel', false); }
+
+  return ok;
+}
+
+function validateStep2() {
+  let ok = true;
+  const fields = ['q_donnees', 'q_tdb', 'q_decision', 'q_kpi', 'q_vision'];
+  fields.forEach(f => {
+    if (!S[f]) { showFieldError(f, true); ok = false; }
+    else        { showFieldError(f, false); }
+  });
+  return ok;
+}
+
+function validateStep3() {
+  const empEl = document.getElementById('employes');
+  const v = empEl ? parseInt(empEl.value) : 0;
+  if (!v || v < 1) {
+    showFieldError('employes', true);
+    return false;
+  }
+  showFieldError('employes', false);
+  S.employes = v;
+  // Capture optional step-3 fields
+  const ca = document.getElementById('ca');
+  if (ca && ca.value) S.ca = parseInt(ca.value);
+  const proj = document.getElementById('projets');
+  if (proj && proj.value) S.projets = parseInt(proj.value);
+  return true;
+}
+
+function goStep2() {
+  if (!validateStep1()) {
+    toast('Veuillez compléter tous les champs obligatoires (secteur, taille, email, téléphone).', 'error');
+    return;
+  }
+  // Capture step-1 fields into state
+  const loc = document.getElementById('localisation');
+  if (loc) S.localisation = loc.value.trim();
+  const emailEl = document.getElementById('contact-email');
+  if (emailEl) S.contactEmail = emailEl.value.trim();
+  const telEl = document.getElementById('contact-tel');
+  if (telEl) S.contactTel = telEl.value.trim();
+  const orgName = document.getElementById('org-name');
+  if (orgName) S.orgName = orgName.value.trim();
   goTo('step2');
 }
 
 function goStep3() {
-  let ok = true;
-  if (!S.objectif) { showFieldError('objectif', true); ok = false; }
-  if (!S.urgence) { showFieldError('urgence', true); ok = false; }
-  if (!S.delai) { showFieldError('delai', true); ok = false; }
-  if (!ok) { toast('Veuillez compléter tous les champs obligatoires.', 'error'); return; }
-  clearFieldErrors('objectif','urgence','delai');
+  if (!validateStep2()) {
+    toast('Veuillez répondre à toutes les questions du diagnostic.', 'error');
+    return;
+  }
   goTo('step3');
 }
 
@@ -1524,10 +1873,10 @@ function calcImpact() {
 }
 
 function fmtXOF(v) {
-  if (v >= 1000000000) return (v / 1000000000).toFixed(1) + ' Mrd XOF';
-  if (v >= 1000000) return (v / 1000000).toFixed(1) + ' M XOF';
-  if (v >= 1000) return (v / 1000).toFixed(0) + ' K XOF';
-  return v.toLocaleString('fr-FR') + ' XOF';
+  if (v >= 1000000000) return (v / 1000000000).toFixed(1) + ' Mrd FCFA';
+  if (v >= 1000000) return (v / 1000000).toFixed(1) + ' M FCFA';
+  if (v >= 1000) return (v / 1000).toFixed(0) + ' K FCFA';
+  return v.toLocaleString('fr-FR') + ' FCFA';
 }
 
 function buildImpact(containerId) {
@@ -1558,41 +1907,89 @@ function buildImpact(containerId) {
     </div>`;
 }
 
-function startAIAnalysis() {
-  if (!S.secteur || !S.objectif) { toast('Données incomplètes.', 'error'); return; }
-  computeScores();
+// ── Utility ───────────────────────────────────────────────────────────────
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+let _analysisRunning = false;
+
+async function startAIAnalysis() {
+  // Guard: prevent double execution
+  if (_analysisRunning) return;
+
+  // Validate step 3 only (steps 1 & 2 already validated when navigating here)
+  if (!validateStep3()) {
+    toast('Veuillez saisir le nombre d\'employés (champ obligatoire).', 'error');
+    return;
+  }
+
+  _analysisRunning = true;
+
+  // Disable launch button
+  const btn = document.getElementById('btn-analyse');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Analyse en cours…'; }
+
+  // Show analyzing screen and reset all steps to grey
   goTo('analyzing');
-  const steps = ['step-a1','step-a2','step-a3','step-a4','step-a5'];
-  animateSteps(steps, () => {
+  ['as1','as2','as3','as4','as5'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('act', 'done');
+  });
+
+  // Compute scores locally (synchronous, never blocks)
+  computeScores();
+
+  // Safety timeout — if something goes wrong, show dashboard after 8s
+  const safetyTimer = setTimeout(() => {
+    _showDashboard();
+  }, 8000);
+
+  try {
+    // Animate each step sequentially
+    const stepIds = ['as1','as2','as3','as4','as5'];
+    const stepDurations = [800, 900, 850, 950, 750];
+
+    for (let i = 0; i < stepIds.length; i++) {
+      const el = document.getElementById(stepIds[i]);
+      if (el) el.classList.add('act');
+      await wait(stepDurations[i]);
+      if (el) { el.classList.remove('act'); el.classList.add('done'); }
+      await wait(120);
+    }
+
+    clearTimeout(safetyTimer);
+    await wait(400);
+    _showDashboard();
+
+  } catch (err) {
+    clearTimeout(safetyTimer);
+    _showDashboard();
+  }
+}
+
+function _showDashboard() {
+  try {
     saveAnalysis();
     buildAllPages();
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('app-shell').style.display = 'flex';
-    appNav('dashboard');
-    initChat();
-    updateTaskBadge();
-  });
+  } catch (err) {
+    console.warn('buildAllPages error (non-fatal):', err);
+  }
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const shell = document.getElementById('app-shell');
+  if (shell) shell.style.display = 'flex';
+  appNav('dashboard');
+  try { initChat(); } catch(e) {}
+  try { updateTaskBadge(); } catch(e) {}
+  // Re-enable button for future use
+  const btn = document.getElementById('btn-analyse');
+  if (btn) { btn.disabled = false; btn.textContent = '🚀 Lancer l\'analyse IA'; }
+  _analysisRunning = false;
+  // Lead capture — show modal if not yet captured (slight delay for UX)
+  setTimeout(() => { try { showLeadModal(); } catch(e) {} }, 800);
 }
 
 function runAnalysis() { startAIAnalysis(); }
-
-function animateSteps(ids, cb) {
-  let i = 0;
-  const delays = [900, 1200, 1000, 1100, 800];
-  function next() {
-    if (i >= ids.length) { setTimeout(cb, 400); return; }
-    const el = document.getElementById(ids[i]);
-    if (el) {
-      el.classList.add('active');
-      setTimeout(() => {
-        el.classList.add('done');
-        i++;
-        setTimeout(next, 150);
-      }, delays[i] || 1000);
-    } else { i++; next(); }
-  }
-  next();
-}
 
 function saveAnalysis() {
   const analyses = JSON.parse(localStorage.getItem('iac_analyses') || '[]');
@@ -1628,6 +2025,8 @@ function buildAllPages() {
   buildMethode();
   buildProcedures();
   buildBibliotheque();
+  buildFormations();
+  buildOutils();
 }
 
 function buildSidebar() {}
@@ -1637,37 +2036,55 @@ function buildDashboard() {
   const sc = S.scores || {};
   const idx = S.indices || {};
 
+  // KPI cards row
   const kpis = [
-    { label: 'Score Global', value: S.globalScore + '%', icon: '🎯', color: scoreColor(S.globalScore) },
-    { label: 'Niveau', value: 'Niveau ' + S.level, icon: '🏆', color: li.color },
-    { label: 'Résilience', value: (idx.resilience || 0) + '%', icon: '🛡️', color: '#3b82f6' },
-    { label: 'Innovation', value: (idx.innovation || 0) + '%', icon: '💡', color: '#8b5cf6' }
+    { label: 'Score Global',  value: (S.globalScore || 0) + '%', icon: '🎯', color: scoreColor(S.globalScore || 0) },
+    { label: 'Niveau',        value: 'Niveau ' + S.level,         icon: '🏆', color: li.color },
+    { label: 'Résilience',    value: (idx.resilience || 0) + '%', icon: '🛡️', color: '#3b82f6' },
+    { label: 'Innovation',    value: (idx.innovation  || 0) + '%', icon: '💡', color: '#8b5cf6' }
   ];
+  const kpisEl = document.getElementById('dash-kpis');
+  if (kpisEl) {
+    kpisEl.innerHTML = kpis.map(k => `
+      <div class="kpi-card">
+        <div class="kpi-icon">${k.icon}</div>
+        <div class="kpi-body">
+          <div class="kpi-value" style="color:${k.color}">${k.value}</div>
+          <div class="kpi-label">${k.label}</div>
+        </div>
+      </div>`).join('');
+  }
 
-  const kpiHtml = kpis.map(k => `
-    <div class="kpi-card">
-      <div class="kpi-icon">${k.icon}</div>
-      <div class="kpi-body">
-        <div class="kpi-value" style="color:${k.color}">${k.value}</div>
-        <div class="kpi-label">${k.label}</div>
-      </div>
-    </div>`).join('');
+  // Score circle — circumference ≈ 452 (r=72, from CSS stroke-dasharray:452)
+  const scFill = document.getElementById('sc-fill');
+  if (scFill) {
+    scFill.style.stroke = scoreColor(S.globalScore || 0);
+    scFill.style.strokeDashoffset = Math.round(452 * (1 - (S.globalScore || 0) / 100));
+  }
+  const scNum = document.getElementById('sc-num');
+  if (scNum) { scNum.textContent = S.globalScore || 0; scNum.style.color = scoreColor(S.globalScore || 0); }
 
-  const axisHtml = ['process','digital','rh','finance'].map(a => {
-    const labels = { process: 'Processus', digital: 'Digital', rh: 'Capital Humain', finance: 'Finance' };
-    const v = sc[a] || 0;
-    return `<div class="axis-bar-item">
-      <div class="axis-bar-label"><span>${labels[a]}</span><span style="color:${scoreColor(v)};font-weight:700">${v}%</span></div>
-      <div class="axis-bar-track"><div class="axis-bar-fill" style="width:${v}%;background:${scoreColor(v)}"></div></div>
-    </div>`;
-  }).join('');
+  // Level badge + description
+  const badge = document.getElementById('dash-level-badge');
+  if (badge) {
+    badge.textContent = `Niveau ${S.level} — ${li.label}`;
+    Object.assign(badge.style, { background: li.color + '20', color: li.color, border: `1px solid ${li.color}40` });
+  }
+  const desc = document.getElementById('dash-level-desc');
+  if (desc) desc.textContent = li.desc;
 
-  document.getElementById('dash-kpis').innerHTML = kpiHtml;
-  document.getElementById('dash-axes').innerHTML = axisHtml;
-  document.getElementById('dash-level-badge').innerHTML = `<span class="level-badge" style="background:${li.color}20;color:${li.color};border-color:${li.color}40">Niveau ${S.level} — ${li.label}</span><p>${li.desc}</p>`;
+  // Sub-components (each guards its own element)
+  buildRadar();
+  buildIndices();
+  buildAlerts();
   buildImpact('dash-impact');
   buildDashTopTasks();
-  buildRadar();
+
+  // Monetization layer (containers injected in sec-dashboard)
+  try { renderFinalSummary(); }      catch(e) {}
+  try { renderMonetizationCTA(); }   catch(e) {}
+  try { renderOfferSection(); }      catch(e) {}
+  try { renderGlobalCTA(); }         catch(e) {}
 }
 
 function buildRadar() {
@@ -1692,7 +2109,7 @@ function buildRadar() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      scales: { r: { min: 0, max: 100, ticks: { stepSize: 25, font: { size: 11 } }, grid: { color: '#e2e8f0' }, pointLabels: { font: { size: 13, weight: '600' } } } },
+      scales: { r: { min: 0, max: 100, ticks: { stepSize: 25, font: { size: 10 } }, grid: { color: '#e2e8f0' }, pointLabels: { font: { size: 11, weight: '600' } } } },
       plugins: { legend: { display: false } }
     }
   });
@@ -1701,21 +2118,24 @@ function buildRadar() {
 function buildIndices() {
   const idx = S.indices || {};
   const items = [
-    { key: 'resilience', label: 'Indice de Résilience', icon: '🛡️', desc: 'Capacité à absorber les chocs et à se relever rapidement.' },
-    { key: 'innovation', label: 'Indice d\'Innovation', icon: '💡', desc: 'Propension à générer et adopter de nouvelles idées.' },
-    { key: 'agilite', label: 'Indice d\'Agilité', icon: '⚡', desc: 'Vitesse d\'adaptation aux changements du marché.' },
-    { key: 'durabilite', label: 'Indice de Durabilité', icon: '🌱', desc: 'Ancrage des pratiques responsables et pérennes.' },
-    { key: 'competitivite', label: 'Indice de Compétitivité', icon: '🏆', desc: 'Positionnement concurrentiel global.' }
+    { key: 'resilience',    label: 'Résilience',    icon: '🛡️' },
+    { key: 'innovation',    label: 'Innovation',    icon: '💡' },
+    { key: 'agilite',       label: 'Agilité',       icon: '⚡' },
+    { key: 'durabilite',    label: 'Durabilité',    icon: '🌱' },
+    { key: 'competitivite', label: 'Compétitivité', icon: '🏆' }
   ];
-  const el = document.getElementById('indices-grid');
+  const el = document.getElementById('dash-indices');
   if (!el) return;
   el.innerHTML = items.map(it => {
     const v = idx[it.key] || 0;
-    return `<div class="index-card">
-      <div class="index-header"><span class="index-icon">${it.icon}</span><span class="index-label">${it.label}</span></div>
-      <div class="index-score" style="color:${scoreColor(v)}">${v}<span>/100</span></div>
-      <div class="index-bar"><div class="index-fill" style="width:${v}%;background:${scoreColor(v)}"></div></div>
-      <p class="index-desc">${it.desc}</p>
+    const col = scoreColor(v);
+    return `<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--s100)">
+      <span style="font-size:16px;width:20px;text-align:center">${it.icon}</span>
+      <span style="flex:1;font-size:13px;font-weight:500;color:var(--s700)">${it.label}</span>
+      <div style="width:80px;height:6px;background:var(--s100);border-radius:3px;overflow:hidden">
+        <div style="width:${v}%;height:100%;background:${col};border-radius:3px"></div>
+      </div>
+      <span style="font-size:13px;font-weight:700;color:${col};min-width:36px;text-align:right">${v}%</span>
     </div>`;
   }).join('');
 }
@@ -1735,39 +2155,53 @@ function buildDashTopTasks() {
 function buildResults() {
   const sc = S.scores || {};
   const li = levelInfo(S.level);
-  const el = document.getElementById('results-content');
-  if (!el) return;
 
-  const axes = [
-    { key: 'process', label: 'Processus & Organisation', icon: '⚙️' },
-    { key: 'digital', label: 'Transformation Digitale', icon: '💻' },
-    { key: 'rh', label: 'Capital Humain', icon: '👥' },
-    { key: 'finance', label: 'Performance Financière', icon: '💰' }
-  ];
+  // Subtitle
+  const subEl = document.getElementById('res-sub');
+  if (subEl) subEl.textContent = `Niveau ${S.level} — ${li.label} — Score global : ${S.globalScore || 0}/100`;
 
-  el.innerHTML = `
-    <div class="results-hero">
-      <div class="results-score-ring" style="--score:${S.globalScore};--color:${scoreColor(S.globalScore)}">
-        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#e2e8f0" stroke-width="10"/><circle cx="60" cy="60" r="52" fill="none" stroke="${scoreColor(S.globalScore)}" stroke-width="10" stroke-dasharray="${2*Math.PI*52}" stroke-dashoffset="${2*Math.PI*52*(1-S.globalScore/100)}" stroke-linecap="round" transform="rotate(-90 60 60)"/></svg>
-        <div class="results-score-inner"><span class="results-score-val">${S.globalScore}</span><span class="results-score-unit">/ 100</span></div>
-      </div>
-      <div class="results-hero-info">
-        <div class="level-badge" style="background:${li.color}20;color:${li.color};border-color:${li.color}40;display:inline-flex;margin-bottom:.5rem">Niveau ${S.level} — ${li.label}</div>
-        <p>${li.desc}</p>
-        <div class="results-problems">${genProblems().slice(0,2).map(p=>`<div class="problem-chip">⚠️ ${p}</div>`).join('')}</div>
-      </div>
-    </div>
-    <div class="axes-detail">
-      ${axes.map(a => {
-        const v = sc[a.key] || 0;
-        return `<div class="axis-detail-card">
-          <div class="axis-detail-header"><span class="axis-detail-icon">${a.icon}</span><span class="axis-detail-label">${a.label}</span><span class="axis-detail-score" style="color:${scoreColor(v)}">${v}%</span></div>
-          <div class="axis-bar-track"><div class="axis-bar-fill" style="width:${v}%;background:${scoreColor(v)}"></div></div>
-          <p class="axis-detail-desc">${getAxisDesc(a.key, v)}</p>
-        </div>`;
-      }).join('')}
-    </div>`;
-  buildImpact('results-impact');
+  // 4-axis cards
+  const axesEl = document.getElementById('axes-cards');
+  if (axesEl) {
+    const axes = [
+      { key: 'process', label: 'Processus & Organisation', icon: '⚙️' },
+      { key: 'digital', label: 'Transformation Digitale',  icon: '💻' },
+      { key: 'rh',      label: 'Capital Humain',           icon: '👥' },
+      { key: 'finance', label: 'Performance Financière',   icon: '💰' }
+    ];
+    axesEl.innerHTML = axes.map(a => {
+      const v = sc[a.key] || 0;
+      const col = scoreColor(v);
+      return `<div class="card card-p" style="text-align:center">
+        <div style="font-size:26px;margin-bottom:8px">${a.icon}</div>
+        <div style="font-size:32px;font-weight:900;color:${col};line-height:1">${v}%</div>
+        <div style="font-size:13px;font-weight:600;color:var(--s700);margin:6px 0">${a.label}</div>
+        <div style="height:6px;background:var(--s100);border-radius:3px;margin:8px 0;overflow:hidden">
+          <div style="width:${v}%;height:100%;background:${col};border-radius:3px;transition:width .8s ease"></div>
+        </div>
+        <div style="font-size:11px;color:var(--s500);line-height:1.5">${getAxisDesc(a.key, v)}</div>
+      </div>`;
+    }).join('');
+  }
+
+  // Problems
+  const probEl = document.getElementById('res-problems');
+  if (probEl) {
+    probEl.innerHTML = genProblems().map(p =>
+      `<div class="tl-item"><span style="color:#ef4444;font-size:14px">⚠</span><span>${p}</span></div>`
+    ).join('');
+  }
+
+  // Opportunities
+  const oppEl = document.getElementById('res-opportunities');
+  if (oppEl) {
+    oppEl.innerHTML = genOpportunities().map(o =>
+      `<div class="tl-item"><span style="color:#22c55e;font-size:14px">✓</span><span>${o}</span></div>`
+    ).join('');
+  }
+
+  // Impact
+  buildImpact('res-impact');
 }
 
 function getAxisDesc(axis, v) {
@@ -1837,34 +2271,40 @@ function genTasks() {
 }
 
 function buildRecommendations() {
-  const el = document.getElementById('reco-content');
+  const el = document.getElementById('tl-grid');
   if (!el) return;
   const opps = genOpportunities();
   const phases = [
     { phase: '7 jours', icon: '⚡', color: '#ef4444', label: 'Actions immédiates', items: [
       'Partager ce rapport avec votre comité de direction',
       'Désigner un responsable de transformation',
-      opps[0] || 'Lancer un atelier de priorisation'
+      opps[0] || 'Lancer un atelier de priorisation',
+      'Répertorier les processus à risque immédiat'
     ]},
     { phase: '30 jours', icon: '🎯', color: '#f97316', label: 'Actions à court terme', items: [
       'Cartographier les 5 processus les plus critiques',
       opps[1] || 'Structurer un plan de formation',
-      'Mettre en place des indicateurs de suivi hebdomadaires'
+      'Mettre en place des indicateurs de suivi hebdomadaires',
+      'Sélectionner et tester un premier outil digital'
     ]},
     { phase: '90 jours', icon: '🚀', color: '#3b82f6', label: 'Transformation structurelle', items: [
       'Déployer la solution digitale prioritaire',
       opps[2] || 'Consolider la gouvernance de transformation',
-      'Réaliser un bilan et ajuster la stratégie'
+      'Réaliser un bilan et ajuster la stratégie',
+      'Lancer un programme de formation à grande échelle'
     ]}
   ];
 
   el.innerHTML = phases.map(ph => `
-    <div class="reco-phase-card">
-      <div class="reco-phase-header" style="border-left:4px solid ${ph.color}">
-        <span class="reco-phase-icon">${ph.icon}</span>
-        <div><div class="reco-phase-title" style="color:${ph.color}">${ph.phase}</div><div class="reco-phase-label">${ph.label}</div></div>
+    <div class="tl-card">
+      <div class="tl-head" style="border-top:4px solid ${ph.color}">
+        <div style="font-size:24px;margin-bottom:6px">${ph.icon}</div>
+        <div style="font-size:17px;font-weight:800;color:${ph.color};margin-bottom:2px">${ph.phase}</div>
+        <div style="font-size:12px;font-weight:600;color:var(--s500);text-transform:uppercase;letter-spacing:.04em">${ph.label}</div>
       </div>
-      <ul class="reco-list">${ph.items.map(i => `<li>${i}</li>`).join('')}</ul>
+      <div class="tl-body">
+        ${ph.items.map(i => `<div class="tl-item"><span style="color:${ph.color};font-size:14px;flex-shrink:0">→</span><span>${i}</span></div>`).join('')}
+      </div>
     </div>`).join('');
 }
 
@@ -1875,16 +2315,16 @@ function buildActionPlan() {
 
 function renderTasks(filter) {
   const tasks = JSON.parse(localStorage.getItem('iac_tasks') || '[]');
-  const el = document.getElementById('tasks-list');
+  const el = document.getElementById('task-list');   // HTML id is task-list (not tasks-list)
   if (!el) return;
   let filtered = tasks;
-  if (filter === '7j') filtered = tasks.filter(t => t.phase === '7j');
-  else if (filter === '30j') filtered = tasks.filter(t => t.phase === '30j');
-  else if (filter === '90j') filtered = tasks.filter(t => t.phase === '90j');
-  else if (filter === 'done') filtered = tasks.filter(t => t.done);
+  if      (filter === 'urgent')    filtered = tasks.filter(t => !t.done && (t.priority === 'critique' || t.priority === 'haute'));
+  else if (filter === 'important') filtered = tasks.filter(t => !t.done && t.priority === 'moyenne');
+  else if (filter === 'done')      filtered = tasks.filter(t => t.done);
+  else                             filtered = tasks; // 'all'
 
   if (!filtered.length) {
-    el.innerHTML = '<div class="empty-state"><div class="empty-icon">✅</div><p>Aucune tâche dans cette catégorie.</p></div>';
+    el.innerHTML = '<div style="text-align:center;padding:32px;color:var(--s400)"><div style="font-size:32px;margin-bottom:8px">✅</div><p>Aucune tâche dans cette catégorie.</p></div>';
     return;
   }
 
@@ -1907,7 +2347,7 @@ function renderTasks(filter) {
 
 function priLabel(p) {
   const m = { critique: '🔴 Critique', haute: '🟠 Haute', moyenne: '🟡 Moyenne', faible: '🟢 Faible' };
-  return m[p] || p;
+  return m[p] || (p && p !== 'undefined' ? p : '🔵 Normal');
 }
 
 function toggleTask(id, e) {
@@ -1915,7 +2355,7 @@ function toggleTask(id, e) {
   const tasks = JSON.parse(localStorage.getItem('iac_tasks') || '[]');
   const t = tasks.find(t => String(t.id) === String(id));
   if (t) { t.done = !t.done; localStorage.setItem('iac_tasks', JSON.stringify(tasks)); }
-  const activeBtn = document.querySelector('.task-filter-btn.active');
+  const activeBtn = document.querySelector('.ap-tab.act');   // HTML class is ap-tab, active marker is act
   renderTasks(activeBtn ? activeBtn.dataset.filter : 'all');
   updateTaskCounts();
   updateTaskBadge();
@@ -1928,7 +2368,7 @@ function deleteTask(id, e) {
   let tasks = JSON.parse(localStorage.getItem('iac_tasks') || '[]');
   tasks = tasks.filter(t => String(t.id) !== String(id));
   localStorage.setItem('iac_tasks', JSON.stringify(tasks));
-  const activeBtn = document.querySelector('.task-filter-btn.active');
+  const activeBtn = document.querySelector('.ap-tab.act');
   renderTasks(activeBtn ? activeBtn.dataset.filter : 'all');
   updateTaskCounts();
   updateTaskBadge();
@@ -1936,23 +2376,28 @@ function deleteTask(id, e) {
 }
 
 function filterTasks(btn) {
-  document.querySelectorAll('.task-filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  document.querySelectorAll('.ap-tab').forEach(b => b.classList.remove('act'));
+  btn.classList.add('act');
   renderTasks(btn.dataset.filter);
 }
 
 function updateTaskCounts() {
   const tasks = JSON.parse(localStorage.getItem('iac_tasks') || '[]');
-  const total = tasks.length;
-  const done = tasks.filter(t => t.done).length;
-  const el = document.getElementById('task-progress');
-  if (el) el.innerHTML = `<span>${done}/${total} tâches complétées</span><div class="task-prog-bar"><div style="width:${total?Math.round(done/total*100):0}%;background:var(--g5);height:6px;border-radius:3px"></div></div>`;
+  const urgent    = tasks.filter(t => !t.done && (t.priority === 'critique' || t.priority === 'haute')).length;
+  const important = tasks.filter(t => !t.done && t.priority === 'moyenne').length;
+  const done      = tasks.filter(t => t.done).length;
+  const all       = tasks.length;
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('cnt-all', all);
+  set('cnt-urgent', urgent);
+  set('cnt-important', important);
+  set('cnt-done', done);
 }
 
 function updateTaskBadge() {
   const tasks = JSON.parse(localStorage.getItem('iac_tasks') || '[]');
   const pending = tasks.filter(t => !t.done).length;
-  const badge = document.getElementById('task-badge');
+  const badge = document.getElementById('badge-tasks');   // HTML id is badge-tasks
   if (badge) { badge.textContent = pending; badge.style.display = pending ? 'flex' : 'none'; }
 }
 
@@ -1993,31 +2438,34 @@ function genAlerts() {
 }
 
 function buildAlerts() {
-  const el = document.getElementById('alerts-list');
-  if (!el) return;
   const alerts = genAlerts();
-  el.innerHTML = alerts.map(a => `
-    <div class="alert-card alert-${a.type}">
-      <div class="alert-icon">${a.icon}</div>
-      <div class="alert-body">
-        <div class="alert-title">${a.title}</div>
-        <div class="alert-desc">${a.desc}</div>
-        <div class="alert-date">${a.date}</div>
-      </div>
-    </div>`).join('');
-  const badge = document.getElementById('alert-badge');
-  if (badge) { const n = alerts.filter(a=>a.type==='critique'||a.type==='warning').length; badge.textContent = n; badge.style.display = n ? 'flex' : 'none'; }
+  // Dashboard uses id="dash-alerts" for mini alert list
+  const dashEl = document.getElementById('dash-alerts');
+  if (dashEl) {
+    dashEl.innerHTML = alerts.slice(0, 4).map(a => `
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--s100)">
+        <span style="font-size:16px;flex-shrink:0">${a.icon}</span>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:600;color:var(--s800);line-height:1.3">${a.title}</div>
+          <div style="font-size:11px;color:var(--s500);margin-top:2px">${a.date}</div>
+        </div>
+      </div>`).join('') || '<p style="color:var(--s400);font-size:13px;padding:8px 0">Aucune alerte active.</p>';
+  }
 }
 
 function buildTrackingCharts() {
   const months = ['Jan','Fév','Mar','Avr','Mai','Jun'];
   const base = S.globalScore || 50;
-  const progression = months.map((_, i) => Math.min(100, Math.round(base + i * ((100 - base) / 8) + (Math.random() * 6 - 3))));
+  const sc = S.scores || {};
+  const progression = months.map((_, i) =>
+    Math.min(100, Math.round(base + i * ((100 - base) / 8) + (Math.random() * 6 - 3)))
+  );
 
-  const ctx1 = document.getElementById('progressChart');
+  // Évolution du score global → id="evolChart"
+  const ctx1 = document.getElementById('evolChart');
   if (ctx1) {
-    if (window._progressChart) window._progressChart.destroy();
-    window._progressChart = new Chart(ctx1, {
+    if (window._evolChart) window._evolChart.destroy();
+    window._evolChart = new Chart(ctx1, {
       type: 'line',
       data: {
         labels: months,
@@ -2037,29 +2485,69 @@ function buildTrackingCharts() {
     });
   }
 
-  const ctx2 = document.getElementById('axisChart');
+  // Projection 90 jours → id="projChart"
+  const ctx2 = document.getElementById('projChart');
   if (ctx2) {
-    if (window._axisChart) window._axisChart.destroy();
-    const sc = S.scores || {};
-    window._axisChart = new Chart(ctx2, {
+    if (window._projChart) window._projChart.destroy();
+    const projected = [sc.process, sc.digital, sc.rh, sc.finance].map(v => Math.min(100, (v||0) + 20));
+    window._projChart = new Chart(ctx2, {
       type: 'bar',
       data: {
         labels: ['Processus', 'Digital', 'Capital Humain', 'Finance'],
-        datasets: [{
-          label: 'Score par axe',
-          data: [sc.process||0, sc.digital||0, sc.rh||0, sc.finance||0],
-          backgroundColor: ['rgba(59,130,246,0.7)','rgba(139,92,246,0.7)','rgba(16,185,129,0.7)','rgba(245,158,11,0.7)'],
-          borderRadius: 6
-        }]
+        datasets: [
+          { label: 'Actuel',  data: [sc.process||0, sc.digital||0, sc.rh||0, sc.finance||0], backgroundColor: 'rgba(59,130,246,0.6)', borderRadius: 4 },
+          { label: 'Projeté', data: projected, backgroundColor: 'rgba(34,197,94,0.6)', borderRadius: 4 }
+        ]
       },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0, max: 100 } } }
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { min: 0, max: 100 } } }
     });
+  }
+
+  // Historique des analyses → id="hist-tbody"
+  const tbody = document.getElementById('hist-tbody');
+  if (tbody) {
+    const analyses = JSON.parse(localStorage.getItem('iac_analyses') || '[]');
+    tbody.innerHTML = analyses.map((a, idx) => {
+      const li = levelInfo(a.level || 1);
+      const sc2 = a.scores || {};
+      const prev = analyses[idx + 1];
+      const evol = prev ? (a.globalScore || 0) - (prev.globalScore || 0) : null;
+      return `<tr>
+        <td>${new Date(a.savedAt || Date.now()).toLocaleDateString('fr-FR')}</td>
+        <td>${a.orgName || a.secteur || '—'}</td>
+        <td style="font-weight:700;color:${scoreColor(a.globalScore||0)}">${a.globalScore||0}/100</td>
+        <td><span style="color:${li.color};font-weight:600">Niv.&nbsp;${a.level||1}</span></td>
+        <td>${sc2.process||0}%</td>
+        <td>${sc2.digital||0}%</td>
+        <td>${sc2.rh||0}%</td>
+        <td>${sc2.finance||0}%</td>
+        <td>${evol === null ? '—' : (evol > 0 ? `<span style="color:#22c55e">+${evol}</span>` : `<span style="color:#ef4444">${evol}</span>`)}</td>
+      </tr>`;
+    }).join('') || '<tr><td colspan="9" style="text-align:center;color:var(--s400);padding:16px">Aucun historique disponible.</td></tr>';
   }
 }
 
 function buildOrganization() {
-  const team = JSON.parse(localStorage.getItem('iac_team') || '[]');
-  const el = document.getElementById('team-list');
+  const team  = JSON.parse(localStorage.getItem('iac_team')  || '[]');
+  const tasks = JSON.parse(localStorage.getItem('iac_tasks') || '[]');
+
+  // Org stats → id="org-stats"
+  const statsEl = document.getElementById('org-stats');
+  if (statsEl) {
+    statsEl.innerHTML = [
+      { label: 'Membres équipe',  value: team.length,                       icon: '👥' },
+      { label: 'Tâches totales',  value: tasks.length,                      icon: '✅' },
+      { label: 'En cours',        value: tasks.filter(t => !t.done).length, icon: '⏳' }
+    ].map(s => `
+      <div class="card card-p" style="text-align:center">
+        <div style="font-size:24px;margin-bottom:6px">${s.icon}</div>
+        <div style="font-size:30px;font-weight:900;color:var(--b5);line-height:1">${s.value}</div>
+        <div style="font-size:12px;color:var(--s500);font-weight:600;margin-top:4px">${s.label}</div>
+      </div>`).join('');
+  }
+
+  // Team cards → id="team-grid"
+  const el = document.getElementById('team-grid');
   if (!el) return;
   el.innerHTML = team.map(m => `
     <div class="member-card">
@@ -2069,7 +2557,8 @@ function buildOrganization() {
         <div class="member-role">${m.role}</div>
         <div class="member-dept">${m.dept}</div>
       </div>
-    </div>`).join('') || '<p style="color:var(--s500)">Aucun membre enregistré.</p>';
+    </div>`).join('') || '<p style="color:var(--s500);padding:16px">Aucun membre enregistré.</p>';
+
   buildTeamChart();
 }
 
@@ -2602,7 +3091,18 @@ const PROCEDURES = {
 };
 
 function buildProcedures() {
-  const el = document.getElementById('procedures-content');
+  // Filter bar → id="proc-filter-bar"
+  const filterBar = document.getElementById('proc-filter-bar');
+  if (filterBar) {
+    const allTags = ['all', ...new Set(Object.values(PROCEDURES).flatMap(p => p.tags))];
+    const labels  = { all: 'Tous', processus: 'Processus', digital: 'Digital', audit: 'Audit', rh: 'RH', performance: 'Performance', finance: 'Finance', planification: 'Planification', qualité: 'Qualité', risque: 'Risque', conformité: 'Conformité' };
+    filterBar.innerHTML = allTags.map(t =>
+      `<button class="proc-filter-btn ${t==='all'?'active':''}" onclick="filterProc(this,'${t}')">${labels[t]||t}</button>`
+    ).join('');
+  }
+
+  // Accordion cards → id="proc-content"
+  const el = document.getElementById('proc-content');
   if (!el) return;
   const recProcs = getRecommendedProcedures(S);
 
@@ -2621,9 +3121,7 @@ function buildProcedures() {
       </div>
       <div class="proc-body" style="display:none">
         <p class="proc-desc">${p.desc}</p>
-        <ol class="proc-steps">
-          ${p.steps.map(s=>`<li>${s}</li>`).join('')}
-        </ol>
+        <ol class="proc-steps">${p.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
       </div>
     </div>`;
   }).join('');
@@ -2650,41 +3148,1236 @@ function filterProc(btn, tag) {
   });
 }
 
+// ── Library import helpers ────────────────────────────────────────────────
+
+function fmtFileSize(bytes) {
+  if (bytes < 1024) return bytes + ' o';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' Ko';
+  return (bytes / (1024 * 1024)).toFixed(1) + ' Mo';
+}
+
+function fileIcon(mimeType, name) {
+  const n = (name || '').toLowerCase();
+  if (mimeType.includes('pdf') || n.endsWith('.pdf'))              return '📕';
+  if (mimeType.includes('word') || n.endsWith('.docx') || n.endsWith('.doc')) return '📘';
+  if (mimeType.includes('sheet') || n.endsWith('.xlsx') || n.endsWith('.xls')) return '📗';
+  if (mimeType.includes('presentation') || n.endsWith('.pptx') || n.endsWith('.ppt')) return '📙';
+  if (mimeType.includes('csv') || n.endsWith('.csv'))              return '📊';
+  if (mimeType.includes('image'))                                  return '🖼️';
+  if (mimeType.includes('text') || n.endsWith('.txt'))             return '📄';
+  return '📁';
+}
+
+function importToLibrary(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const MAX_BYTES = 3 * 1024 * 1024; // 3 Mo max pour localStorage
+  if (file.size > MAX_BYTES) {
+    toast(`Fichier trop volumineux (${fmtFileSize(file.size)} — max 3 Mo).`, 'error');
+    input.value = '';
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const entry = {
+        id: Date.now(),
+        name: file.name,
+        mimeType: file.type || 'application/octet-stream',
+        size: file.size,
+        importedAt: new Date().toISOString(),
+        dataUrl: e.target.result
+      };
+      const list = JSON.parse(localStorage.getItem('iac_library') || '[]');
+      list.unshift(entry);
+      localStorage.setItem('iac_library', JSON.stringify(list));
+
+      buildBibliotheque();
+      appNav('bibliotheque');
+      toast(`"${file.name}" ajouté à la Bibliothèque.`, 'success');
+    } catch (err) {
+      if (err.name === 'QuotaExceededError') {
+        toast('Espace de stockage plein. Supprimez des fichiers existants.', 'error');
+      } else {
+        toast('Erreur lors de l\'import : ' + err.message, 'error');
+      }
+    }
+  };
+  reader.onerror = () => toast('Impossible de lire le fichier.', 'error');
+  reader.readAsDataURL(file);
+  input.value = '';
+}
+
+function viewImportedFile(id) {
+  const list = JSON.parse(localStorage.getItem('iac_library') || '[]');
+  const entry = list.find(i => String(i.id) === String(id));
+  if (!entry) { toast('Fichier introuvable dans la bibliothèque.', 'error'); return; }
+
+  try {
+    // Rebuild blob from stored dataURL and open in new tab
+    const parts   = entry.dataUrl.split(',');
+    const mime    = entry.mimeType;
+    const binary  = atob(parts[1]);
+    const buffer  = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) buffer[i] = binary.charCodeAt(i);
+    const blob    = new Blob([buffer], { type: mime });
+    const url     = URL.createObjectURL(blob);
+    const win     = window.open(url, '_blank');
+    setTimeout(() => URL.revokeObjectURL(url), 15000);
+    if (!win) toast('Autorisez les pop-ups pour prévisualiser le fichier.', 'warning');
+  } catch (err) {
+    toast('Aperçu impossible — téléchargement via Supprimer + reimport.', 'error');
+  }
+}
+
+function deleteImportedFile(id) {
+  if (!confirm('Supprimer ce fichier de la bibliothèque ?')) return;
+  let list = JSON.parse(localStorage.getItem('iac_library') || '[]');
+  list = list.filter(i => String(i.id) !== String(id));
+  localStorage.setItem('iac_library', JSON.stringify(list));
+  buildBibliotheque();
+  toast('Fichier supprimé de la bibliothèque.', 'info');
+}
+
+// ── buildBibliotheque ─────────────────────────────────────────────────────
 function buildBibliotheque() {
-  const el = document.getElementById('biblio-content');
+  // Filter bar → id="lib-filter-bar"
+  const filterBar = document.getElementById('lib-filter-bar');
+  const imported = JSON.parse(localStorage.getItem('iac_library') || '[]');
+
+  if (filterBar) {
+    const sectors = ['all', ...(imported.length ? ['imported'] : []), 'digital', 'processus', 'rh', 'finance', 'stratégie'];
+    const labels  = {
+      all: 'Tous',
+      imported: `📁 Importés (${imported.length})`,
+      digital: 'Digital', processus: 'Processus',
+      rh: 'RH', finance: 'Finance', 'stratégie': 'Stratégie'
+    };
+    filterBar.innerHTML = sectors.map(s =>
+      `<button class="lib-filter-btn ${s==='all'?'active':''}" onclick="filterLib(this,'${s}')">${labels[s] || s}</button>`
+    ).join('');
+  }
+
+  // Resource grid → id="lib-content"
+  const el = document.getElementById('lib-content');
   if (!el) return;
-  const resources = [
-    { title: 'Guide de la Transformation Digitale en Afrique', type: 'Guide', sector: 'digital', icon: '📘', desc: 'Panorama des enjeux et opportunités de la digitalisation pour les organisations africaines.' },
-    { title: 'Manuel de Lean Management Appliqué', type: 'Manuel', sector: 'processus', icon: '📗', desc: 'Application concrète des principes Lean dans un contexte PME et ETI.' },
-    { title: 'Tableau de Bord RH — Indicateurs Clés', type: 'Template', sector: 'rh', icon: '📊', desc: '35 KPI RH essentiels avec formules de calcul et benchmarks sectoriels.' },
-    { title: 'Guide du Contrôle de Gestion Opérationnel', type: 'Guide', sector: 'finance', icon: '📙', desc: 'Mise en place d\'un système de pilotage financier adapté aux structures en croissance.' },
-    { title: 'Méthodes Agiles pour Managers', type: 'Formation', sector: 'digital', icon: '🎓', desc: 'Introduction aux méthodes agiles (Scrum, Kanban, OKR) pour les équipes non-IT.' },
-    { title: 'Cartographie des Risques — Template Excel', type: 'Template', sector: 'processus', icon: '🗂️', desc: 'Modèle complet de cartographie des risques avec pondération et plan d\'action intégré.' },
-    { title: 'Plan de Développement des Compétences', type: 'Template', sector: 'rh', icon: '📋', desc: 'Structure complète pour construire un PDC annuel conforme aux exigences légales.' },
-    { title: 'Analyse de la Chaîne de Valeur (Porter)', type: 'Guide', sector: 'stratégie', icon: '🔍', desc: 'Application du modèle de Porter pour identifier les avantages concurrentiels.' },
-    { title: 'Business Model Canvas — Guide Complet', type: 'Guide', sector: 'stratégie', icon: '🖼️', desc: 'Utiliser le BMC pour modéliser, innover et transformer votre modèle d\'affaires.' },
-    { title: 'KPI Dashboard — Finance & Opérations', type: 'Template', sector: 'finance', icon: '📈', desc: 'Tableau de bord Excel avec 50+ indicateurs financiers et opérationnels automatisés.' }
+
+  const RESOURCES = [
+    { title: 'Guide de la Transformation Digitale en Afrique', type: 'Guide',     sector: 'digital',    icon: '📘', desc: 'Panorama des enjeux et opportunités de la digitalisation pour les organisations africaines.' },
+    { title: 'Manuel de Lean Management Appliqué',             type: 'Manuel',    sector: 'processus',  icon: '📗', desc: 'Application concrète des principes Lean dans un contexte PME et ETI.' },
+    { title: 'Tableau de Bord RH — Indicateurs Clés',          type: 'Template',  sector: 'rh',         icon: '📊', desc: '35 KPI RH essentiels avec formules de calcul et benchmarks sectoriels.' },
+    { title: 'Guide du Contrôle de Gestion Opérationnel',      type: 'Guide',     sector: 'finance',    icon: '📙', desc: 'Mise en place d\'un système de pilotage financier adapté aux structures en croissance.' },
+    { title: 'Méthodes Agiles pour Managers',                  type: 'Formation', sector: 'digital',    icon: '🎓', desc: 'Introduction aux méthodes agiles (Scrum, Kanban, OKR) pour les équipes non-IT.' },
+    { title: 'Cartographie des Risques — Template Excel',       type: 'Template',  sector: 'processus',  icon: '🗂️', desc: 'Modèle complet de cartographie des risques avec pondération et plan d\'action intégré.' },
+    { title: 'Plan de Développement des Compétences',          type: 'Template',  sector: 'rh',         icon: '📋', desc: 'Structure complète pour construire un PDC annuel conforme aux exigences légales.' },
+    { title: 'Analyse de la Chaîne de Valeur (Porter)',         type: 'Guide',     sector: 'stratégie',  icon: '🔍', desc: 'Application du modèle de Porter pour identifier les avantages concurrentiels.' },
+    { title: 'Business Model Canvas — Guide Complet',           type: 'Guide',     sector: 'stratégie',  icon: '🖼️', desc: 'Utiliser le BMC pour modéliser, innover et transformer votre modèle d\'affaires.' },
+    { title: 'KPI Dashboard — Finance & Opérations',            type: 'Template',  sector: 'finance',    icon: '📈', desc: 'Tableau de bord Excel avec 50+ indicateurs financiers et opérationnels automatisés.' }
   ];
 
-  el.innerHTML = resources.map(r => `
-    <div class="biblio-card" data-sector="${r.sector}">
-      <div class="biblio-icon">${r.icon}</div>
-      <div class="biblio-info">
-        <div class="biblio-type">${r.type}</div>
-        <div class="biblio-title">${r.title}</div>
-        <div class="biblio-desc">${r.desc}</div>
+  let html = '';
+
+  // ── Section : fichiers importés ──────────────────────────────────────
+  if (imported.length) {
+    html += `
+      <div style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;
+                  padding:14px 18px;background:var(--b1);border-radius:12px;border:1px solid var(--b3)40">
+        <div>
+          <span style="font-size:14px;font-weight:700;color:var(--b7)">📁 Documents / Templates importés</span>
+          <span style="font-size:12px;color:var(--b6);margin-left:10px">${imported.length} fichier${imported.length > 1 ? 's' : ''}</span>
+        </div>
+        <button class="btn-sm outline" onclick="document.getElementById('lib-import-input').click()"
+                style="font-size:12px">+ Importer un fichier</button>
+      </div>`;
+
+    html += imported.map(entry => {
+      const icon    = fileIcon(entry.mimeType, entry.name);
+      const dateStr = new Date(entry.importedAt).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
+      const ext     = entry.name.split('.').pop().toUpperCase();
+      return `
+        <div class="lib-card" data-sector="imported">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px">
+            <div class="lib-icon" style="margin-bottom:0">${icon}</div>
+            <span style="background:var(--b1);color:var(--b6);font-size:10px;font-weight:700;
+                         padding:3px 9px;border-radius:20px;flex-shrink:0;border:1px solid var(--b3)40">
+              ${ext} · Importé
+            </span>
+          </div>
+          <div class="lib-name" style="word-break:break-word;margin-top:6px">${entry.name}</div>
+          <div class="lib-sector">${fmtFileSize(entry.size)}</div>
+          <div class="lib-desc">Importé le ${dateStr}</div>
+          <div class="lib-footer">
+            <button class="lib-cta" onclick="viewImportedFile('${entry.id}')">👁 Voir</button>
+            <button onclick="deleteImportedFile('${entry.id}')"
+                    style="padding:7px 12px;background:var(--r1);color:var(--r5);
+                           border:1px solid rgba(239,68,68,.25);border-radius:8px;
+                           font-size:12px;font-weight:600;cursor:pointer;transition:opacity .2s"
+                    onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
+              🗑 Supprimer
+            </button>
+          </div>
+        </div>`;
+    }).join('');
+
+    // Divider before built-in resources
+    html += `
+      <div style="grid-column:1/-1;display:flex;align-items:center;gap:12px;margin:4px 0">
+        <div style="flex:1;height:1px;background:var(--s200)"></div>
+        <span style="font-size:12px;font-weight:600;color:var(--s400);white-space:nowrap">Bibliothèque IAConsult</span>
+        <div style="flex:1;height:1px;background:var(--s200)"></div>
+      </div>`;
+  }
+
+  // ── Section : ressources intégrées ───────────────────────────────────
+  html += RESOURCES.map(r => `
+    <div class="lib-card" data-sector="${r.sector}">
+      <div class="lib-icon">${r.icon}</div>
+      <div class="lib-name">${r.title}</div>
+      <div class="lib-sector">${r.type}</div>
+      <div class="lib-desc">${r.desc}</div>
+      <div class="lib-footer">
+        <span class="lib-price">IAConsult Pro</span>
+        <button class="lib-cta" onclick="toast('Disponible dans la version Pro.','info')">Accéder →</button>
       </div>
-      <button class="biblio-btn" onclick="toast('Téléchargement disponible dans la version Pro.','info')">Accéder →</button>
     </div>`).join('');
+
+  el.innerHTML = html;
 }
 
 function filterLib(btn, sector) {
   document.querySelectorAll('.lib-filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.biblio-card').forEach(card => {
-    card.style.display = (sector === 'all' || card.dataset.sector === sector) ? 'flex' : 'none';
+
+  // Filter .lib-card elements by data-sector
+  document.querySelectorAll('#lib-content .lib-card').forEach(card => {
+    const match = sector === 'all' || card.dataset.sector === sector;
+    card.style.display = match ? 'flex' : 'none';
+  });
+
+  // Show/hide full-width section headers (grid-column:1/-1 divs)
+  // Keep headers visible only if 'all' or the matching section
+  document.querySelectorAll('#lib-content [style*="grid-column:1/-1"], #lib-content [style*="grid-column: 1 / -1"]').forEach(el => {
+    el.style.display = (sector === 'all') ? '' : 'none';
   });
 }
+
+// ══════════════════════════════════════════════════════════════════════════
+// ── MODULE FORMATIONS ─────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════════════
+
+const FORMATIONS_DATA = [
+  {
+    id: 'form-data',
+    icon: '📊',
+    title: 'Maîtrise des Données & Tableaux de Bord',
+    level: 'Intermédiaire',
+    duration: '3 jours',
+    objectif: 'Collecter, structurer et visualiser les données pour piloter avec des faits réels.',
+    problems: ['Données non structurées', 'Absence de tableaux de bord', 'Décisions sans données'],
+    results: ['TDB opérationnel en 30 jours', 'Réduction reporting 60%', 'Score data +25 pts'],
+    priority: 'eleve',
+    gain: '1,5 M FCFA/an',
+    triggers: (sc, q) => (sc.digital || 0) < 55 || q.q_donnees === 'non' || q.q_tdb === 'non',
+    badge: '🔥 Prioritaire'
+  },
+  {
+    id: 'form-decision',
+    icon: '🧠',
+    title: 'Prise de Décision Stratégique basée sur les Données',
+    level: 'Avancé',
+    duration: '2 jours',
+    objectif: 'Structurer un processus de décision objectif, rapide et documenté à tous les niveaux.',
+    problems: ['Décisions intuitives non documentées', 'Absence d\'indicateurs de suivi', 'Comités inefficaces'],
+    results: ['Processus de décision documenté', 'Réduction délais décisions 40%', 'Amélioration gouvernance'],
+    priority: 'eleve',
+    gain: '2 M FCFA/an',
+    triggers: (sc, q) => q.q_decision === 'non' || q.q_kpi === 'non' || (sc.process || 0) < 50,
+    badge: '🔥 Prioritaire'
+  },
+  {
+    id: 'form-processus',
+    icon: '⚙️',
+    title: 'Lean Management & Optimisation des Processus',
+    level: 'Intermédiaire',
+    duration: '4 jours',
+    objectif: 'Identifier, cartographier et optimiser les processus clés pour éliminer les gaspillages.',
+    problems: ['Processus non documentés', 'Doublons d\'activités', 'Temps de cycle trop longs'],
+    results: ['Économies 20–35% sur les coûts opérationnels', 'Processus cartographiés', 'Manuel de procédures'],
+    priority: 'eleve',
+    gain: '3 M FCFA/an',
+    triggers: (sc, q) => (sc.process || 0) < 60,
+    badge: '⚡ Recommandé'
+  },
+  {
+    id: 'form-kpi',
+    icon: '📈',
+    title: 'KPI & Pilotage de la Performance',
+    level: 'Fondamental',
+    duration: '2 jours',
+    objectif: 'Définir, mesurer et piloter les bons indicateurs à chaque niveau de l\'organisation.',
+    problems: ['Absence de KPI formalisés', 'Reporting manuel', 'Manque de visibilité performance'],
+    results: ['20+ KPI définis et suivis', 'Dashboard performance déployé', 'Réunions de pilotage structurées'],
+    priority: 'moyen',
+    gain: '1,2 M FCFA/an',
+    triggers: (sc, q) => q.q_kpi === 'non' || q.q_vision === 'non' || (sc.finance || 0) < 55,
+    badge: '📌 Conseillé'
+  },
+  {
+    id: 'form-digital',
+    icon: '💻',
+    title: 'Transformation Digitale pour Managers',
+    level: 'Fondamental',
+    duration: '3 jours',
+    objectif: 'Comprendre, planifier et piloter la transformation numérique de l\'organisation.',
+    problems: ['Résistance au changement digital', 'Outils mal utilisés', 'Stratégie digitale absente'],
+    results: ['Feuille de route digitale 12 mois', 'Équipe sensibilisée', 'Quick wins identifiés'],
+    priority: 'moyen',
+    gain: '2,5 M FCFA/an',
+    triggers: (sc, q) => (sc.digital || 0) < 65,
+    badge: '📌 Conseillé'
+  },
+  {
+    id: 'form-leadership',
+    icon: '👥',
+    title: 'Leadership & Management des Équipes Performantes',
+    level: 'Intermédiaire',
+    duration: '3 jours',
+    objectif: 'Développer le leadership, la motivation et l\'alignement des équipes sur les objectifs.',
+    problems: ['Turn-over élevé', 'Manque de motivation', 'Conflits non gérés', 'Mauvaise communication'],
+    results: ['Réduction absentéisme 30%', 'Engagement équipes +40%', 'Objectifs SMART définis'],
+    priority: 'moyen',
+    gain: '1,8 M FCFA/an',
+    triggers: (sc, q) => (sc.rh || 0) < 60,
+    badge: '📌 Conseillé'
+  },
+  {
+    id: 'form-finance',
+    icon: '💰',
+    title: 'Contrôle de Gestion & Pilotage Financier',
+    level: 'Avancé',
+    duration: '3 jours',
+    objectif: 'Mettre en place un système de contrôle de gestion opérationnel adapté à la structure.',
+    problems: ['Manque de visibilité financière', 'Budget non suivi', 'Écarts non analysés'],
+    results: ['Outil de contrôle de gestion déployé', 'Budget réel vs prévisionnel', 'Reporting mensuel automatisé'],
+    priority: 'moyen',
+    gain: '2,2 M FCFA/an',
+    triggers: (sc, q) => (sc.finance || 0) < 60,
+    badge: '📌 Conseillé'
+  },
+  {
+    id: 'form-gestion-projet',
+    icon: '🚀',
+    title: 'Gestion de Projet & Méthodes Agiles',
+    level: 'Fondamental',
+    duration: '2 jours',
+    objectif: 'Maîtriser la planification, l\'exécution et le suivi de projets avec des méthodes modernes.',
+    problems: ['Projets non livrés dans les délais', 'Dépassements budgétaires', 'Manque de coordination'],
+    results: ['Taux de réussite projets +50%', 'Méthodologie Scrum/Kanban adoptée', 'Plan de projet type'],
+    priority: 'faible',
+    gain: '900 K FCFA/an',
+    triggers: (sc, q) => true, // always available
+    badge: null
+  }
+];
+
+function getRecommendedFormations() {
+  const sc = S.scores || {};
+  const q  = S;
+  return FORMATIONS_DATA.filter(f => f.triggers(sc, q)).map(f => f.id);
+}
+
+function buildFormations() {
+  const recommended = getRecommendedFormations();
+  const filterBar   = document.getElementById('form-filter-bar');
+  const container   = document.getElementById('form-content');
+  const ctaStrip    = document.getElementById('form-cta-strip');
+  if (!container) return;
+
+  // Filter bar
+  const filters = [
+    { key: 'all',    label: 'Toutes' },
+    { key: 'eleve',  label: '🔥 Priorité élevée' },
+    { key: 'moyen',  label: '📌 Priorité moyenne' },
+    { key: 'faible', label: '✅ Priorité faible' },
+    { key: 'rec',    label: '⭐ Recommandées pour vous' }
+  ];
+  if (filterBar) {
+    filterBar.innerHTML = filters.map(f =>
+      `<button class="form-filter-btn ${f.key==='all'?'active':''}" data-filter="${f.key}"
+               onclick="filterFormations(this,'${f.key}')">${f.label}</button>`
+    ).join('');
+  }
+
+  // Cards
+  container.innerHTML = FORMATIONS_DATA.map(f => {
+    const isRec = recommended.includes(f.id);
+    const priMap = { eleve: 'Priorité élevée', moyen: 'Priorité moyenne', faible: 'Priorité faible' };
+    return `
+    <div class="form-card ${isRec ? 'form-rec-highlight' : ''}" data-pri="${f.priority}" data-rec="${isRec}">
+      <div class="form-card-top">
+        <div class="form-card-icon">${f.icon}</div>
+        <div class="form-card-title">${f.title}</div>
+        <div class="form-card-level">
+          <span>${f.level}</span>
+          <span style="color:var(--s300)">·</span>
+          <span>⏱ ${f.duration}</span>
+          ${isRec ? '<span style="color:var(--b5)">⭐ Recommandée</span>' : ''}
+        </div>
+        <div class="form-pri-badge ${f.priority}">${priMap[f.priority]}</div>
+      </div>
+      <div class="form-card-body">
+        <div class="form-detail-row">
+          <span class="fd-icon">🎯</span>
+          <span><strong>Objectif :</strong> ${f.objectif}</span>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--s500);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">⚠️ Problèmes résolus</div>
+          <div class="form-tags">${f.problems.map(p => `<span class="form-tag problem">${p}</span>`).join('')}</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--s500);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">✅ Résultats attendus</div>
+          <div class="form-tags">${f.results.map(r => `<span class="form-tag result">${r}</span>`).join('')}</div>
+        </div>
+        <div class="form-gain-bar">
+          <span class="form-gain-label">💰 Gain estimé annuel</span>
+          <span class="form-gain-value">${f.gain}</span>
+        </div>
+      </div>
+      <div class="form-card-btns">
+        <button class="form-btn primary" onclick="inscriptionFormation('${f.id}')">S'inscrire →</button>
+        <button class="form-btn outline" onclick="infoFormation('${f.id}')">ℹ Demander info</button>
+        <button class="form-btn orange" onclick="accompagnementFormation('${f.id}')">🤝 Être accompagné</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  if (ctaStrip) ctaStrip.style.display = 'flex';
+}
+
+function filterFormations(btn, filter) {
+  document.querySelectorAll('.form-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#form-content .form-card').forEach(card => {
+    let show = true;
+    if (filter === 'rec')    show = card.dataset.rec === 'true';
+    else if (filter !== 'all') show = card.dataset.pri === filter;
+    card.style.display = show ? '' : 'none';
+  });
+}
+
+function inscriptionFormation(id) {
+  const f = FORMATIONS_DATA.find(x => x.id === id);
+  if (!f) return;
+  const msg = encodeURIComponent(`Bonjour IAConsult,\n\nJe souhaite m'inscrire à la formation :\n"${f.title}" (${f.duration} — niveau ${f.level})\n\nOrganisation : ${S.orgName || 'N/D'}\nContact : ${S.contactEmail || S.contactTel || 'N/D'}\n\nMerci.`);
+  window.open(`https://wa.me/221700000000?text=${msg}`, '_blank');
+}
+
+function infoFormation(id) {
+  const f = FORMATIONS_DATA.find(x => x.id === id);
+  if (!f) return;
+  const msg = encodeURIComponent(`Bonjour IAConsult,\n\nJe souhaite recevoir des informations sur :\n"${f.title}"\n\nOrganisation : ${S.orgName || 'N/D'}\nContact : ${S.contactEmail || S.contactTel || 'N/D'}`);
+  window.open(`https://wa.me/221700000000?text=${msg}`, '_blank');
+}
+
+function accompagnementFormation(id) {
+  const f = FORMATIONS_DATA.find(x => x.id === id);
+  if (!f) return;
+  const msg = encodeURIComponent(`Bonjour IAConsult,\n\nJe souhaite un accompagnement personnalisé autour de :\n"${f.title}"\n\nOrganisation : ${S.orgName || 'N/D'}\nScore global : ${S.globalScore || 0}/100\nContact : ${S.contactEmail || S.contactTel || 'N/D'}`);
+  window.open(`https://wa.me/221700000000?text=${msg}`, '_blank');
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// ── MODULE OUTILS ─────────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════════════
+
+const OUTILS_DATA = [
+  {
+    id: 'outil-ong',
+    icon: '🌍',
+    name: 'ONG Smart Funding',
+    secteurs: ['ong', 'associatif', 'humanitaire'],
+    problem: 'Gestion des bailleurs et des subventions complexe et manuelle',
+    desc: 'Plateforme complète de gestion des fonds, des bailleurs et des rapports d\'impact pour ONG et associations. Centralise les projets, le suivi budgétaire et la conformité des rapports donateurs.',
+    features: ['Gestion multi-bailleurs', 'Rapports d\'impact automatisés', 'Suivi budgétaire temps réel', 'Module conformité & audit'],
+    level: 'standard',
+    levelLabel: 'Standard',
+    triggerSectors: ['ong', 'humanitaire', 'associatif', 'santé'],
+    triggerScores: (sc) => (sc.finance || 0) < 65 || (sc.process || 0) < 65,
+    images: []
+  },
+  {
+    id: 'outil-btp',
+    icon: '🏗️',
+    name: 'PBTP — Plateforme BTP',
+    secteurs: ['btp', 'construction', 'immobilier'],
+    problem: 'Suivi de chantiers et gestion de sous-traitants difficiles à coordonner',
+    desc: 'Solution de gestion de projets de construction : suivi des chantiers, gestion des équipes terrain, facturation clients, suivi des délais et reporting direction.',
+    features: ['Suivi chantiers en temps réel', 'Gestion sous-traitants', 'Facturation et devis', 'Tableau de bord direction'],
+    level: 'avance',
+    levelLabel: 'Avancé',
+    triggerSectors: ['btp', 'construction', 'génie civil', 'infrastructure'],
+    triggerScores: (sc) => (sc.digital || 0) < 70,
+    images: []
+  },
+  {
+    id: 'outil-immo',
+    icon: '🏠',
+    name: 'PIIM — Gestion Immobilière',
+    secteurs: ['immobilier', 'promotion immobilière'],
+    problem: 'Gestion des biens, des locataires et des paiements non centralisée',
+    desc: 'Plateforme de gestion immobilière intégrée : portefeuille de biens, suivi des loyers, gestion des locataires, maintenance et reporting propriétaires.',
+    features: ['Portefeuille multi-biens', 'Suivi des loyers et relances', 'Gestion maintenance', 'Reporting propriétaires'],
+    level: 'standard',
+    levelLabel: 'Standard',
+    triggerSectors: ['immobilier', 'promotion', 'foncier', 'btp'],
+    triggerScores: (sc) => (sc.finance || 0) < 70,
+    images: []
+  },
+  {
+    id: 'outil-ecole',
+    icon: '🎓',
+    name: 'GSI — Gestion Scolaire Intelligente',
+    secteurs: ['éducation', 'école', 'formation'],
+    problem: 'Administration scolaire encore manuelle, communication parents-école difficile',
+    desc: 'Système de gestion scolaire complet : inscriptions, notes, emplois du temps, communication parents-enseignants, paiements des frais et statistiques pédagogiques.',
+    features: ['Gestion des inscriptions', 'Notes et bulletins digitaux', 'Application parents', 'Paiements en ligne'],
+    level: 'demarrage',
+    levelLabel: 'Démarrage',
+    triggerSectors: ['éducation', 'école', 'université', 'formation', 'enseignement'],
+    triggerScores: (sc) => (sc.digital || 0) < 65,
+    images: []
+  },
+  {
+    id: 'outil-finance',
+    icon: '💰',
+    name: 'FinPilot — Contrôle de Gestion',
+    secteurs: ['finance', 'banque', 'microfinance'],
+    problem: 'Pilotage financier approximatif sans indicateurs temps réel',
+    desc: 'Outil de contrôle de gestion adapté aux PME et ETI africaines : budget, reporting mensuel, analyse des écarts, prévisions et tableaux de bord financiers.',
+    features: ['Budget vs réel automatique', 'Analyse des écarts', 'Tableaux de bord financiers', 'Prévisions et simulations'],
+    level: 'avance',
+    levelLabel: 'Avancé',
+    triggerSectors: ['finance', 'banque', 'assurance', 'microfinance', 'comptabilité'],
+    triggerScores: (sc) => (sc.finance || 0) < 60,
+    images: []
+  },
+  {
+    id: 'outil-agri',
+    icon: '🌾',
+    name: 'AgriData — Gestion Agricole',
+    secteurs: ['agriculture', 'agro-industrie'],
+    problem: 'Suivi des exploitations, intrants et rendements sans outil centralisé',
+    desc: 'Plateforme de gestion agricole : suivi des parcelles, gestion des intrants, traçabilité des productions, données météo intégrées et tableau de bord exploitation.',
+    features: ['Cartographie des parcelles', 'Gestion intrants et stocks', 'Traçabilité production', 'Analyse de rentabilité'],
+    level: 'demarrage',
+    levelLabel: 'Démarrage',
+    triggerSectors: ['agriculture', 'agro-industrie', 'élevage', 'pêche'],
+    triggerScores: (sc) => (sc.digital || 0) < 55,
+    images: []
+  },
+  {
+    id: 'outil-rh',
+    icon: '👥',
+    name: 'RHConnect — SIRH Simplifié',
+    secteurs: ['tous'],
+    problem: 'Gestion RH et paie encore manuelle, congés et contrats non centralisés',
+    desc: 'Système d\'information RH adapté aux structures de 10 à 500 personnes : gestion des contrats, congés, paie, évaluations et formation continue.',
+    features: ['Contrats et dossiers salariés', 'Gestion congés et absences', 'Module paie simplifié', 'Suivi formations'],
+    level: 'standard',
+    levelLabel: 'Standard',
+    triggerSectors: [],
+    triggerScores: (sc) => (sc.rh || 0) < 60,
+    images: []
+  },
+  {
+    id: 'outil-hotel',
+    icon: '🏨',
+    name: 'HotelSync — Hôtellerie & Restauration',
+    secteurs: ['hôtellerie', 'restauration', 'tourisme'],
+    problem: 'Gestion des réservations, du personnel et des recettes non centralisée',
+    desc: 'Solution de gestion pour établissements hôteliers et de restauration : réservations, check-in/out, gestion des chambres, point de vente et reporting direction.',
+    features: ['Réservations en ligne intégrées', 'PMS complet', 'Point de vente F&B', 'Reporting revenus'],
+    level: 'standard',
+    levelLabel: 'Standard',
+    triggerSectors: ['hôtellerie', 'restauration', 'tourisme', 'hébergement'],
+    triggerScores: (sc) => (sc.digital || 0) < 65,
+    images: []
+  }
+];
+
+function getRecommendedOutils() {
+  const secteur = (S.secteur || '').toLowerCase();
+  const sc      = S.scores || {};
+  return OUTILS_DATA.filter(o => {
+    const secteurMatch = o.triggerSectors.length === 0 ||
+      o.triggerSectors.some(s => secteur.includes(s.toLowerCase()) || s.toLowerCase().includes(secteur));
+    const scoreMatch   = o.triggerScores(sc);
+    return secteurMatch || scoreMatch;
+  }).map(o => o.id);
+}
+
+// Per-tool image storage key
+function toolImgKey(id) { return 'iac_tool_imgs_' + id; }
+
+let _currentToolId = null;
+
+function buildOutils() {
+  const recommended = getRecommendedOutils();
+  const filterBar   = document.getElementById('tool-filter-bar');
+  const container   = document.getElementById('tool-content');
+  const ctaStrip    = document.getElementById('outils-cta-strip');
+  if (!container) return;
+
+  // Sector-based filter options (deduplicated)
+  const allSectors = ['all', 'recommandés', ...new Set(OUTILS_DATA.flatMap(o => o.secteurs))];
+  const sectorLabels = { all: 'Tous les outils', 'recommandés': '⭐ Recommandés pour vous' };
+
+  if (filterBar) {
+    filterBar.innerHTML = allSectors.map(s =>
+      `<button class="tool-filter-btn ${s==='all'?'active':''}" data-filter="${s}"
+               onclick="filterOutils(this,'${s}')">${sectorLabels[s] || s.charAt(0).toUpperCase()+s.slice(1)}</button>`
+    ).join('');
+  }
+
+  // Cards
+  container.innerHTML = OUTILS_DATA.map(o => {
+    const isRec     = recommended.includes(o.id);
+    const imgs      = JSON.parse(localStorage.getItem(toolImgKey(o.id)) || '[]');
+    const firstImg  = imgs.length ? imgs[0] : null;
+    const levelClass= o.level;
+
+    return `
+    <div class="tool-card ${isRec ? 'tool-rec-badge' : ''}" data-secteurs="${o.secteurs.join(',')}" data-rec="${isRec}" onclick="">
+      <div class="tool-card-preview" onclick="openToolModal('${o.id}')">
+        ${firstImg
+          ? `<img class="tool-preview-img" src="${firstImg}" alt="${o.name}">`
+          : `<div class="tool-preview-placeholder"><div class="tool-preview-icon">${o.icon}</div><div>${o.name}</div></div>`
+        }
+        <div class="tool-preview-overlay"><span class="tool-preview-overlay-txt">👁 Voir détails</span></div>
+        <span class="tool-badge-secteur">${o.secteurs[0] || 'Général'}</span>
+        ${isRec ? '<span class="tool-badge-rec">⭐ Recommandé</span>' : ''}
+      </div>
+      <div class="tool-card-body">
+        <div class="tool-card-name">${o.name}</div>
+        <div class="tool-card-problem">⚠️ ${o.problem}</div>
+        <div class="tool-card-desc">${o.desc.substring(0, 100)}…</div>
+        <div><span class="tool-card-level ${levelClass}">● ${o.levelLabel}</span></div>
+      </div>
+      <div class="tool-card-btns">
+        <button class="tool-btn primary" onclick="openToolModal('${o.id}')">👁 Voir</button>
+        <button class="tool-btn outline" onclick="testerOutil('${o.id}')">🖥 Tester</button>
+        <button class="tool-btn outline" onclick="demanderAccesOutil('${o.id}')">🔑 Accès</button>
+        <button class="tool-btn orange" onclick="obtenirSysteme('${o.id}')">🚀 Obtenir</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  if (ctaStrip) ctaStrip.style.display = 'flex';
+}
+
+function filterOutils(btn, filter) {
+  document.querySelectorAll('.tool-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#tool-content .tool-card').forEach(card => {
+    let show = true;
+    if (filter === 'recommandés') show = card.dataset.rec === 'true';
+    else if (filter !== 'all') {
+      const sects = (card.dataset.secteurs || '').toLowerCase();
+      show = sects.includes(filter.toLowerCase());
+    }
+    card.style.display = show ? '' : 'none';
+  });
+}
+
+// ── Tool modal ─────────────────────────────────────────────────
+
+function openToolModal(id) {
+  const o = OUTILS_DATA.find(x => x.id === id);
+  if (!o) return;
+  _currentToolId = id;
+
+  const modal = document.getElementById('modal-tool');
+  if (!modal) return;
+
+  // Title & icon
+  const titleEl = document.getElementById('tool-modal-title');
+  if (titleEl) titleEl.textContent = o.icon + '  ' + o.name;
+  const iconEl = document.getElementById('tool-modal-icon');
+  if (iconEl) iconEl.textContent = o.icon;
+  const descEl = document.getElementById('tool-modal-desc');
+  if (descEl) descEl.textContent = o.desc;
+
+  // Detail grid
+  const detailEl = document.getElementById('tool-detail-grid');
+  if (detailEl) {
+    detailEl.innerHTML = [
+      { label: 'Secteur cible', value: o.secteurs.join(', ') || 'Tous' },
+      { label: 'Niveau', value: o.levelLabel },
+      { label: 'Problème résolu', value: o.problem },
+      { label: 'Fonctionnalités clés', value: o.features.join(' · ') }
+    ].map(d => `
+      <div class="tool-detail-chip">
+        <div class="tool-detail-chip-lbl">${d.label}</div>
+        <div class="tool-detail-chip-val">${d.value}</div>
+      </div>`).join('');
+  }
+
+  // Gallery
+  _renderToolGallery(id);
+
+  modal.classList.add('open');
+}
+
+function _renderToolGallery(id) {
+  const imgs   = JSON.parse(localStorage.getItem(toolImgKey(id)) || '[]');
+  const mainEl = document.getElementById('tool-gallery-main');
+  const imgEl  = document.getElementById('tool-gallery-img');
+  const phEl   = document.getElementById('tool-gallery-placeholder');
+  const thumbEl= document.getElementById('tool-gallery-thumbs');
+  if (!mainEl) return;
+
+  if (imgs.length) {
+    if (imgEl)  { imgEl.src = imgs[0]; imgEl.style.display = 'block'; }
+    if (phEl)   phEl.style.display = 'none';
+  } else {
+    if (imgEl)  imgEl.style.display = 'none';
+    if (phEl) {
+      phEl.style.display = 'flex';
+      const o = OUTILS_DATA.find(x => x.id === id);
+      const iconEl = document.getElementById('tool-modal-icon');
+      if (iconEl && o) iconEl.textContent = o.icon;
+    }
+  }
+
+  // Thumbnails
+  if (thumbEl) {
+    thumbEl.innerHTML = imgs.map((src, i) =>
+      `<div class="tool-thumb ${i===0?'active':''}" onclick="_setGalleryMain(${i},'${id}')">
+         <img src="${src}" alt="Capture ${i+1}">
+       </div>`
+    ).join('') + `<label class="tool-thumb" title="Ajouter une capture" for="tool-img-upload"
+         style="border:2px dashed var(--s300);cursor:pointer;font-size:20px;color:var(--s400)">+</label>`;
+  }
+}
+
+function _setGalleryMain(idx, id) {
+  const imgs = JSON.parse(localStorage.getItem(toolImgKey(id)) || '[]');
+  const imgEl = document.getElementById('tool-gallery-img');
+  const phEl  = document.getElementById('tool-gallery-placeholder');
+  if (imgEl && imgs[idx]) {
+    imgEl.src = imgs[idx]; imgEl.style.display = 'block';
+    if (phEl) phEl.style.display = 'none';
+  }
+  // Update active thumb
+  document.querySelectorAll('#tool-gallery-thumbs .tool-thumb').forEach((t, i) => {
+    t.classList.toggle('active', i === idx);
+  });
+}
+
+function handleToolImageUpload(input) {
+  const file = input.files[0];
+  if (!file || !_currentToolId) return;
+  if (file.size > 2 * 1024 * 1024) { toast('Image trop grande (max 2 Mo).', 'error'); input.value=''; return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const imgs = JSON.parse(localStorage.getItem(toolImgKey(_currentToolId)) || '[]');
+      if (imgs.length >= 5) { toast('Maximum 5 captures par outil.', 'warning'); return; }
+      imgs.push(e.target.result);
+      localStorage.setItem(toolImgKey(_currentToolId), JSON.stringify(imgs));
+      _renderToolGallery(_currentToolId);
+      // Also refresh the card in the grid
+      buildOutils();
+      toast('Capture ajoutée.', 'success');
+    } catch(err) {
+      if (err.name === 'QuotaExceededError') toast('Espace de stockage plein.', 'error');
+    }
+  };
+  reader.readAsDataURL(file);
+  input.value = '';
+}
+
+function closeToolModal() {
+  const m = document.getElementById('modal-tool');
+  if (m) m.classList.remove('open');
+  _currentToolId = null;
+}
+
+function testerOutil(id) {
+  const o = OUTILS_DATA.find(x => x.id === id);
+  if (!o) return;
+  const msg = encodeURIComponent(`Bonjour IAConsult,\n\nJe souhaite tester l'outil "${o.name}".\n\nOrganisation : ${S.orgName || 'N/D'}\nContact : ${S.contactEmail || S.contactTel || 'N/D'}`);
+  window.open(`https://wa.me/221700000000?text=${msg}`, '_blank');
+}
+
+function demanderAccesOutil(id) {
+  const o = OUTILS_DATA.find(x => x.id === id);
+  if (!o) return;
+  const msg = encodeURIComponent(`Bonjour IAConsult,\n\nJe souhaite obtenir un accès à "${o.name}".\n\nOrganisation : ${S.orgName || 'N/D'}\nSecteur : ${S.secteur || 'N/D'}\nContact : ${S.contactEmail || S.contactTel || 'N/D'}`);
+  window.open(`https://wa.me/221700000000?text=${msg}`, '_blank');
+}
+
+function obtenirSysteme(id) {
+  const o = OUTILS_DATA.find(x => x.id === id);
+  if (!o) return;
+  const impact = computeBusinessImpact ? computeBusinessImpact() : {};
+  const msg = encodeURIComponent(
+    `Bonjour IAConsult,\n\nJe souhaite obtenir le système "${o.name}" pour mon organisation.\n\n` +
+    `Organisation : ${S.orgName || 'N/D'}\nSecteur : ${S.secteur || 'N/D'}\n` +
+    `Score actuel : ${S.globalScore || 0}/100\n` +
+    `Contact : ${S.contactEmail || ''} ${S.contactTel ? '/ ' + S.contactTel : ''}\n\nMerci de me contacter pour discuter de l'implémentation.`
+  );
+  window.open(`https://wa.me/221700000000?text=${msg}`, '_blank');
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// ── MONETIZATION LAYER ────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════════════
+
+// ── Lead modal ───────────────────────────────────────────────────────────
+
+function showLeadModal() {
+  // Skip if lead already captured
+  if (localStorage.getItem('iac_lead')) return;
+  const modal = document.getElementById('modal-lead');
+  if (!modal) return;
+  // Pre-fill email/tel from step-1 if available
+  const emailEl = document.getElementById('lead-email');
+  const telEl   = document.getElementById('lead-tel');
+  const orgEl   = document.getElementById('lead-org');
+  if (emailEl && S.contactEmail) emailEl.value = S.contactEmail;
+  if (telEl   && S.contactTel)   telEl.value   = S.contactTel;
+  if (orgEl   && S.orgName)      orgEl.value   = S.orgName;
+  modal.classList.add('open');
+}
+
+function closeLeadModal() {
+  const modal = document.getElementById('modal-lead');
+  if (modal) modal.classList.remove('open');
+}
+
+function submitLead() {
+  const nomEl   = document.getElementById('lead-nom');
+  const emailEl = document.getElementById('lead-email');
+  const errNom   = document.getElementById('err-lead-nom');
+  const errEmail = document.getElementById('err-lead-email');
+
+  let ok = true;
+  const nom   = (nomEl   ? nomEl.value.trim()   : '');
+  const email = (emailEl ? emailEl.value.trim() : '');
+
+  if (errNom)   errNom.style.display   = 'none';
+  if (errEmail) errEmail.style.display = 'none';
+
+  if (!nom)   { if (errNom)   errNom.style.display   = 'flex'; ok = false; }
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email || !emailRe.test(email)) { if (errEmail) errEmail.style.display = 'flex'; ok = false; }
+
+  if (!ok) return;
+
+  const lead = {
+    nom,
+    email,
+    tel:  (document.getElementById('lead-tel')  ? document.getElementById('lead-tel').value.trim()  : ''),
+    org:  (document.getElementById('lead-org')  ? document.getElementById('lead-org').value.trim()  : ''),
+    score: S.globalScore || 0,
+    level: S.level || 1,
+    secteur: S.secteur || '',
+    capturedAt: new Date().toISOString()
+  };
+
+  // Persist lead
+  localStorage.setItem('iac_lead', JSON.stringify(lead));
+  const leads = JSON.parse(localStorage.getItem('iac_leads') || '[]');
+  leads.unshift(lead);
+  localStorage.setItem('iac_leads', JSON.stringify(leads));
+
+  // Update state name / org
+  if (lead.nom) S.contactName = lead.nom;
+  if (lead.org) S.orgName = S.orgName || lead.org;
+
+  closeLeadModal();
+  toast(`Bienvenue ${lead.nom.split(' ')[0]} ! Votre diagnostic est prêt.`, 'success');
+
+  // Rebuild dashboard with name now available
+  try { buildDashboard(); } catch(e) {}
+}
+
+// ── Business impact computation ──────────────────────────────────────────
+
+function computeBusinessImpact() {
+  const emp      = S.employes || 10;
+  const score    = S.globalScore || 50;
+  const gap      = 100 - score;
+
+  // Estimated average annual salary (FCFA): ~4 800 000 (400k/month)
+  const avgSalary = 4800000;
+  const totalPayroll = emp * avgSalary;
+
+  // Inefficiency cost: proportional to gap (up to 25% of payroll)
+  const inefficiencyRate  = (gap / 100) * 0.25;
+  const impactXOF         = Math.round(totalPayroll * inefficiencyRate / 100000) * 100000;
+
+  // Potential savings with improvement (50% of current inefficiency)
+  const savingsXOF        = Math.round(impactXOF * 0.50 / 100000) * 100000;
+
+  // ROI (savings vs rough consulting investment)
+  const investEstimate    = Math.max(500000, Math.round(emp * 25000 / 100000) * 100000);
+  const roi               = investEstimate > 0 ? Math.round((savingsXOF / investEstimate) * 100) : 0;
+
+  // Efficiency & risk
+  const efficiencyGain    = Math.round(gap * 0.45); // % improvement potential
+  const riskLevel         = score < 35 ? 'Élevé' : score < 60 ? 'Modéré' : 'Faible';
+  const opportunityScore  = Math.min(100, Math.round(gap * 1.2));
+
+  return { impactXOF, savingsXOF, roi, efficiencyGain, riskLevel, opportunityScore, investEstimate };
+}
+
+// ── Final summary card ────────────────────────────────────────────────────
+
+function renderFinalSummary() {
+  const el = document.getElementById('dash-final-summary');
+  if (!el) return;
+
+  const li     = levelInfo(S.level);
+  const sc     = S.globalScore || 0;
+  const scCol  = scoreColor(sc);
+  const impact = computeBusinessImpact();
+  const lead   = JSON.parse(localStorage.getItem('iac_lead') || 'null');
+  // Name: prefer lead modal capture, else state (from step 1 optional org-name)
+  const firstName = lead ? lead.nom.split(' ')[0] : (S.orgName || 'votre organisation');
+  // Contact info from step 1 or lead modal
+  const contactEmail = S.contactEmail || (lead ? lead.email : '');
+  const contactTel   = S.contactTel   || (lead ? lead.tel   : '');
+
+  // Top 3 critical axes
+  const scores  = S.scores || {};
+  const axes    = [
+    { key: 'process', label: 'Processus',      icon: '⚙️' },
+    { key: 'digital', label: 'Digital',         icon: '💻' },
+    { key: 'rh',      label: 'Capital Humain',  icon: '👥' },
+    { key: 'finance', label: 'Finance',          icon: '💰' }
+  ];
+  const sorted   = axes.map(a => ({ ...a, v: scores[a.key] || 0 })).sort((a,b) => a.v - b.v);
+  const critical = sorted.slice(0, 3);
+
+  el.innerHTML = `
+    <div class="mono-summary">
+      <div class="mono-summary-top">
+        <div class="mono-summary-body">
+          <div class="mono-summary-title">Bonjour ${firstName} 👋</div>
+          <div class="mono-summary-sub">Votre diagnostic IAConsult est prêt — voici les points clés</div>
+          ${(contactEmail || contactTel) ? `<div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">${contactEmail ? `<span>✉ ${contactEmail}</span>` : ''}${contactTel ? `<span>📞 ${contactTel}</span>` : ''}</div>` : ''}
+          <div class="mono-points">
+            ${critical.map(a => `
+              <div class="mono-point-item">
+                <span class="mono-point-dot" style="background:${scoreColor(a.v)}"></span>
+                <span>${a.icon} <strong>${a.label}</strong> — Score ${a.v}% · ${a.v < 40 ? 'Action urgente requise' : a.v < 65 ? 'Amélioration recommandée' : 'Bon niveau'}</span>
+              </div>`).join('')}
+          </div>
+        </div>
+        <div class="mono-summary-score">
+          <div class="mono-score-big" style="color:${scCol}">${sc}</div>
+          <div class="mono-score-lbl">Score global</div>
+          <div style="margin-top:8px;font-size:11px;background:${li.color}30;color:${li.color};padding:4px 10px;border-radius:20px;font-weight:700">${li.label}</div>
+        </div>
+      </div>
+      <div class="mono-gains">
+        <div class="mono-gain-chip">
+          <span style="font-size:18px">⚠️</span>
+          <div>
+            <div style="font-size:10px;opacity:.6;text-transform:uppercase;letter-spacing:.04em">Coût inefficacité estimé</div>
+            <div style="font-size:16px;font-weight:800">${fmtXOF(impact.impactXOF)}/an</div>
+          </div>
+        </div>
+        <div class="mono-gain-chip">
+          <span style="font-size:18px">💰</span>
+          <div>
+            <div style="font-size:10px;opacity:.6;text-transform:uppercase;letter-spacing:.04em">Économies potentielles</div>
+            <div style="font-size:16px;font-weight:800">${fmtXOF(impact.savingsXOF)}/an</div>
+          </div>
+        </div>
+        <div class="mono-gain-chip">
+          <span style="font-size:18px">📈</span>
+          <div>
+            <div style="font-size:10px;opacity:.6;text-transform:uppercase;letter-spacing:.04em">Gain efficacité potentiel</div>
+            <div style="font-size:16px;font-weight:800">+${impact.efficiencyGain}%</div>
+          </div>
+        </div>
+        <div class="mono-gain-chip">
+          <span style="font-size:18px">🛡️</span>
+          <div>
+            <div style="font-size:10px;opacity:.6;text-transform:uppercase;letter-spacing:.04em">Niveau de risque</div>
+            <div style="font-size:16px;font-weight:800">${impact.riskLevel}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ── Monetization CTA bar (3 tiers) ───────────────────────────────────────
+
+function renderMonetizationCTA() {
+  const el = document.getElementById('dash-cta-mono');
+  if (!el) return;
+
+  el.innerHTML = `
+    <div class="mono-cta-bar">
+      <div class="mono-cta-card">
+        <div style="font-size:22px;margin-bottom:8px">📋</div>
+        <div style="font-size:14px;font-weight:700;color:var(--s800);margin-bottom:4px">Rapport PDF gratuit</div>
+        <div style="font-size:12px;color:var(--s500);margin-bottom:14px;line-height:1.5">Synthèse de votre diagnostic avec recommandations prioritaires</div>
+        <button class="mono-cta-btn btn-free" onclick="downloadDiagnosticPDF()">
+          ⬇ Télécharger gratuitement
+        </button>
+      </div>
+      <div class="mono-cta-card" style="border-color:var(--b4);box-shadow:0 0 0 2px rgba(59,130,246,.12)">
+        <div style="font-size:22px;margin-bottom:8px">🚀</div>
+        <div style="font-size:14px;font-weight:700;color:var(--s800);margin-bottom:4px">Plan d'action détaillé</div>
+        <div style="font-size:12px;color:var(--s500);margin-bottom:14px;line-height:1.5">Feuille de route 90 jours · KPI · Responsables · Budget</div>
+        <button class="mono-cta-btn btn-paid" onclick="showPaymentModal()">
+          💳 Obtenir pour 150 000 FCFA
+        </button>
+      </div>
+      <div class="mono-cta-card" style="border-color:var(--o5);background:linear-gradient(135deg,#fff7ed,#fff)">
+        <div style="font-size:22px;margin-bottom:8px">🏆</div>
+        <div style="font-size:14px;font-weight:700;color:var(--s800);margin-bottom:4px">Accompagnement conseil</div>
+        <div style="font-size:12px;color:var(--s500);margin-bottom:14px;line-height:1.5">Consultant dédié · Sessions de travail · Suivi mensuel</div>
+        <button class="mono-cta-btn btn-premium" onclick="contactIAConsult()">
+          📞 Demander un devis
+        </button>
+      </div>
+    </div>`;
+}
+
+// ── Offer section ─────────────────────────────────────────────────────────
+
+function renderOfferSection() {
+  const el = document.getElementById('dash-offer-section');
+  if (!el) return;
+
+  const impact = computeBusinessImpact();
+
+  el.innerHTML = `
+    <div style="margin-bottom:16px">
+      <div class="sec-title" style="font-size:18px;margin-bottom:4px">🎁 Nos offres d'accompagnement</div>
+      <div class="sec-sub" style="margin-bottom:0">Choisissez le niveau d'accompagnement adapté à vos ambitions</div>
+    </div>
+    <div class="offer-grid" style="margin-bottom:20px">
+      <div class="offer-card">
+        <div class="offer-card-icon" style="background:var(--g1);color:var(--g5)">📋</div>
+        <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:800;color:var(--s900);margin-bottom:4px">Essentiel</div>
+        <div style="font-size:22px;font-weight:900;color:var(--b5);margin-bottom:2px">Gratuit</div>
+        <div style="font-size:12px;color:var(--s400);margin-bottom:16px">Pour démarrer</div>
+        <ul class="offer-features">
+          <li>✅ Diagnostic organisationnel complet</li>
+          <li>✅ Score de maturité et niveau</li>
+          <li>✅ Rapport PDF téléchargeable</li>
+          <li>✅ 3 recommandations prioritaires</li>
+          <li>❌ Plan d'action détaillé</li>
+          <li>❌ Accompagnement conseil</li>
+        </ul>
+        <button class="offer-cta-btn" style="background:var(--g5);color:#fff" onclick="downloadDiagnosticPDF()">
+          Télécharger mon rapport →
+        </button>
+      </div>
+      <div class="offer-card" style="border-color:var(--b4);box-shadow:0 4px 24px rgba(59,130,246,.12);position:relative">
+        <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--b5);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;white-space:nowrap">⭐ Le plus populaire</div>
+        <div class="offer-card-icon" style="background:var(--b1);color:var(--b5)">🚀</div>
+        <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:800;color:var(--s900);margin-bottom:4px">Pro</div>
+        <div style="font-size:22px;font-weight:900;color:var(--b5);margin-bottom:2px">150 000 FCFA</div>
+        <div style="font-size:12px;color:var(--s400);margin-bottom:16px">Paiement unique</div>
+        <ul class="offer-features">
+          <li>✅ Tout ce qui est inclus dans Essentiel</li>
+          <li>✅ Plan d'action détaillé 90 jours</li>
+          <li>✅ Tableau de bord de suivi avancé</li>
+          <li>✅ Templates & outils téléchargeables</li>
+          <li>✅ Support email 30 jours</li>
+          <li>❌ Accompagnement personnalisé</li>
+        </ul>
+        <button class="offer-cta-btn" style="background:var(--b5);color:#fff" onclick="showPaymentModal()">
+          Obtenir l'offre Pro →
+        </button>
+      </div>
+      <div class="offer-card" style="border-color:var(--o5)">
+        <div class="offer-card-icon" style="background:var(--o1);color:var(--o6)">🏆</div>
+        <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:800;color:var(--s900);margin-bottom:4px">Conseil</div>
+        <div style="font-size:22px;font-weight:900;color:var(--o5);margin-bottom:2px">Sur devis</div>
+        <div style="font-size:12px;color:var(--s400);margin-bottom:16px">Accompagnement sur mesure</div>
+        <ul class="offer-features">
+          <li>✅ Tout ce qui est inclus dans Pro</li>
+          <li>✅ Consultant dédié assigné</li>
+          <li>✅ Sessions de travail (présentiel/distanciel)</li>
+          <li>✅ Suivi mensuel 6 mois</li>
+          <li>✅ Formation des équipes incluse</li>
+          <li>✅ ROI estimé : ${fmtXOF(impact.savingsXOF)}/an</li>
+        </ul>
+        <button class="offer-cta-btn" style="background:var(--o5);color:#fff" onclick="contactIAConsult()">
+          Demander un devis →
+        </button>
+      </div>
+    </div>`;
+}
+
+// ── Global CTA strip ──────────────────────────────────────────────────────
+
+function renderGlobalCTA() {
+  const el = document.getElementById('dash-global-cta');
+  if (!el) return;
+
+  const impact = computeBusinessImpact();
+
+  el.innerHTML = `
+    <div class="global-cta-strip">
+      <div>
+        <div class="global-cta-text">🎯 Passez à l'action — chaque mois sans transformation coûte ${fmtXOF(Math.round(impact.impactXOF / 12 / 100000) * 100000)}</div>
+        <div style="font-size:12px;color:var(--s500);margin-top:3px">IAConsult vous accompagne de l'analyse à la mise en œuvre</div>
+      </div>
+      <div class="global-cta-btns">
+        <button class="btn-sm solid" onclick="downloadDiagnosticPDF()">⬇ PDF gratuit</button>
+        <button class="btn-next" style="display:inline-flex;padding:10px 22px;font-size:14px" onclick="contactIAConsult()">
+          📞 Parler à un consultant
+        </button>
+      </div>
+    </div>`;
+}
+
+// ── Payment modal ─────────────────────────────────────────────────────────
+
+function showPaymentModal() {
+  const m = document.getElementById('modal-payment');
+  if (m) m.classList.add('open');
+}
+
+function closePaymentModal() {
+  const m = document.getElementById('modal-payment');
+  if (m) m.classList.remove('open');
+}
+
+// ── Contact / WhatsApp ───────────────────────────────────────────────────
+
+function contactIAConsult() {
+  const lead   = JSON.parse(localStorage.getItem('iac_lead') || 'null');
+  const name   = lead ? lead.nom : (S.orgName || 'un visiteur');
+  const score  = S.globalScore || 0;
+  const impact = computeBusinessImpact();
+  const msg = encodeURIComponent(
+    `Bonjour IAConsult,\n\nJe viens de réaliser mon diagnostic sur IAConsult Decision Engine.\n\n` +
+    `📊 Score global : ${score}/100\n` +
+    `👤 Contact : ${name}\n` +
+    `🏢 Organisation : ${S.orgName || 'N/D'}\n` +
+    `💰 Impact estimé : ${fmtXOF(impact.impactXOF)}/an\n\n` +
+    `Je souhaite en discuter avec un consultant.`
+  );
+  // WhatsApp deeplink (replace number as needed)
+  window.open(`https://wa.me/221700000000?text=${msg}`, '_blank');
+  closePaymentModal();
+}
+
+// ── PDF export ────────────────────────────────────────────────────────────
+
+function buildPrintReport() {
+  const el = document.getElementById('print-content');
+  if (!el) return;
+
+  const li     = levelInfo(S.level);
+  const sc     = S.scores || {};
+  const idx    = S.indices || {};
+  const impact = computeBusinessImpact();
+  const lead   = JSON.parse(localStorage.getItem('iac_lead') || 'null');
+  const now    = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
+
+  const axes = [
+    { key: 'process', label: 'Processus'    },
+    { key: 'digital', label: 'Digital'      },
+    { key: 'rh',      label: 'Capital Humain'},
+    { key: 'finance', label: 'Finance'       }
+  ];
+
+  const recs = (S.recommendations || []).slice(0, 5);
+
+  // Consolidate contact: step-1 fields take priority, lead modal as fallback
+  const cEmail = S.contactEmail || (lead ? lead.email : '');
+  const cTel   = S.contactTel   || (lead ? lead.tel   : '');
+  const cName  = (lead ? lead.nom : '') || S.orgName || '';
+
+  el.innerHTML = `
+    <table class="print-meta">
+      <tr>
+        <td><strong>Organisation :</strong> ${S.orgName || 'N/D'}</td>
+        <td><strong>Secteur :</strong> ${S.secteur || 'N/D'}</td>
+        <td><strong>Taille :</strong> ${S.employes || 'N/D'} employés</td>
+        <td><strong>Localisation :</strong> ${S.localisation || 'N/D'}</td>
+      </tr>
+      <tr>
+        ${cName  ? `<td><strong>Contact :</strong> ${cName}</td>` : '<td></td>'}
+        ${cEmail ? `<td><strong>Email :</strong> ${cEmail}</td>` : '<td></td>'}
+        ${cTel   ? `<td><strong>Tél / WA :</strong> ${cTel}</td>` : '<td></td>'}
+        <td><strong>Date :</strong> ${now}</td>
+      </tr>
+    </table>
+
+    <div class="print-section">
+      <h2>1. Score de maturité globale</h2>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px">
+        <div style="font-size:52px;font-weight:900;color:${scoreColor(S.globalScore||0)}">${S.globalScore || 0}<span style="font-size:20px;color:#64748b">/100</span></div>
+        <div>
+          <div style="font-size:18px;font-weight:700;color:${li.color}">${li.label}</div>
+          <div style="font-size:13px;color:#475569">${li.desc}</div>
+        </div>
+      </div>
+      <table class="print-table">
+        <thead><tr><th>Axe</th><th>Score</th><th>Évaluation</th></tr></thead>
+        <tbody>
+          ${axes.map(a => {
+            const v = sc[a.key] || 0;
+            const eval_ = v < 40 ? '🔴 Critique' : v < 65 ? '🟡 À améliorer' : '🟢 Satisfaisant';
+            return `<tr><td>${a.label}</td><td style="font-weight:700;color:${scoreColor(v)}">${v}%</td><td>${eval_}</td></tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="print-section">
+      <h2>2. Impact business estimé</h2>
+      <table class="print-table">
+        <thead><tr><th>Indicateur</th><th>Valeur</th></tr></thead>
+        <tbody>
+          <tr><td>Coût annuel de l'inefficacité estimé</td><td style="font-weight:700;color:#ef4444">${fmtXOF(impact.impactXOF)}</td></tr>
+          <tr><td>Économies potentielles annuelles</td><td style="font-weight:700;color:#22c55e">${fmtXOF(impact.savingsXOF)}</td></tr>
+          <tr><td>Gain d'efficacité potentiel</td><td style="font-weight:700">+${impact.efficiencyGain}%</td></tr>
+          <tr><td>Niveau de risque organisationnel</td><td style="font-weight:700">${impact.riskLevel}</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    ${recs.length ? `
+    <div class="print-section">
+      <h2>3. Recommandations prioritaires</h2>
+      <ol style="margin:0;padding-left:20px">
+        ${recs.map(r => `<li style="margin-bottom:8px;font-size:13px"><strong>${r.title || r}</strong>${r.desc ? '<br><span style="color:#475569">' + r.desc + '</span>' : ''}</li>`).join('')}
+      </ol>
+    </div>` : ''}
+
+    <div class="print-footer">
+      <p>Rapport généré par <strong>IAConsult Decision Engine</strong> — ${now}</p>
+      <p>Pour un accompagnement personnalisé, contactez-nous : <strong>contact@iaconsult.com</strong></p>
+    </div>`;
+}
+
+function downloadDiagnosticPDF() {
+  try {
+    buildPrintReport();
+    setTimeout(() => window.print(), 200);
+  } catch (err) {
+    toast('Erreur lors de la génération du rapport.', 'error');
+  }
+}
+
+// Alias for topbar button
+function exportPDF() { downloadDiagnosticPDF(); }
 
 // ── INIT ──────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -2699,11 +4392,122 @@ document.addEventListener('DOMContentLoaded', () => {
       appNav('dashboard');
       initChat();
       updateTaskBadge();
+      setTimeout(() => { try { showLeadModal(); } catch(e) {} }, 800);
       return;
     }
   }
   goTo('landing');
 });
 </script>
+
+<!-- ══ TOOL DETAIL MODAL ══ -->
+<div class="modal-overlay" id="modal-tool" role="dialog" aria-modal="true">
+  <div class="modal" style="max-width:580px">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px 0">
+      <div style="font-family:'Sora',sans-serif;font-size:17px;font-weight:800;color:var(--s900)" id="tool-modal-title">Outil</div>
+      <button class="modal-close" onclick="closeToolModal()">✕</button>
+    </div>
+    <div style="padding:16px 24px 24px">
+      <!-- Gallery -->
+      <div class="tool-modal-preview">
+        <div class="tool-gallery-main" id="tool-gallery-main">
+          <div class="tool-preview-placeholder" id="tool-gallery-placeholder">
+            <div id="tool-modal-icon" class="tool-preview-icon">🛠️</div>
+            <div>Aucune capture — uploadez la vôtre</div>
+          </div>
+          <img id="tool-gallery-img" style="display:none;width:100%;height:100%;object-fit:cover" src="" alt="">
+        </div>
+        <div class="tool-gallery-thumbs" id="tool-gallery-thumbs"></div>
+      </div>
+      <!-- Upload zone -->
+      <label class="tool-upload-zone" for="tool-img-upload" style="display:block;margin-bottom:16px">
+        📷 Ajouter une capture d'écran (JPG/PNG, max 2 Mo)
+        <input type="file" id="tool-img-upload" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="handleToolImageUpload(this)">
+      </label>
+      <!-- Detail grid -->
+      <div class="tool-detail-grid" id="tool-detail-grid"></div>
+      <!-- Description -->
+      <div style="font-size:13px;color:var(--s600);line-height:1.7;margin-bottom:20px" id="tool-modal-desc"></div>
+      <!-- Buttons -->
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn-next" style="display:inline-flex;padding:10px 22px;font-size:14px;flex:1" id="tool-modal-btn-access" onclick="contactIAConsult()">
+          🔑 Obtenir l'accès →
+        </button>
+        <button class="btn-sm solid" style="flex:1" id="tool-modal-btn-demo" onclick="contactIAConsult()">
+          🖥️ Demander une démo
+        </button>
+        <button class="btn-sm outline" onclick="closeToolModal()">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LEAD CAPTURE MODAL ══ -->
+<div class="lead-modal-overlay" id="modal-lead" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
+  <div class="lead-modal">
+    <div class="lead-modal-hero">
+      <div style="font-size:38px;margin-bottom:10px">🎯</div>
+      <h2 id="lead-modal-title" style="font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:6px">Votre diagnostic est prêt !</h2>
+      <p style="font-size:13px;color:rgba(255,255,255,.65);line-height:1.55">Renseignez vos coordonnées pour accéder à votre tableau de bord et recevoir votre rapport personnalisé.</p>
+    </div>
+    <div style="padding:28px 32px">
+      <div class="fg">
+        <label class="flabel" for="lead-nom">Nom complet <span class="req">*</span></label>
+        <input id="lead-nom" type="text" class="finput" placeholder="Jean Dupont" autocomplete="name">
+        <span id="err-lead-nom" class="ferr" style="display:none">Ce champ est requis.</span>
+      </div>
+      <div class="fg">
+        <label class="flabel" for="lead-email">Email professionnel <span class="req">*</span></label>
+        <input id="lead-email" type="email" class="finput" placeholder="jean@entreprise.com" autocomplete="email">
+        <span id="err-lead-email" class="ferr" style="display:none">Adresse email valide requise.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="fg" style="margin-bottom:0">
+          <label class="flabel" for="lead-tel">Téléphone</label>
+          <input id="lead-tel" type="tel" class="finput" placeholder="+221 XX XXX XXXX" autocomplete="tel">
+        </div>
+        <div class="fg" style="margin-bottom:0">
+          <label class="flabel" for="lead-org">Organisation</label>
+          <input id="lead-org" type="text" class="finput" placeholder="Nom de votre organisation" autocomplete="organization">
+        </div>
+      </div>
+      <button class="lead-submit-btn" onclick="submitLead()" style="margin-top:22px">
+        Voir mon diagnostic complet →
+      </button>
+      <p style="text-align:center;font-size:11px;color:var(--s400);margin-top:12px">
+        🔒 Données confidentielles — utilisées uniquement pour personnaliser votre rapport
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAYMENT MODAL ══ -->
+<div class="modal-overlay" id="modal-payment" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="payment-modal-body">
+      <div class="payment-modal-icon">🚀</div>
+      <div class="payment-modal-title">Offre disponible prochainement</div>
+      <div class="payment-modal-desc">
+        Nous finalisons notre plateforme de paiement sécurisé.<br>
+        Laissez-nous vos coordonnées pour être parmi les premiers à accéder à cette offre.
+      </div>
+      <button class="btn-next" style="display:inline-flex;margin-bottom:12px" onclick="contactIAConsult()">
+        📞 Contacter IAConsult
+      </button>
+      <br>
+      <button class="btn-sm outline" onclick="closePaymentModal()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PRINT REPORT (hidden — only visible when printing) ══ -->
+<div id="print-report">
+  <div class="print-header">
+    <div style="font-size:22px;font-weight:800;color:#0F3460">🧠 IAConsult Decision Engine</div>
+    <div style="font-size:14px;color:#475569;margin-top:4px">Rapport de diagnostic organisationnel</div>
+  </div>
+  <div id="print-content"><!-- populated by buildPrintReport() --></div>
+</div>
+
 </body>
 </html>
